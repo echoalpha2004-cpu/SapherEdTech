@@ -116,3 +116,53 @@ p {
 .hidden {
   display: none;
 }
+
+.dashboard {
+  max-width: 800px;
+  margin: 2rem auto;
+  text-align: center;
+  padding: 1rem;
+  color: white;
+}
+
+.profile {
+  margin-bottom: 2rem;
+}
+
+.pfp {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #4da3ff;
+  margin-bottom: 1rem;
+  object-fit: cover;
+}
+
+.language-label {
+  opacity: 0.8;
+  margin-top: 0.3rem;
+}
+
+.dashboard-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.dash-btn {
+  flex: 1 1 180px;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  background: #1f3b64;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dash-btn:hover {
+  background: #2b4f86;
+}
+
