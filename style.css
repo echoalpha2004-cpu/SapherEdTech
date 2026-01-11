@@ -163,6 +163,25 @@ p {
   transition: 0.2s;
 }
 
+.dash-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  margin-bottom: 2rem;
+}
+
+.dash-logo {
+  width: 40px;
+  height: 40px;
+}
+
+.app-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+
 .dash-btn:hover {
   background: #2b4f86;
 }
