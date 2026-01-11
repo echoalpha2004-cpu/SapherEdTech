@@ -99,3 +99,20 @@ p {
   opacity: 0.6;
   margin: 0.5rem 0;
 }
+
+.student-login {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.student-login input {
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+.hidden {
+  display: none;
+}
