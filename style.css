@@ -1,1 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
 
+body {
+  height: 100vh;
+  background: linear-gradient(120deg, #0b1020, #1b2a4a);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.home {
+  text-align: center;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+}
+
+.logo {
+  width: 160px;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+p {
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+.actions {
+  margin-top: 2rem;
+}
+
+.login-btn {
+  padding: 0.8rem 2.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 999px;
+  background: #4da3ff;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.login-btn:hover {
+  background: #78b9ff;
+}
