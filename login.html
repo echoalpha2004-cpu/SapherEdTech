@@ -29,5 +29,23 @@
 
 
   </main>
+
+<script>
+function showStudentLogin() {
+  document.getElementById("student-login").classList.remove("hidden");
+}
+
+function loginStudent() {
+  const id = document.getElementById("studentId").value;
+
+  if (id.trim() === "") {
+    alert("Please enter your student number.");
+    return;
+  }
+
+  // For now, we accept any number
+  window.location.href = "dashboard.html";
+}
+</script>
 </body>
 </html>
