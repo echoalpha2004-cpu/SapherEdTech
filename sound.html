@@ -20,6 +20,8 @@
     <p id="sound-name" class="sound-name"></p>
 
     <button id="playBtn" class="select-btn">Play Sound</button>
+<button id="pinBtn" class="select-btn secondary">Pin to Practice</button>
+<p id="pinStatus" class="pin-status"></p>
 
     <div class="instructions" id="instructions"></div>
   </div>
@@ -57,6 +59,22 @@ if (sounds[sound]) {
     new Audio(sounds[sound].file).play();
   };
 }
+
+const pinBtn = document.getElementById("pinBtn");
+const pinStatus = document.getElementById("pinStatus");
+
+pinBtn.onclick = () => {
+  let pins = JSON.parse(localStorage.getItem("practicePins")) || [];
+
+  if (!pins.includes(sound)) {
+    pins.push(sound);
+    localStorage.setItem("practicePins", JSON.stringify(pins));
+    pinStatus.textContent = "Pinned for practice ✔";
+  } else {
+    pinStatus.textContent = "Already in your practice list";
+  }
+};
+
 </script>
 
 </body>
