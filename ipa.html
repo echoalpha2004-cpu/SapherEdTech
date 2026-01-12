@@ -1,3 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IPA Chart – Pronunciation Trainer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<main class="ipa-page">
+
 <header class="dash-header">
   <img src="logo.png" class="dash-logo">
   <span class="app-name">IPA Sound Chart</span>
@@ -25,6 +37,31 @@
   <button class="ipa" data-sound="o">o</button>
   <button class="ipa" data-sound="u">u</button>
 </div>
+
+</main>
+
+<script>
+const sounds = {
+  p: "sounds/p.mp3",
+  b: "sounds/b.mp3",
+  t: "sounds/t.mp3",
+  d: "sounds/d.mp3",
+  k: "sounds/k.mp3",
+  g: "sounds/g.mp3",
+  i: "sounds/i.mp3",
+  e: "sounds/e.mp3",
+  a: "sounds/a.mp3",
+  o: "sounds/o.mp3",
+  u: "sounds/u.mp3"
+};
+
+document.querySelectorAll(".ipa").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const symbol = btn.dataset.sound;
+    const audio = new Audio(sounds[symbol]);
+    audio.play();
+  });
+});
 </script>
 
 </body>
