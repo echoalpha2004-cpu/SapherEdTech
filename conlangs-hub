@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Conlang Hub</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main class="home">
+  <h1>Conlang Hub</h1>
+  <p>This will be a community & tools hub for conlanging.</p>
+</main>
+</body>
+</html>
