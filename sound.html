@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IPA Sound</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<main class="sound-page">
+
+  <header class="dash-header">
+    <img src="logo.png" class="dash-logo">
+    <span class="app-name">Pronunciation Trainer</span>
+  </header>
+
+  <div class="sound-card">
+    <div id="symbol" class="sound-symbol">?</div>
+    <p id="sound-name" class="sound-name"></p>
+
+    <button id="playBtn" class="select-btn">Play Sound</button>
+
+    <div class="instructions" id="instructions"></div>
+  </div>
+
+</main>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const sound = params.get("sound");
+
+const sounds = {
+  p: {
+    file: "sounds/p.mp3",
+    name: "Voiceless bilabial plosive",
+    instructions: "Press your lips together, build up air, then release it suddenly without vibrating your vocal cords."
+  },
+  b: {
+    file: "sounds/b.mp3",
+    name: "Voiced bilabial plosive",
+    instructions: "Press your lips together and release while vibrating your vocal cords."
+  },
+  i: {
+    file: "sounds/i.mp3",
+    name: "Close front unrounded vowel",
+    instructions: "Raise your tongue high and forward like in the vowel of 'machine'."
+  }
+};
+
+if (sounds[sound]) {
+  document.getElementById("symbol").textContent = sound;
+  document.getElementById("sound-name").textContent = sounds[sound].name;
+  document.getElementById("instructions").textContent = sounds[sound].instructions;
+
+  document.getElementById("playBtn").onclick = () => {
+    new Audio(sounds[sound].file).play();
+  };
+}
+</script>
+
+</body>
+</html>
