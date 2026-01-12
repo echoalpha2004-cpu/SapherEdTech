@@ -219,3 +219,32 @@ p {
 .ipa:hover {
   background: #4da3ff;
 }
+
+.sound-page {
+  text-align: center;
+  padding: 2rem;
+  color: white;
+}
+
+.sound-card {
+  background: #111a2e;
+  max-width: 500px;
+  margin: auto;
+  padding: 2rem;
+  border-radius: 16px;
+}
+
+.sound-symbol {
+  font-size: 4rem;
+  color: #4da3ff;
+}
+
+.sound-name {
+  margin: 0.5rem 0 1rem;
+  opacity: 0.8;
+}
+
+.instructions {
+  margin-top: 1rem;
+  line-height: 1.5;
+}
