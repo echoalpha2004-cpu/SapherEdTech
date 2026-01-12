@@ -185,3 +185,37 @@ p {
 .dash-btn:hover {
   background: #2b4f86;
 }
+
+.ipa-page {
+  text-align: center;
+  padding: 1rem;
+  color: white;
+}
+
+.ipa-instructions {
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
+
+.ipa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 1rem;
+  max-width: 500px;
+  margin: auto;
+}
+
+.ipa {
+  padding: 1rem;
+  border-radius: 10px;
+  border: none;
+  background: #1f3b64;
+  color: white;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.ipa:hover {
+  background: #4da3ff;
+}
