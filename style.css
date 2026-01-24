@@ -286,3 +286,7 @@ p {
 .uvular{ background:#5e548e; }
 .pharyngeal{ background:#9d4edd; }
 .glottal{ background:#1d3557; }
+
+body {
+  border: 10px solid red;
+}
