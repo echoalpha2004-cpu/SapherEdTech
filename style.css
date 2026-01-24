@@ -274,3 +274,12 @@ p {
   color:#fff;
   cursor:default;
 }
+
+#articulationImage {
+  width: 300px;       /* adjust this to whatever size you like */
+  height: auto;       /* keeps the image proportion correct */
+  display: block;     /* centers it in combination with margin */
+  margin: 1rem auto;  /* optional spacing above/below */
+  border-radius: 8px; /* optional rounded corners if you like */
+}
+
