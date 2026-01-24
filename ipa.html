@@ -19,6 +19,29 @@
   Click any symbol to hear its pronunciation.
 </p>
 
+<section class="articulation-diagram">
+  <img
+    id="articulationImage"
+    src="images/head-default.png"
+    alt="Articulation diagram"
+  />
+</section>
+
+<div class="articulation-buttons">
+  <button onclick="showDiagram('bilabial')">Bilabial</button>
+  <button onclick="showDiagram('labiodental')">Labio-dental</button>
+  <button onclick="showDiagram('dental')">Dental</button>
+  <button onclick="showDiagram('alveolar')">Alveolar</button>
+  <button onclick="showDiagram('postalveolar')">Postalveolar</button>
+  <button onclick="showDiagram('palatal')">Palatal</button>
+  <button onclick="showDiagram('retroflex')">Retroflex</button>
+  <button onclick="showDiagram('velar')">Velar</button>
+  <button onclick="showDiagram('uvular')">Uvular</button>
+  <button onclick="showDiagram('pharyngeal')">Pharyngeal</button>
+  <button onclick="showDiagram('glottal')">Glottal</button>
+</div>
+
+
 <div class="place-filters">
   <button class="place" style="background:#e63946;">Bilabial</button>
   <button class="place" style="background:#f77f00;">Labio-dental</button>
@@ -54,6 +77,15 @@
 
 </main>
 
+<script>
+  function showDiagram(place) {
+    const image = document.getElementById("articulationImage");
+
+    image.src = `images/head-${place}.png`;
+    image.alt = `${place} articulation diagram`;
+  }
+</script>
+  
 <script>
 const sounds = {
   p: "sounds/p.mp3",
