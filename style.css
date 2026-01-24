@@ -282,3 +282,10 @@ p {
   margin: 1rem auto;
 }
 
+.powered-logo {
+  width: 60px;   /* try 40–80px */
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
