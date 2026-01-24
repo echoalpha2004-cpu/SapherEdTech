@@ -28,9 +28,9 @@
 </section>
 
 <div class="place-filters">
-  <button class="place show-all" data-place="all">
-    Show All
-  </button>
+<button class="place show-all" data-place="all" style="background:#adb5bd; color:#000;">
+  Show All
+</button>
   
   <button class="place bilabial" data-place="bilabial" style="background:#e63946;">Bilabial</button>
   <button class="place labiodental" data-place="labiodental" style="background:#f77f00;">Labio-dental</button>
@@ -102,11 +102,18 @@ const sounds = {
   u: "sounds/u.mp3"
 };
 
-document.querySelectorAll(".ipa").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const symbol = btn.dataset.sound;
-    const audio = new Audio(sounds[symbol]);
-    audio.play();
+document.querySelectorAll(".place").forEach(button => {
+  button.addEventListener("click", () => {
+    const place = button.dataset.place;
+    const image = document.getElementById("articulationImage");
+
+    if (place === "all") {
+      image.src = "images/head-default.png"; // restore default image
+      image.alt = "Default articulation diagram";
+    } else {
+      image.src = `images/head-${place}.png`;
+      image.alt = `${place} articulation diagram`;
+    }
   });
 });
 </script>
