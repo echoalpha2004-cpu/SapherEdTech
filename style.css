@@ -276,9 +276,9 @@ p {
 }
 
 #articulationImage {
-  width: 200px !important;  /* forces width to 300px */
-  height: auto !important;  /* keeps aspect ratio */
+  width: 250px !important;
+  height: auto !important;
   display: block;
-  margin: 1rem auto;        /* centers it */
+  margin: 1rem auto;
 }
 
