@@ -275,9 +275,7 @@ p {
   cursor:default;
 }
 
-#articulationImage {
-  max-width: 30%;     /* image will never exceed 80% of screen width */
-  height: auto;
-  display: block;
-  margin: 1rem auto;
+.articulation-diagram {
+  text-align: center; /* center image inside container */
+  max-width: 30%; 
 }
