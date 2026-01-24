@@ -43,12 +43,12 @@
 
 <h2 class="ipa-section">Consonants</h2>
 <div class="ipa-grid">
-  <a href="sound.html?sound=p" class="ipa">p</a>
-  <a href="sound.html?sound=b" class="ipa">b</a>
-  <a href="sound.html?sound=t" class="ipa">t</a>
-  <a href="sound.html?sound=d" class="ipa">d</a>
-  <a href="sound.html?sound=k" class="ipa">k</a>
-  <a href="sound.html?sound=g" class="ipa">g</a>
+  <a href="sound.html?sound=p" class="ipa" data-place="bilabial">p</a>
+  <a href="sound.html?sound=b" class="ipa" data-place="bilabial">b</a>
+  <a href="sound.html?sound=t" class="ipa" data-place="alveolar">t</a>
+  <a href="sound.html?sound=d" class="ipa" data-place="alveolar">d</a>
+  <a href="sound.html?sound=k" class="ipa" data-place="velar">k</a>
+  <a href="sound.html?sound=g" class="ipa" data-place="velar">g</a>
 </div>
 
 <h2 class="ipa-section">Vowels</h2>
@@ -105,6 +105,20 @@ document.querySelectorAll(".ipa").forEach(btn => {
     audio.play();
   });
 });
+</script>
+
+<script>
+function filterSounds(place) {
+  const sounds = document.querySelectorAll(".ipa");
+
+  sounds.forEach(sound => {
+    if (sound.dataset.place === place) {
+      sound.style.display = "inline-flex";
+    } else {
+      sound.style.display = "none";
+    }
+  });
+}
 </script>
 
 </body>
