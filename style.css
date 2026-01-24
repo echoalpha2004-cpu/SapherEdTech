@@ -274,19 +274,3 @@ p {
   color:#fff;
   cursor:default;
 }
-
-.bilabial{ background:#e63946; }
-.labiodental{ background:#f77f00; }
-.dental{ background:#fcbf49; color:#000; }
-.alveolar{ background:#2a9d8f; }
-.postalveolar{ background:#264653; }
-.palatal{ background:#457b9d; }
-.retroflex{ background:#6d597a; }
-.velar{ background:#8d6e63; }
-.uvular{ background:#5e548e; }
-.pharyngeal{ background:#9d4edd; }
-.glottal{ background:#1d3557; }
-
-body {
-  border: 10px solid red;
-}
