@@ -70,6 +70,18 @@
     image.alt = `${place} articulation diagram`;
   }
 </script>
+
+<script>
+document.querySelectorAll(".place").forEach(button => {
+  button.addEventListener("click", () => {
+    const place = button.dataset.place;
+    const image = document.getElementById("articulationImage");
+
+    image.src = `images/head-${place}.png`;
+    image.alt = `${place} articulation diagram`;
+  });
+});
+</script>
   
 <script>
 const sounds = {
