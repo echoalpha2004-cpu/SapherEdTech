@@ -248,3 +248,13 @@ p {
   margin-top: 1rem;
   line-height: 1.5;
 }
+
+.print-btn{
+  background:#fff;
+  color:#000;
+  border:2px dashed #aaa;
+  margin-top:10px;
+  cursor:not-allowed;
+  opacity:0.85;
+}
+
