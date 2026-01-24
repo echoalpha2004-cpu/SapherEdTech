@@ -283,8 +283,8 @@ p {
 }
 
 .powered-logo {
-  width: 60px;   /* try 40–80px */
-  height: auto;
+  width: 60px !important;;   /* try 40–80px */
+  height: auto !important;;
   display: block;
   margin: 0 auto;
 }
