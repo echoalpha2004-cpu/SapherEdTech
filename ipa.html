@@ -28,6 +28,10 @@
 </section>
 
 <div class="place-filters">
+  <button class="place show-all" data-place="all">
+    Show All
+  </button>
+  
   <button class="place bilabial" data-place="bilabial" style="background:#e63946;">Bilabial</button>
   <button class="place labiodental" data-place="labiodental" style="background:#f77f00;">Labio-dental</button>
   <button class="place dental" data-place="dental" style="background:#fcbf49; color:#000;">Dental</button>
@@ -108,21 +112,24 @@ document.querySelectorAll(".ipa").forEach(btn => {
 </script>
 
 <script>
-document.querySelectorAll(".place").forEach(button => {
-  button.addEventListener("click", () => {
-    const selectedPlace = button.dataset.place;
-    const sounds = document.querySelectorAll(".ipa");
+  const placeButtons = document.querySelectorAll(".place");
+  const soundButtons = document.querySelectorAll(".sound");
 
-    sounds.forEach(sound => {
-      if (sound.dataset.place === selectedPlace) {
-        sound.style.display = "inline-flex";
-      } else {
-        sound.style.display = "none";
-      }
+  placeButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const place = btn.dataset.place;
+
+      soundButtons.forEach(sound => {
+        if (place === "all" || sound.dataset.place === place) {
+          sound.style.display = "inline-block";
+        } else {
+          sound.style.display = "none";
+        }
+      });
     });
   });
-});
 </script>
+
 
 </body>
 </html>
