@@ -275,14 +275,9 @@ p {
   cursor:default;
 }
 
-.articulation-diagram {
-  text-align: center;   /* center the image */
-}
-
-#articulationImage {
-  max-width: 300px;     /* or adjust smaller/larger */
-  width: 100%;          /* scales down if container is narrower */
-  height: auto;         /* maintain aspect ratio */
-  display: block;
-  margin: 1rem auto;
+.articulationImage {
+  width: 300px;   /* change to whatever size you want */
+  height: auto;   /* keeps aspect ratio */
+  display: block; /* makes margin centering work */
+  margin: 1rem auto; /* centers the image horizontally */
 }
