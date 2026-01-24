@@ -258,3 +258,31 @@ p {
   opacity:0.85;
 }
 
+.place-filters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.place{
+  padding:8px 12px;
+  border:none;
+  border-radius:999px;
+  font-size:0.85rem;
+  font-weight:600;
+  color:#fff;
+  cursor:default;
+}
+
+.bilabial{ background:#e63946; }
+.labiodental{ background:#f77f00; }
+.dental{ background:#fcbf49; color:#000; }
+.alveolar{ background:#2a9d8f; }
+.postalveolar{ background:#264653; }
+.palatal{ background:#457b9d; }
+.retroflex{ background:#6d597a; }
+.velar{ background:#8d6e63; }
+.uvular{ background:#5e548e; }
+.pharyngeal{ background:#9d4edd; }
+.glottal{ background:#1d3557; }
