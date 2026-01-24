@@ -108,17 +108,20 @@ document.querySelectorAll(".ipa").forEach(btn => {
 </script>
 
 <script>
-function filterSounds(place) {
-  const sounds = document.querySelectorAll(".ipa");
+document.querySelectorAll(".place").forEach(button => {
+  button.addEventListener("click", () => {
+    const selectedPlace = button.dataset.place;
+    const sounds = document.querySelectorAll(".ipa");
 
-  sounds.forEach(sound => {
-    if (sound.dataset.place === place) {
-      sound.style.display = "inline-flex";
-    } else {
-      sound.style.display = "none";
-    }
+    sounds.forEach(sound => {
+      if (sound.dataset.place === selectedPlace) {
+        sound.style.display = "inline-flex";
+      } else {
+        sound.style.display = "none";
+      }
+    });
   });
-}
+});
 </script>
 
 </body>
