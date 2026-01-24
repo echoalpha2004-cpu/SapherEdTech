@@ -282,8 +282,8 @@ p {
   margin: 1rem auto;
 }
 
-.powered-by-logo {
-  width: 60px !important;;   /* try 40–80px */
+#powered-logo {
+  width: 40px !important;;   /* try 40–80px */
   height: auto !important;;
   display: block;
   margin: 0 auto;
