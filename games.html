@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>In-Class Games</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<main class="home">
+
+  <header class="dash-header">
+    <img src="logo.png" class="dash-logo">
+    <span class="app-name">In-Class Games</span>
+  </header>
+
+  <h2>Select a game</h2>
+  <p>Choose a game to see how it’s played in class.</p>
+
+  <div class="games-grid">
+    <button class="game-btn" onclick="openGame('soundBingo')">Sound Bingo</button>
+    <button class="game-btn" onclick="openGame('minimalPairs')">Minimal Pairs</button>
+    <button class="game-btn" onclick="openGame('ipaRace')">IPA Race</button>
+  </div>
+
+</main>
+
+<script>
+function openGame(game) {
+  window.location.href = `game.html?game=${game}`;
+}
+</script>
+
+</body>
+</html>
