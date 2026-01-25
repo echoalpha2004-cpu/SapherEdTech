@@ -316,3 +316,11 @@ p {
 .game-instructions li {
   margin-bottom: 0.75rem;
 }
+
+.game-board {
+  display: block;
+  max-width: 700px;
+  width: 100%;
+  margin: 2rem auto 0;
+}
+
