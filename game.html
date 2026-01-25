@@ -17,6 +17,7 @@
 
   <h2 id="gameTitle"></h2>
   <ol id="gameInstructions" class="game-instructions"></ol>
+  <img id="gameBoard" class="game-board" alt="Game board">
 
 </main>
 
@@ -33,8 +34,10 @@ const games = {
       "Correctly identify the sound or its name to advance 1 square.",
       "The turn passes to the next player.",
       "The first player to return to the centre square wins."
-    ]
+    ],
+    boardImage: "images/board.png"
   },
+
   ipaRace: {
     title: "IPA Race",
     instructions: [
@@ -42,9 +45,11 @@ const games = {
       "The teacher assigns phonemes to each player.",
       "Players form sentences using the assigned phonemes.",
       "Each correct occurrence advances the player one square."
-    ]
+    ],
+    boardImage: "images/board.png"
   }
 };
+
 
 if (games[game]) {
   document.getElementById("gameTitle").textContent = games[game].title;
@@ -58,6 +63,9 @@ if (games[game]) {
     instructionsEl.appendChild(li);
   });
 }  // ← THIS was missing
+
+const boardImg = document.getElementById("gameBoard");
+boardImg.src = games[game].boardImage;
 </script>
 
 </body>
