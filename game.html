@@ -16,7 +16,7 @@
   </header>
 
   <h2 id="gameTitle"></h2>
-  <p id="gameInstructions"></p>
+  <ol id="gameInstructions" class="game-instructions"></ol>
 
 </main>
 
@@ -48,8 +48,14 @@ const games = {
 
 if (games[game]) {
   document.getElementById("gameTitle").textContent = games[game].title;
-  document.getElementById("gameInstructions").textContent = games[game].instructions;
-}
+  const instructionsEl = document.getElementById("gameInstructions");
+instructionsEl.innerHTML = "";
+
+games[game].instructions.forEach(step => {
+  const li = document.createElement("li");
+  li.textContent = step;
+  instructionsEl.appendChild(li);
+});
 </script>
 
 </body>
