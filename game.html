@@ -48,14 +48,16 @@ const games = {
 
 if (games[game]) {
   document.getElementById("gameTitle").textContent = games[game].title;
-  const instructionsEl = document.getElementById("gameInstructions");
-instructionsEl.innerHTML = "";
 
-games[game].instructions.forEach(step => {
-  const li = document.createElement("li");
-  li.textContent = step;
-  instructionsEl.appendChild(li);
-});
+  const instructionsEl = document.getElementById("gameInstructions");
+  instructionsEl.innerHTML = "";
+
+  games[game].instructions.forEach(step => {
+    const li = document.createElement("li");
+    li.textContent = step;
+    instructionsEl.appendChild(li);
+  });
+}  // ← THIS was missing
 </script>
 
 </body>
