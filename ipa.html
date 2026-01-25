@@ -119,22 +119,33 @@ document.querySelectorAll(".place").forEach(button => {
 </script>
 
 <script>
-  const placeButtons = document.querySelectorAll(".place");
-  const soundButtons = document.querySelectorAll(".sound");
+const placeButtons = document.querySelectorAll(".place");
+const soundButtons = document.querySelectorAll(".ipa"); // select the actual sound buttons
 
-  placeButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-      const place = btn.dataset.place;
+placeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const place = btn.dataset.place;
+    const image = document.getElementById("articulationImage");
 
-      soundButtons.forEach(sound => {
-        if (place === "all" || sound.dataset.place === place) {
-          sound.style.display = "inline-block";
-        } else {
-          sound.style.display = "none";
-        }
-      });
+    // Change the diagram image
+    if (place === "all") {
+      image.src = "images/head-default.png";
+      image.alt = "Default articulation diagram";
+    } else {
+      image.src = `images/head-${place}.png`;
+      image.alt = `${place} articulation diagram`;
+    }
+
+    // Filter the sounds
+    soundButtons.forEach(sound => {
+      if (place === "all" || sound.dataset.place === place) {
+        sound.style.display = "inline-block";
+      } else {
+        sound.style.display = "none";
+      }
     });
   });
+});
 </script>
 
 
