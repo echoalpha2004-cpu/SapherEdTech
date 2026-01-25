@@ -353,17 +353,17 @@ p {
 
 /* Status colors */
 .overdue {
-  background: #004719;
+  background: #043600;
   border-left: 6px solid #e63946;
 }
 
 .in-progress {
-  background: #004719;
+  background: #043600;
   border-left: 6px solid #6c757d;
 }
 
 .due-soon {
-  background: #004719;
+  background: #043600;
   border-left: 6px solid #fcbf49;
 }
 
