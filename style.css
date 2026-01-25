@@ -332,4 +332,38 @@ p {
   text-align: center;
 }
 
+.assignments-section {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+}
+
+.assignments-section h2 {
+  margin-bottom: 0.5rem;
+}
+
+.assignment-list {
+  padding-left: 1.2rem;
+}
+
+.assignment-item {
+  margin: 0.5rem 0;
+}
+
+/* Status colors */
+.overdue {
+  background: #ffe5e5;
+  border-left: 6px solid #e63946;
+}
+
+.in-progress {
+  background: #f1f3f5;
+  border-left: 6px solid #6c757d;
+}
+
+.due-soon {
+  background: #fff3cd;
+  border-left: 6px solid #fcbf49;
+}
 
