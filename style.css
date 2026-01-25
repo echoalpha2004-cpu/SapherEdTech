@@ -304,3 +304,15 @@ p {
   display: block;
   margin: 0 auto;
 }
+
+.game-instructions {
+  max-width: 600px;       /* controls line length */
+  margin: 2rem auto;      /* centers the block */
+  padding: 0 1rem;
+  text-align: left;       /* important: NOT centered text */
+  line-height: 1.6;
+}
+
+.game-instructions li {
+  margin-bottom: 0.75rem;
+}
