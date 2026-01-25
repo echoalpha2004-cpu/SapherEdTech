@@ -27,11 +27,22 @@ const game = params.get("game");
 const games = {
   speechBingo: {
     title: "Speech Bingo",
-    instructions: "Starting players begin in the centre square. Upon flipping the coin, the side facing up determines the sound of a phoneme or the name of a phoneme. The player then advances 1 square upon correctly identifying the sound's name or pronunciation, and the turn goes to the next player. The first player who returns to the starting square wins the game"
+    instructions: [
+      "All players begin on the centre square.",
+      "Flip the coin to determine the phoneme sound or name.",
+      "Correctly identify the sound or its name to advance 1 square.",
+      "The turn passes to the next player.",
+      "The first player to return to the centre square wins."
+    ]
   },
   ipaRace: {
     title: "IPA Race",
-    instructions: "Starting players begin in the centre square. The teacher assigns phonemes to players during their turn. Players must form sentences using designated phonemes in the words. The quantity of the phoneme's occurance in the sentence determines how many squares the player advances."
+    instructions: [
+      "All players begin on the centre square.",
+      "The teacher assigns phonemes to each player.",
+      "Players form sentences using the assigned phonemes.",
+      "Each correct occurrence advances the player one square."
+    ]
   }
 };
 
