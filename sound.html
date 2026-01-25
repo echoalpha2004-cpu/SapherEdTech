@@ -27,6 +27,8 @@
 
 <div class="instructions" id="instructions"></div>
 
+<div id="illustration" class="illustration"></div>
+
 <p id="pinStatus" class="pin-status"></p>
 
     <div class="instructions" id="instructions"></div>
@@ -101,6 +103,34 @@ if (sounds[sound]) {
   document.getElementById("sound-name").textContent = sounds[sound].name;
   document.getElementById("instructions").textContent = sounds[sound].instructions;
 
+  // ---- NEW CODE FOR ILLUSTRATION ----
+  const illustrations = {
+    p: "images/p-illustration.png",
+    b: "images/b-illustration.png",
+    t: "images/t-illustration.png",
+    d: "images/d-illustration.png",
+    k: "images/k-illustration.png",
+    g: "images/g-illustration.png",
+    i: "images/i-illustration.png",
+    e: "images/e-illustration.png",
+    a: "images/a-illustration.png",
+    o: "images/o-illustration.png",
+    u: "images/u-illustration.png"
+  };
+
+  const illustrationDiv = document.getElementById("illustration");
+  if (illustrations[sound]) {
+    const img = document.createElement("img");
+    img.src = illustrations[sound];
+    img.alt = `${sound} articulation illustration`;
+    img.style.maxWidth = "60%";      // adjust size if needed
+    img.style.display = "block";
+    img.style.margin = "1rem auto 0";
+
+    illustrationDiv.appendChild(img);
+  }
+  // -----------------------------------
+  
   document.getElementById("playBtn").onclick = () => {
     new Audio(sounds[sound].file).play();
   };
