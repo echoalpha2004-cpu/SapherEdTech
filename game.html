@@ -95,7 +95,7 @@ if (coin && flipBtn) {
     flipBtn.classList.add("pressed");
 
     setTimeout(() => {
-      coin.src = `images/coin-${result}.png`;
+      coin.src = `images/${result}.png`;
       coin.alt = `Coin showing ${result}`;
       flipBtn.classList.remove("pressed");
     }, 200);
