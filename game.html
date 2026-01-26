@@ -18,6 +18,16 @@
   <h2 id="gameTitle"></h2>
   <ol id="gameInstructions" class="game-instructions"></ol>
   <img id="gameBoard" class="game-board" alt="Game board">
+  
+  <div id="coinSection" class="coin-container" hidden>
+  <img
+    id="coin"
+    src="images/coin-name.png"
+    alt="Coin showing Name"
+  >
+
+  <button id="flipCoinBtn">Flip Coin</button>
+</div>
 
 </main>
 
@@ -52,6 +62,7 @@ const games = {
 
 
 if (games[game]) {
+  
   document.getElementById("gameTitle").textContent = games[game].title;
 
   const instructionsEl = document.getElementById("gameInstructions");
@@ -62,10 +73,35 @@ if (games[game]) {
     li.textContent = step;
     instructionsEl.appendChild(li);
   });
+
+// Show coin only for Speech Bingo
+if (game === "speechBingo") {
+  document.getElementById("coinSection").hidden = false;
+}
+
 }  // ← THIS was missing
 
 const boardImg = document.getElementById("gameBoard");
 boardImg.src = games[game].boardImage;
+
+const coin = document.getElementById("coin");
+const flipBtn = document.getElementById("flipCoinBtn");
+
+if (coin && flipBtn) {
+  flipBtn.addEventListener("click", () => {
+    const result = Math.random() < 0.5 ? "name" : "sound";
+
+    // visual feedback
+    flipBtn.classList.add("pressed");
+
+    setTimeout(() => {
+      coin.src = `images/coin-${result}.png`;
+      coin.alt = `Coin showing ${result}`;
+      flipBtn.classList.remove("pressed");
+    }, 200);
+  });
+}
+
 </script>
 
 <footer class="site-footer">
