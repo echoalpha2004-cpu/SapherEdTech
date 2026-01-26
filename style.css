@@ -367,3 +367,7 @@ p {
   border-left: 6px solid #fcbf49;
 }
 
+#flipCoinBtn.pressed {
+  transform: scale(0.95);
+  opacity: 0.8;
+}
