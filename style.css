@@ -371,3 +371,12 @@ p {
   transform: scale(0.95);
   opacity: 0.8;
 }
+
+.coin-container img {
+  width: 120px;        /* ← adjust this number */
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1rem auto;
+}
+
