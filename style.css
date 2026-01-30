@@ -515,4 +515,8 @@ p {
   opacity: 1;
 }
 
+.nav-logo img {
+  height: 24px;   /* try 20–28px */
+  width: auto;
+}
 
