@@ -514,3 +514,13 @@ p {
 .nav-links a:hover {
   opacity: 1;
 }
+
+.nav-inner {
+  max-width: 900px;      /* same width as your page content */
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
