@@ -95,8 +95,14 @@ typeButtons.forEach(btn => {
   });
 });
 
-// Initially show all words
-wordButtons.forEach(wordBtn => wordBtn.style.display = "inline-block");
+// Make word buttons open word.html
+wordButtons.forEach(wordBtn => {
+  wordBtn.addEventListener("click", () => {
+    const word = wordBtn.textContent; // or use wordBtn.dataset.word if you prefer
+    window.location.href = `word.html?word=${encodeURIComponent(word)}`;
+  });
+});
+
 </script>
 
 </body>
