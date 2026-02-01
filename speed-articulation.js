@@ -2,6 +2,16 @@ const typeButtons = document.querySelectorAll('.type-buttons button');
 const words = document.querySelectorAll('.word');
 const description = document.getElementById('type-description');
 
+const wordButtons = document.querySelectorAll(".word-btn");
+
+wordButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const word = btn.dataset.word; // make sure each button has data-word="Pikke" etc.
+    window.location.href = `word.html?word=${encodeURIComponent(word)}`;
+  });
+});
+
+
 const descriptions = {
   a: 'The primary stress of the word falls on the first syllable. Both syllables are read at equally short length',
   b: 'The primary stress of the word falls on the second syllable. The consonant with two vowels is read at double the length of short length',
