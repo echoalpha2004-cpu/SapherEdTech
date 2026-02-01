@@ -580,3 +580,9 @@ p {
   display: none;
 }
 
+.section-title {
+  font-size: 1.2rem;
+  margin: 1.5rem 0 0.5rem;
+  color: white; /* matches site theme */
+  font-weight: 600;
+}
