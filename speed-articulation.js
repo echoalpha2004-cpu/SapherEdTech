@@ -38,3 +38,46 @@ typeButtons.forEach(btn => {
     });
   });
 });
+
+const searchInput = document.getElementById("wordSearch");
+
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+
+  wordButtons.forEach(wordBtn => {
+    const word = wordBtn.textContent.toLowerCase();
+    if (word.includes(query)) {
+      wordBtn.style.display = "inline-block"; // show matches
+    } else {
+      wordBtn.style.display = "none";         // hide non-matches
+    }
+  });
+});
+
+let currentTypeFilter = "all";
+
+typeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentTypeFilter = btn.dataset.type;
+    updateWordDisplay();
+  });
+});
+
+searchInput.addEventListener("input", updateWordDisplay);
+
+function updateWordDisplay() {
+  const query = searchInput.value.toLowerCase();
+
+  wordButtons.forEach(wordBtn => {
+    const word = wordBtn.textContent.toLowerCase();
+    const typeMatch = currentTypeFilter === "all" || wordBtn.dataset.type === currentTypeFilter;
+    const queryMatch = word.includes(query);
+
+    if (typeMatch && queryMatch) {
+      wordBtn.style.display = "inline-block";
+    } else {
+      wordBtn.style.display = "none";
+    }
+  });
+}
+
