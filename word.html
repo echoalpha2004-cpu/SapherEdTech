@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Word Details – Speed Articulation</title>
+<title>Word – Speed Articulation</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body class="app">
 
+<!-- Top Nav -->
 <nav class="top-nav">
   <div class="nav-inner">
     <div class="nav-left">
@@ -17,7 +18,6 @@
         <span>Pronunciation Trainer</span>
       </a>
     </div>
-
     <div class="nav-links">
       <a href="dashboard.html">Dashboard</a>
       <a href="inbox.html">Inbox</a>
@@ -28,87 +28,107 @@
     </div>
   </div>
 </nav>
-  
+
 <main class="home">
+  <div class="sound-card">
+    <div id="wordTitle" class="sound-symbol">?</div>
+    <p id="wordType" class="sound-name"></p>
+    <p id="ipa" class="ipa-pronunciation"></p>
 
-  <header class="dash-header">
-    <img src="logo.png" class="dash-logo" alt="Logo">
-    <span class="app-name">Speed Articulation – Word Details</span>
-  </header>
+    <button id="playBtn" class="select-btn">Play Audio</button>
 
-  <div class="word-card">
-    <div id="wordDisplay" class="word-symbol">?</div>
-    <p id="wordType" class="word-type"></p>
-    <p id="wordIPA" class="word-ipa"></p>
+    <div class="instructions" id="instructions"></div>
 
-    <button id="playBtn" class="select-btn">Play Word</button>
-
-    <div id="wordImageContainer" class="word-image-container">
-      <img id="wordImage" src="" alt="Word articulation illustration">
-    </div>
+    <div id="illustrationContainer"></div>
   </div>
-
 </main>
 
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
+
 <script>
-// Get the word from the query string
+// Get word from URL
 const params = new URLSearchParams(window.location.search);
 const word = params.get("word");
 
-// Define all your words
+// Define words and their data
 const words = {
   Pikke: {
     type: "Type A",
-    ipa: ".pikːe",
-    audio: "audio/pikke.mp3",
-    image: "images/pikke.png"
+    ipa: "/pɪkə/",
+    audio: "sounds/Pikke.mp3",
+    instructions: "This word is pronounced with a short first syllable.",
+    illustration: "images/Pikke.png"
   },
   Pike: {
     type: "Type A",
-    ipa: ".pike",
-    audio: "audio/pike.mp3",
-    image: "images/pike.png"
+    ipa: "/paɪk/",
+    audio: "sounds/Pike.mp3",
+    instructions: "This word is pronounced with a long vowel in the first syllable.",
+    illustration: "images/Pike.png"
   },
   Piike: {
     type: "Type B",
-    ipa: "piː.ke",
-    audio: "audio/piike.mp3",
-    image: "images/piike.png"
+    ipa: "/piːkə/",
+    audio: "sounds/Piike.mp3",
+    instructions: "This word is pronounced with a long first syllable.",
+    illustration: "images/Piike.png"
   },
   Pikee: {
     type: "Type B",
-    ipa: "pi.keː",
-    audio: "audio/pikee.mp3",
-    image: "images/pikee.png"
+    ipa: "/paɪkiː/",
+    audio: "sounds/Pikee.mp3",
+    instructions: "This word is pronounced with a long second syllable.",
+    illustration: "images/Pikee.png"
   },
-  "Edi": {
+  Edi: {
     type: "Type C",
-    ipa: "edi",
-    audio: "audio/edi.mp3",
-    image: "images/edi.png"
+    ipa: "/ɛdi/",
+    audio: "sounds/Edi.mp3",
+    instructions: "This word is pronounced with equal stress on both syllables.",
+    illustration: "images/Edi.png"
   },
-  "Eti": {
+  Eti: {
     type: "Type C",
-    ipa: "eti",
-    audio: "audio/eti.mp3",
-    image: "images/eti.png"
+    ipa: "/ɛti/",
+    audio: "sounds/Eti.mp3",
+    instructions: "This word is pronounced with equal stress on both syllables.",
+    illustration: "images/Eti.png"
   }
 };
 
-// Populate page if the word exists
+// Populate page
 if (words[word]) {
-  document.getElementById("wordDisplay").textContent = word;
-  document.getElementById("wordType").textContent = `Word Type: ${words[word].type}`;
-  document.getElementById("wordIPA").textContent = `IPA: ${words[word].ipa}`;
-  
-  const wordImg = document.getElementById("wordImage");
-  wordImg.src = words[word].image;
-  wordImg.alt = `${word} articulation illustration`;
+  document.getElementById("wordTitle").textContent = word;
+  document.getElementById("wordType").textContent = words[word].type;
+  document.getElementById("ipa").textContent = words[word].ipa;
+  document.getElementById("instructions").textContent = words[word].instructions;
 
+  // Audio button
   document.getElementById("playBtn").onclick = () => {
     new Audio(words[word].audio).play();
   };
+
+  // Illustration
+  const imgContainer = document.getElementById("illustrationContainer");
+  const img = document.createElement("img");
+  img.src = words[word].illustration;
+  img.alt = `${word} pronunciation illustration`;
+  img.style.maxWidth = "60%";
+  img.style.display = "block";
+  img.style.margin = "1rem auto 0";
+  imgContainer.appendChild(img);
+} else {
+  document.getElementById("wordTitle").textContent = "Word not found";
+  document.getElementById("instructions").textContent = "";
 }
+</script>
+
+</body>
+</html>
+
 </script>
 
 </body>
