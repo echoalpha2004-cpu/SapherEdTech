@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Details – Speed Articulation</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+<main class="home">
+
+  <header class="dash-header">
+    <img src="logo.png" class="dash-logo" alt="Logo">
+    <span class="app-name">Speed Articulation – Word Details</span>
+  </header>
+
+  <div class="word-card">
+    <div id="wordDisplay" class="word-symbol">?</div>
+    <p id="wordType" class="word-type"></p>
+    <p id="wordIPA" class="word-ipa"></p>
+
+    <button id="playBtn" class="select-btn">Play Word</button>
+
+    <div id="wordImageContainer" class="word-image-container">
+      <img id="wordImage" src="" alt="Word articulation illustration">
+    </div>
+  </div>
+
+</main>
+
+<script>
+// Get the word from the query string
+const params = new URLSearchParams(window.location.search);
+const word = params.get("word");
+
+// Define all your words
+const words = {
+  Pikke: {
+    type: "Type A",
+    ipa: ".pikːe",
+    audio: "audio/pikke.mp3",
+    image: "images/pikke.png"
+  },
+  Pike: {
+    type: "Type A",
+    ipa: ".pike",
+    audio: "audio/pike.mp3",
+    image: "images/pike.png"
+  },
+  Piike: {
+    type: "Type B",
+    ipa: "piː.ke",
+    audio: "audio/piike.mp3",
+    image: "images/piike.png"
+  },
+  Pikee: {
+    type: "Type B",
+    ipa: "pi.keː",
+    audio: "audio/pikee.mp3",
+    image: "images/pikee.png"
+  },
+  "Edi": {
+    type: "Type C",
+    ipa: "edi",
+    audio: "audio/edi.mp3",
+    image: "images/edi.png"
+  },
+  "Eti": {
+    type: "Type C",
+    ipa: "eti",
+    audio: "audio/eti.mp3",
+    image: "images/eti.png"
+  }
+};
+
+// Populate page if the word exists
+if (words[word]) {
+  document.getElementById("wordDisplay").textContent = word;
+  document.getElementById("wordType").textContent = `Word Type: ${words[word].type}`;
+  document.getElementById("wordIPA").textContent = `IPA: ${words[word].ipa}`;
+  
+  const wordImg = document.getElementById("wordImage");
+  wordImg.src = words[word].image;
+  wordImg.alt = `${word} articulation illustration`;
+
+  document.getElementById("playBtn").onclick = () => {
+    new Audio(words[word].audio).play();
+  };
+}
+</script>
+
+</body>
+</html>
