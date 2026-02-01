@@ -1,83 +1,63 @@
+// Grab DOM elements
 const typeButtons = document.querySelectorAll('.type-buttons button');
-const words = document.querySelectorAll('.word');
-const description = document.getElementById('type-description');
+const wordButtons = document.querySelectorAll(".word-btn"); // make sure your word buttons have class "word-btn"
+const descriptionEl = document.getElementById('typeDescription'); // make sure your <p> has this id
+const searchInput = document.getElementById("wordSearch");
 
-const wordButtons = document.querySelectorAll(".word-btn");
-
-wordButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const word = btn.dataset.word; // make sure each button has data-word="Pikke" etc.
-    window.location.href = `word.html?word=${encodeURIComponent(word)}`;
-  });
-});
-
-
-const descriptions = {
+// Descriptions for types
+const typeDescriptions = {
   a: 'The primary stress of the word falls on the first syllable. Both syllables are read at equally short length',
   b: 'The primary stress of the word falls on the second syllable. The consonant with two vowels is read at double the length of short length',
   c: 'The primary stress of the word falls on the second syllable. Both syllables are read at equally short length'
 };
 
-typeButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const type = btn.dataset.type;
-
-    // active button styling
-    typeButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
-    // description
-    description.innerHTML = `<p>${descriptions[type]}</p>`;
-
-    // filtering
-    words.forEach(word => {
-      word.classList.toggle(
-        'hidden',
-        word.dataset.type !== type
-      );
-    });
-  });
-});
-
-const searchInput = document.getElementById("wordSearch");
-
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-
-  wordButtons.forEach(wordBtn => {
-    const word = wordBtn.textContent.toLowerCase();
-    if (word.includes(query)) {
-      wordBtn.style.display = "inline-block"; // show matches
-    } else {
-      wordBtn.style.display = "none";         // hide non-matches
-    }
-  });
-});
-
+// Current type filter
 let currentTypeFilter = "all";
 
+// Word button click: goes to word.html?word=...
+wordButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const word = btn.dataset.word; // make sure each word button has data-word="Pikke" etc.
+    window.location.href = `word.html?word=${encodeURIComponent(word)}`;
+  });
+});
+
+// Type button click: filter words and show description
 typeButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     currentTypeFilter = btn.dataset.type;
+
+    // Active button styling
+    typeButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update description (clear if 'all')
+    descriptionEl.textContent = currentTypeFilter === "all" ? "" : typeDescriptions[currentTypeFilter] || "";
+
+    // Update word display
     updateWordDisplay();
   });
 });
 
+// Search input: filter words as user types
 searchInput.addEventListener("input", updateWordDisplay);
 
+// Function to filter words based on type + search query
 function updateWordDisplay() {
   const query = searchInput.value.toLowerCase();
 
-  wordButtons.forEach(wordBtn => {
-    const word = wordBtn.textContent.toLowerCase();
-    const typeMatch = currentTypeFilter === "all" || wordBtn.dataset.type === currentTypeFilter;
-    const queryMatch = word.includes(query);
+  wordButtons.forEach(btn => {
+    const wordText = btn.textContent.toLowerCase();
+    const typeMatch = currentTypeFilter === "all" || btn.dataset.type === currentTypeFilter;
+    const searchMatch = wordText.includes(query);
 
-    if (typeMatch && queryMatch) {
-      wordBtn.style.display = "inline-block";
+    if (typeMatch && searchMatch) {
+      btn.style.display = "inline-block";
     } else {
-      wordBtn.style.display = "none";
+      btn.style.display = "none";
     }
   });
 }
 
+// Initialize: show all words
+updateWordDisplay();
