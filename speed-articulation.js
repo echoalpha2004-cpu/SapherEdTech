@@ -3,9 +3,9 @@ const words = document.querySelectorAll('.word');
 const description = document.getElementById('type-description');
 
 const descriptions = {
-  a: 'Type A description goes here.',
-  b: 'Type B description goes here.',
-  c: 'Type C description goes here.'
+  a: 'The primary stress of the word falls on the first syllable. Both syllables are read at equally short length',
+  b: 'The primary stress of the word falls on the second syllable. The consonant with two vowels is read at double the length of short length',
+  c: 'The primary stress of the word falls on the second syllable. Both syllables are read at equally short length'
 };
 
 typeButtons.forEach(btn => {
