@@ -41,6 +41,7 @@
   <button class="dash-btn type-btn" data-type="a">Type A</button>
   <button class="dash-btn type-btn" data-type="b">Type B</button>
   <button class="dash-btn type-btn" data-type="c">Type C</button>
+  <button class="dash-btn type-btn" data-type="all">Show All</button>
 </div>
 
   <!-- Type Description -->
@@ -66,9 +67,9 @@
 <script>
 // Type descriptions object
 const typeDescriptions = {
-  a: "Type A description goes here",
-  b: "Type B description goes here",
-  c: "Type C description goes here"
+  a: "The primary stress of the word falls on the first syllable. Both syllables are read at equally short length",
+  b: "The primary stress of the word falls on the second syllable. The consonant with two vowels is read at double the length of short length",
+  c: "The primary stress of the word falls on the second syllable. Both syllables are read at equally short length"
 };
 
 const typeButtons = document.querySelectorAll(".type-btn");
@@ -79,14 +80,16 @@ const descriptionEl = document.getElementById("typeDescription");
 typeButtons.forEach(btn => {
   btn.addEventListener("click", () => {
     const type = btn.dataset.type;
-    descriptionEl.textContent = typeDescriptions[type] || "";
+
+    // Update description (clear if 'all')
+    descriptionEl.textContent = type === "all" ? "" : typeDescriptions[type] || "";
 
     // Filter word buttons
     wordButtons.forEach(wordBtn => {
-      if (wordBtn.dataset.type === type) {
-        wordBtn.style.display = "inline-block";
+      if (type === "all" || wordBtn.dataset.type === type) {
+        wordBtn.style.display = "inline-block"; // show
       } else {
-        wordBtn.style.display = "none";
+        wordBtn.style.display = "none";         // hide
       }
     });
   });
