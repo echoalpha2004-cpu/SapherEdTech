@@ -1,50 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Speed Articulation</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<title>Speed Articulation – Pronunciation Trainer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
 
-  <!-- Top navigation (reuse your existing nav later if you want) -->
-  <nav class="top-nav">
-    <a href="dashboard.html" class="nav-logo">
-      <span>Pronunciation Trainer</span>
-    </a>
-  </nav>
+<body class="app">
 
-  <main>
+<!-- Top Nav (same as other pages) -->
+<nav class="top-nav">
+  <a href="dashboard.html" class="nav-logo">
+    <img src="logo.png" alt="Logo">
+    <span>Pronunciation Trainer</span>
+  </a>
+  <div class="nav-links">
+    <a href="dashboard.html">Dashboard</a>
+    <a href="inbox.html">Inbox</a>
+    <a href="assignments.html">Assignments</a>
+    <a href="ipa.html">IPA Chart</a>
+    <a href="games.html">Games</a>
+  </div>
+</nav>
 
-    <section class="speed-articulation">
+<main class="home">
+  <header class="dash-header">
+    <img src="logo.png" class="dash-logo" alt="Logo">
+    <span class="app-name">Speed Articulation</span>
+  </header>
 
-      <h1>Speed Articulation</h1>
+  <!-- Type Buttons -->
+  <div class="type-buttons">
+    <button class="type-btn" data-type="a">Type A</button>
+    <button class="type-btn" data-type="b">Type B</button>
+    <button class="type-btn" data-type="c">Type C</button>
+  </div>
 
-      <div class="type-buttons">
-        <button data-type="a" class="active">Type A</button>
-        <button data-type="b">Type B</button>
-        <button data-type="c">Type C</button>
-      </div>
+  <!-- Type Description -->
+  <p id="typeDescription" class="type-description"></p>
 
-      <div class="type-description" id="type-description">
-        <p>Type A description goes here.</p>
-      </div>
+  <!-- Word Bank -->
+  <div id="wordBank" class="word-bank">
+    <button class="word-btn" data-type="a">Pikke</button>
+    <button class="word-btn" data-type="a">Pike</button>
+    <button class="word-btn" data-type="b">Piike</button>
+    <button class="word-btn" data-type="b">Pikee</button>
+    <button class="word-btn" data-type="c">Edi-1</button>
+    <button class="word-btn" data-type="c">Edi-2</button>
+  </div>
+</main>
 
-      <div class="word-bank">
-        <button class="word" data-type="a">Pikke</button>
-        <button class="word" data-type="a">Pike</button>
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
 
-        <button class="word" data-type="b">Piike</button>
-        <button class="word" data-type="b">Pikee</button>
+<script>
+// Type descriptions object
+const typeDescriptions = {
+  a: "Type A description goes here",
+  b: "Type B description goes here",
+  c: "Type C description goes here"
+};
 
-        <button class="word" data-type="c">Edi-1</button>
-        <button class="word" data-type="c">Edi-2</button>
-      </div>
+const typeButtons = document.querySelectorAll(".type-btn");
+const wordButtons = document.querySelectorAll(".word-btn");
+const descriptionEl = document.getElementById("typeDescription");
 
-    </section>
+// Handle type button click
+typeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const type = btn.dataset.type;
+    descriptionEl.textContent = typeDescriptions[type] || "";
 
-  </main>
+    // Filter word buttons
+    wordButtons.forEach(wordBtn => {
+      if (wordBtn.dataset.type === type) {
+        wordBtn.style.display = "inline-block";
+      } else {
+        wordBtn.style.display = "none";
+      }
+    });
+  });
+});
 
-  <script src="speed-articulation.js"></script>
+// Initially show all words
+wordButtons.forEach(wordBtn => wordBtn.style.display = "inline-block");
+</script>
+
 </body>
 </html>
