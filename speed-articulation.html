@@ -83,35 +83,51 @@ const typeDescriptions = {
 const typeButtons = document.querySelectorAll(".type-btn");
 const wordButtons = document.querySelectorAll(".word-btn");
 const descriptionEl = document.getElementById("typeDescription");
+const searchInput = document.getElementById("wordSearch");
 
-// Handle type button click
+let currentTypeFilter = "all";
+
+// Function to update displayed words based on type and search query
+function updateWordDisplay() {
+  const query = searchInput.value.toLowerCase();
+
+  wordButtons.forEach(wordBtn => {
+    const word = wordBtn.dataset.word.toLowerCase(); // use dataset.word
+    const typeMatch = currentTypeFilter === "all" || wordBtn.dataset.type === currentTypeFilter;
+    const queryMatch = word.includes(query);
+
+    if (typeMatch && queryMatch) {
+      wordBtn.style.display = "inline-block"; // show
+    } else {
+      wordBtn.style.display = "none";         // hide
+    }
+  });
+}
+
+// Handle type button clicks
 typeButtons.forEach(btn => {
   btn.addEventListener("click", () => {
-    const type = btn.dataset.type;
-
-    // Update description (clear if 'all')
-    descriptionEl.textContent = type === "all" ? "" : typeDescriptions[type] || "";
-
-    // Filter word buttons
-    wordButtons.forEach(wordBtn => {
-      if (type === "all" || wordBtn.dataset.type === type) {
-        wordBtn.style.display = "inline-block"; // show
-      } else {
-        wordBtn.style.display = "none";         // hide
-      }
-    });
+    currentTypeFilter = btn.dataset.type;
+    descriptionEl.textContent = currentTypeFilter === "all" ? "" : typeDescriptions[currentTypeFilter] || "";
+    updateWordDisplay();
   });
 });
+
+// Handle search input
+searchInput.addEventListener("input", updateWordDisplay);
 
 // Make word buttons open word.html
 wordButtons.forEach(wordBtn => {
   wordBtn.addEventListener("click", () => {
-    const word = wordBtn.textContent; // or use wordBtn.dataset.word if you prefer
+    const word = wordBtn.dataset.word; // safer than textContent
     window.location.href = `word.html?word=${encodeURIComponent(word)}`;
   });
 });
 
+// Initially show all words
+updateWordDisplay();
 </script>
+
 
 </body>
 </html>
