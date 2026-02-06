@@ -46,37 +46,54 @@
   <!-- Language Name -->
   <div class="content-box">
     <h3>Language Name</h3>
-    <input type="text" placeholder="Enter language name..." class="text-input">
+    <input
+      id="langName"
+      type="text"
+      placeholder="Enter language name..."
+      class="text-input"
+    >
   </div>
 
   <!-- Phonology -->
   <div class="content-box">
     <h3>Phonology</h3>
-    <textarea placeholder="List sounds, IPA symbols, stress rules, phonotactics..."></textarea>
+    <textarea
+      id="phonology"
+      placeholder="List sounds, IPA symbols, stress rules, phonotactics..."
+    ></textarea>
   </div>
 
   <!-- Pronouns -->
   <div class="content-box">
     <h3>Pronouns</h3>
-    <textarea placeholder="Describe personal pronouns, cases, gender, formality..."></textarea>
+    <textarea
+      id="pronouns"
+      placeholder="Describe personal pronouns, cases, gender, formality..."
+    ></textarea>
   </div>
 
   <!-- Verbs -->
   <div class="content-box">
     <h3>Verbs</h3>
-    <textarea placeholder="Verb conjugation, tense, aspect, mood..."></textarea>
+    <textarea
+      id="verbs"
+      placeholder="Verb conjugation, tense, aspect, mood..."
+    ></textarea>
   </div>
 
   <!-- Cardinal Numbers -->
   <div class="content-box">
     <h3>Cardinal Numbers</h3>
-    <textarea placeholder="Number system, base, examples (1–10, etc.)..."></textarea>
+    <textarea
+      id="numbers"
+      placeholder="Number system, base, examples (1–10, etc.)..."
+    ></textarea>
   </div>
 
   <!-- Save / Continue -->
   <div class="action-row">
-    <button class="dash-btn">Save Language</button>
-    <button class="dash-btn secondary">Continue Later</button>
+    <button class="dash-btn" id="saveLang">Save Language</button>
+    <a href="my-conlangs.html" class="dash-btn secondary">Continue Later</a>
   </div>
 
 </main>
@@ -86,6 +103,29 @@
   <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
 </footer>
 
+<script>
+document.getElementById("saveLang").addEventListener("click", () => {
+  const language = {
+    id: Date.now(),
+    name: document.getElementById("langName").value.trim(),
+    phonology: document.getElementById("phonology").value,
+    pronouns: document.getElementById("pronouns").value,
+    verbs: document.getElementById("verbs").value,
+    numbers: document.getElementById("numbers").value
+  };
+
+  if (!language.name) {
+    alert("Please give your language a name.");
+    return;
+  }
+
+  const saved = JSON.parse(localStorage.getItem("conlangs")) || [];
+  saved.push(language);
+  localStorage.setItem("conlangs", JSON.stringify(saved));
+
+  window.location.href = "my-conlangs.html";
+});
+</script>
+
 </body>
 </html>
-~
