@@ -43,9 +43,6 @@
     Create your own constructed language by defining its sounds, grammar, and number system.
   </p>
 
-<h2 class="section-title">My Conlangs</h2>
-<div id="conlangList" class="word-bank"></div>
-  
   <!-- Language Name -->
   <div class="content-box">
     <h3>Language Name</h3>
@@ -80,73 +77,9 @@
   <div class="action-row">
     <button class="dash-btn">Save Language</button>
     <button class="dash-btn secondary">Continue Later</button>
-    <button class="dash-btn" id="saveLanguage">Save Language</button>
   </div>
 
 </main>
-
-<script>
-const saveBtn = document.getElementById("saveLanguage");
-
-saveBtn.addEventListener("click", () => {
-  const language = {
-    id: Date.now().toString(),
-    name: document.getElementById("langName").value.trim(),
-    phonology: document.getElementById("phonology").value,
-    pronouns: document.getElementById("pronouns").value,
-    verbs: document.getElementById("verbs").value,
-    numbers: document.getElementById("numbers").value,
-    createdAt: Date.now()
-  };
-
-  if (!language.name) {
-    alert("Language name is required");
-    return;
-  }
-
-  const conlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
-  conlangs.push(language);
-  localStorage.setItem("conlangs", JSON.stringify(conlangs));
-
-  window.location.href = "conlangs.html";
-});
-</script>
-
-<script>
-const listEl = document.getElementById("conlangList");
-const conlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
-
-if (conlangs.length === 0) {
-  listEl.innerHTML = "<p>No languages created yet.</p>";
-}
-
-conlangs.forEach(lang => {
-  const card = document.createElement("div");
-  card.className = "ipa-card";
-
-  card.innerHTML = `
-    <h3>${lang.name}</h3>
-    <button class="dash-btn" onclick="openLang('${lang.id}')">Edit</button>
-    <button class="dash-btn danger" onclick="deleteLang('${lang.id}')">Delete</button>
-  `;
-
-  listEl.appendChild(card);
-});
-
-function openLang(id) {
-  window.location.href = `conlang-edit.html?id=${id}`;
-}
-
-function deleteLang(id) {
-  if (!confirm("Delete this language?")) return;
-
-  const updated = conlangs.filter(l => l.id !== id);
-  localStorage.setItem("conlangs", JSON.stringify(updated));
-  location.reload();
-}
-</script>
-
-
 
 <footer class="site-footer">
   <p>Powered by</p>
@@ -155,4 +88,4 @@ function deleteLang(id) {
 
 </body>
 </html>
-
+~
