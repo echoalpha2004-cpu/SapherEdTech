@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Edit Conlang – Pronunciation Trainer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="app">
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a href="dashboard.html" class="nav-logo">
+      <img src="logo.png">
+      <span>Pronunciation Trainer</span>
+    </a>
+  </div>
+</nav>
+
+<main class="home">
+  <header class="dash-header">
+    <span class="app-name">Edit Language</span>
+  </header>
+
+  <div class="content-box">
+    <input id="langName">
+    <textarea id="phonology"></textarea>
+    <textarea id="pronouns"></textarea>
+    <textarea id="verbs"></textarea>
+    <textarea id="numbers"></textarea>
+
+    <button class="dash-btn" id="saveChanges">Save Changes</button>
+  </div>
+</main>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const id = Number(params.get("id"));
+
+const langs = JSON.parse(localStorage.getItem("conlangs")) || [];
+const lang = langs.find(l => l.id === id);
+
+document.getElementById("langName").value = lang.name;
+document.getElementById("phonology").value = lang.phonology;
+document.getElementById("pronouns").value = lang.pronouns;
+document.getElementById("verbs").value = lang.verbs;
+document.getElementById("numbers").value = lang.numbers;
+
+document.getElementById("saveChanges").addEventListener("click", () => {
+  lang.name = langName.value;
+  lang.phonology = phonology.value;
+  lang.pronouns = pronouns.value;
+  lang.verbs = verbs.value;
+  lang.numbers = numbers.value;
+
+  localStorage.setItem("conlangs", JSON.stringify(langs));
+  window.location.href = "my-conlangs.html";
+});
+</script>
+
+</body>
+</html>
 
