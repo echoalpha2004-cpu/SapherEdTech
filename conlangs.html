@@ -2,13 +2,86 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Conlangs</title>
+<title>Conlangs – Pronunciation Trainer</title>
 <link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body>
+
+<body class="app">
+
+<!-- Top Nav -->
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>Pronunciation Trainer</span>
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="ipa.html">IPA Chart</a>
+      <a href="conlangs.html">Conlangs</a>
+    </div>
+  </div>
+</nav>
+
 <main class="home">
-  <h1>Conlangs</h1>
-  <p>This will show the student’s constructed languages.</p>
+
+  <header class="dash-header">
+    <img src="logo.png" class="dash-logo" alt="Logo">
+    <span class="app-name">Constructed Language Builder</span>
+  </header>
+
+  <!-- Intro -->
+  <p class="page-intro">
+    Create your own constructed language by defining its sounds, grammar, and number system.
+  </p>
+
+  <!-- Language Name -->
+  <div class="content-box">
+    <h3>Language Name</h3>
+    <input type="text" placeholder="Enter language name..." class="text-input">
+  </div>
+
+  <!-- Phonology -->
+  <div class="content-box">
+    <h3>Phonology</h3>
+    <textarea placeholder="List sounds, IPA symbols, stress rules, phonotactics..."></textarea>
+  </div>
+
+  <!-- Pronouns -->
+  <div class="content-box">
+    <h3>Pronouns</h3>
+    <textarea placeholder="Describe personal pronouns, cases, gender, formality..."></textarea>
+  </div>
+
+  <!-- Verbs -->
+  <div class="content-box">
+    <h3>Verbs</h3>
+    <textarea placeholder="Verb conjugation, tense, aspect, mood..."></textarea>
+  </div>
+
+  <!-- Cardinal Numbers -->
+  <div class="content-box">
+    <h3>Cardinal Numbers</h3>
+    <textarea placeholder="Number system, base, examples (1–10, etc.)..."></textarea>
+  </div>
+
+  <!-- Save / Continue -->
+  <div class="action-row">
+    <button class="dash-btn">Save Language</button>
+    <button class="dash-btn secondary">Continue Later</button>
+  </div>
+
 </main>
+
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
+
 </body>
 </html>
+
