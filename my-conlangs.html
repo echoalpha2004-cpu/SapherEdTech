@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Conlangs – Pronunciation Trainer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="app">
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <a href="dashboard.html" class="nav-logo">
+      <img src="logo.png">
+      <span>Pronunciation Trainer</span>
+    </a>
+  </div>
+</nav>
+
+<main class="home">
+  <header class="dash-header">
+    <span class="app-name">My Languages</span>
+  </header>
+
+  <div id="langList" class="content-box"></div>
+</main>
+
+<script>
+const container = document.getElementById("langList");
+const langs = JSON.parse(localStorage.getItem("conlangs")) || [];
+
+container.innerHTML = "";
+
+langs.forEach(lang => {
+  const div = document.createElement("div");
+  div.className = "language-card";
+
+  div.innerHTML = `
+    <h3>${lang.name}</h3>
+    <button class="dash-btn" onclick="editLang(${lang.id})">Edit</button>
+    <button class="dash-btn" onclick="deleteLang(${lang.id})">Delete</button>
+  `;
+
+  container.appendChild(div);
+});
+
+function editLang(id) {
+  window.location.href = `conlang-edit.html?id=${id}`;
+}
+
+function deleteLang(id) {
+  const updated = langs.filter(l => l.id !== id);
+  localStorage.setItem("conlangs", JSON.stringify(updated));
+  location.reload();
+}
+</script>
+
+</body>
+</html>
