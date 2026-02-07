@@ -63,36 +63,16 @@
 </footer>
 
 <script>
-const searchInput = document.getElementById("conlangSearch");
-const conlangButtons = document.querySelectorAll(".word-btn");
-
-// Search filtering
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
-
-  conlangButtons.forEach(btn => {
-    const name = btn.dataset.name.toLowerCase();
-    btn.style.display = name.includes(query) ? "inline-block" : "none";
-  });
-});
-
-// Click → view conlang
-conlangButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const name = btn.dataset.name;
-    window.location.href = `conlang-view.html?lang=${encodeURIComponent(name)}`;
-  });
-});
-</script>
-
-<script>
 const bank = document.getElementById("conlangBank");
 const searchInput = document.getElementById("conlangSearch");
+
+// Grab existing buttons (featured conlangs)
+const allButtons = () => Array.from(bank.querySelectorAll(".word-btn"));
 
 // Load user-created conlangs
 const savedConlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
 
-// Inject user conlangs into the bank
+// Append saved conlangs WITHOUT deleting featured ones
 savedConlangs.forEach(lang => {
   const btn = document.createElement("button");
   btn.className = "dash-btn word-btn";
@@ -107,19 +87,21 @@ savedConlangs.forEach(lang => {
   bank.appendChild(btn);
 });
 
-// Click handling for featured conlangs
-document.querySelectorAll(".word-btn[data-featured]").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const name = btn.dataset.name;
-    window.location.href = `conlang-view.html?featured=${encodeURIComponent(name)}`;
-  });
+// Attach click handlers to featured conlangs
+document.querySelectorAll(".word-btn[data-name]").forEach(btn => {
+  if (!btn.dataset.id) {
+    btn.addEventListener("click", () => {
+      const name = btn.dataset.name;
+      window.location.href = `conlang-view.html?featured=${encodeURIComponent(name)}`;
+    });
+  }
 });
 
-// Search across ALL conlangs
+// Unified search (featured + user)
 searchInput.addEventListener("input", () => {
   const query = searchInput.value.toLowerCase();
 
-  document.querySelectorAll(".word-btn").forEach(btn => {
+  allButtons().forEach(btn => {
     const name = btn.dataset.name.toLowerCase();
     btn.style.display = name.includes(query) ? "inline-block" : "none";
   });
