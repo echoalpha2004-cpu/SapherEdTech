@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Conlangs – Pronunciation Trainer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="app">
+
+<!-- Top Nav (same as everywhere else) -->
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>Pronunciation Trainer</span>
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="ipa.html">IPA Chart</a>
+      <a href="speed-articulation.html">Speed</a>
+      <a href="conlangs-hub.html">Conlangs</a>
+    </div>
+  </div>
+</nav>
+
+<main class="home">
+
+  <header class="dash-header">
+    <span class="app-name">Conlang Library</span>
+  </header>
+
+  <p class="page-intro">
+    Browse constructed languages created by students. Click one to explore its structure.
+  </p>
+
+  <!-- Search -->
+  <input
+    type="text"
+    id="conlangSearch"
+    placeholder="Search conlangs..."
+    class="dash-btn search-input"
+    style="width:100%; max-width:300px; margin-bottom:1rem;"
+  >
+
+  <!-- Conlang Bank -->
+  <div class="word-bank" id="conlangBank">
+    <!-- You can add as many as you want -->
+    <button class="dash-btn word-btn" data-name="Daveltic">Daveltic</button>
+    <button class="dash-btn word-btn" data-name="Taremi">Taremi</button>
+    <button class="dash-btn word-btn" data-name="Keshan">Keshan</button>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" class="powered-logo">
+</footer>
+
+<script>
+const searchInput = document.getElementById("conlangSearch");
+const conlangButtons = document.querySelectorAll(".word-btn");
+
+// Search filtering
+searchInput.addEventListener("input", () => {
+  const query = searchInput.value.toLowerCase();
+
+  conlangButtons.forEach(btn => {
+    const name = btn.dataset.name.toLowerCase();
+    btn.style.display = name.includes(query) ? "inline-block" : "none";
+  });
+});
+
+// Click → view conlang
+conlangButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const name = btn.dataset.name;
+    window.location.href = `conlang-view.html?lang=${encodeURIComponent(name)}`;
+  });
+});
+</script>
+
+</body>
+</html>
