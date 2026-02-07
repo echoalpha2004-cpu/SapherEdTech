@@ -680,24 +680,23 @@ textarea,
   margin-bottom: 0.4rem;
 }
 
-.about-footer {
-  position: fixed;         /* sticks to the viewport */
-  bottom: 0;               /* bottom of the screen */
-  left: 0;                 /* left-aligned */
-  background: rgba(0, 0, 0, 0.5);  /* semi-transparent to match aesthetic */
+.about-btn {
+  position: fixed;          /* stick to viewport */
+  bottom: 1rem;             /* 1rem from bottom */
+  left: 1rem;               /* 1rem from left */
+  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
-  border-top-right-radius: 8px;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
   z-index: 1000;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
-.about-footer a {
-  color: #88ebf0;          /* a soft link color matching your theme */
-  text-decoration: underline;
-}
-
-.about-footer a:hover {
-  color: #ffffff;
+.about-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
 }
 
