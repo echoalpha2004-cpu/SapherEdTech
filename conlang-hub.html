@@ -66,47 +66,57 @@
 const bank = document.getElementById("conlangBank");
 const searchInput = document.getElementById("conlangSearch");
 
-// Grab existing buttons (featured conlangs)
-const allButtons = () => Array.from(bank.querySelectorAll(".word-btn"));
+/* ---------- FEATURED ---------- */
+const featured = [
+  { name: "Daveltic" },
+  { name: "Taremi" },
+  { name: "Keshan" }
+];
 
-// Load user-created conlangs
-const savedConlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
+/* ---------- USER ---------- */
+const userConlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
 
-// Append saved conlangs WITHOUT deleting featured ones
-savedConlangs.forEach(lang => {
-  const btn = document.createElement("button");
-  btn.className = "dash-btn word-btn";
-  btn.textContent = lang.name;
-  btn.dataset.name = lang.name;
-  btn.dataset.id = lang.id;
+function render(filter = "") {
+  bank.innerHTML = "";
 
-  btn.addEventListener("click", () => {
-    window.location.href = `conlang-view.html?id=${lang.id}`;
-  });
+  // Featured first
+  featured
+    .filter(l => l.name.toLowerCase().includes(filter))
+    .forEach(l => {
+      const btn = document.createElement("button");
+      btn.className = "dash-btn word-btn";
+      btn.textContent = l.name;
 
-  bank.appendChild(btn);
-});
+      btn.onclick = () => {
+        window.location.href = `conlang-view.html?featured=${encodeURIComponent(l.name)}`;
+      };
 
-// Attach click handlers to featured conlangs
-document.querySelectorAll(".word-btn[data-name]").forEach(btn => {
-  if (!btn.dataset.id) {
-    btn.addEventListener("click", () => {
-      const name = btn.dataset.name;
-      window.location.href = `conlang-view.html?featured=${encodeURIComponent(name)}`;
+      bank.appendChild(btn);
     });
-  }
-});
 
-// Unified search (featured + user)
-searchInput.addEventListener("input", () => {
-  const query = searchInput.value.toLowerCase();
+  // User-created
+  userConlangs
+    .filter(l => l.name.toLowerCase().includes(filter))
+    .forEach(l => {
+      const btn = document.createElement("button");
+      btn.className = "dash-btn word-btn";
+      btn.textContent = l.name;
 
-  allButtons().forEach(btn => {
-    const name = btn.dataset.name.toLowerCase();
-    btn.style.display = name.includes(query) ? "inline-block" : "none";
-  });
+      btn.onclick = () => {
+        window.location.href = `conlang-view.html?id=${l.id}`;
+      };
+
+      bank.appendChild(btn);
+    });
+}
+
+render();
+
+searchInput.addEventListener("input", e => {
+  render(e.target.value.toLowerCase());
 });
 </script>
+
 
 </body>
 </html>
