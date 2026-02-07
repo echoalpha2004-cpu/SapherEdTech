@@ -120,12 +120,15 @@ document.getElementById("saveLang").addEventListener("click", () => {
   }
 
   const saved = JSON.parse(localStorage.getItem("conlangs")) || [];
+
   saved.push(language);
   localStorage.setItem("conlangs", JSON.stringify(saved));
 
-  window.location.href = "my-conlangs.html";
+  // Go to the hub
+  window.location.href = "conlangs-hub.html";
 });
 </script>
+
 
 </body>
 </html>
