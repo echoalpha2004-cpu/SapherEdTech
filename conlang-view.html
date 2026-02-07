@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Conlang – Pronunciation Trainer</title>
+<title>Conlang Viewer – Pronunciation Trainer</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -12,37 +12,36 @@
 <nav class="top-nav">
   <div class="nav-inner">
     <a href="conlang-hub.html" class="nav-logo">
-      <span>← Back to Conlangs</span>
+      <img src="logo.png" alt="Logo">
+      <span>Conlang Library</span>
     </a>
   </div>
 </nav>
 
 <main class="home">
 
-  <div class="content-box ipa-box">
+  <header class="dash-header">
+    <span class="app-name" id="langName">Language</span>
+  </header>
 
-    <h2 id="langName">Language Name</h2>
+  <div class="content-box">
+    <h3>Phonology</h3>
+    <p id="phonology"></p>
+  </div>
 
-    <section>
-      <h3>Phonology</h3>
-      <p id="phonology"></p>
-    </section>
+  <div class="content-box">
+    <h3>Pronouns</h3>
+    <p id="pronouns"></p>
+  </div>
 
-    <section>
-      <h3>Pronouns</h3>
-      <p id="pronouns"></p>
-    </section>
+  <div class="content-box">
+    <h3>Verbs</h3>
+    <p id="verbs"></p>
+  </div>
 
-    <section>
-      <h3>Verbs</h3>
-      <p id="verbs"></p>
-    </section>
-
-    <section>
-      <h3>Cardinal Numbers</h3>
-      <p id="numbers"></p>
-    </section>
-
+  <div class="content-box">
+    <h3>Cardinal Numbers</h3>
+    <p id="numbers"></p>
   </div>
 
 </main>
@@ -53,22 +52,63 @@
 </footer>
 
 <script>
+/* ---------- FEATURED CONLANGS ---------- */
+const featuredConlangs = {
+  Daveltic: {
+    phonology: "Consonant-heavy system with emphatic stress.",
+    pronouns: "Three-person system with inclusive/exclusive distinction.",
+    verbs: "Aspect-driven verbal morphology.",
+    numbers: "Base-12 numeral system."
+  },
+  Taremi: {
+    phonology: "Vowel harmony with uvular contrasts.",
+    pronouns: "Gender-neutral pronouns only.",
+    verbs: "Agglutinative tense marking.",
+    numbers: "Base-10 with compound forms."
+  },
+  Keshan: {
+    phonology: "Pitch accent with long vowels.",
+    pronouns: "Politeness-based pronoun hierarchy.",
+    verbs: "Prefix-based agreement.",
+    numbers: "Base-5 counting system."
+  }
+};
+
+/* ---------- LOAD PARAMS ---------- */
 const params = new URLSearchParams(window.location.search);
-const langName = params.get("lang");
+const id = params.get("id");
+const featured = params.get("featured");
 
-const conlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
-const lang = conlangs.find(l => l.name === langName);
+let language = null;
 
-if (!lang) {
+/* ---------- USER-CONSTRUCTED ---------- */
+if (id) {
+  const saved = JSON.parse(localStorage.getItem("conlangs")) || [];
+  language = saved.find(l => l.id === id);
+}
+
+/* ---------- FEATURED ---------- */
+if (!language && featured && featuredConlangs[featured]) {
+  language = {
+    name: featured,
+    ...featuredConlangs[featured]
+  };
+}
+
+/* ---------- RENDER ---------- */
+if (!language) {
   document.getElementById("langName").textContent = "Language not found";
 } else {
-  document.getElementById("langName").textContent = lang.name;
-  document.getElementById("phonology").textContent = lang.phonology;
-  document.getElementById("pronouns").textContent = lang.pronouns;
-  document.getElementById("verbs").textContent = lang.verbs;
-  document.getElementById("numbers").textContent = lang.numbers;
+  document.getElementById("langName").textContent = language.name;
+  document.getElementById("phonology").textContent = language.phonology || "—";
+  document.getElementById("pronouns").textContent = language.pronouns || "—";
+  document.getElementById("verbs").textContent = language.verbs || "—";
+  document.getElementById("numbers").textContent = language.numbers || "—";
 }
 </script>
+
+</body>
+</html>
 
 
 </body>
