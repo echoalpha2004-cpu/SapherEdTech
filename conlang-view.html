@@ -53,33 +53,23 @@
 </footer>
 
 <script>
-// TEMP mock data — replace with real data later
-const conlangs = {
-  Daveltic: {
-    phonology: "Rich vowel harmony, ejective consonants",
-    pronouns: "Three-person system with animacy distinction",
-    verbs: "Aspect-heavy, minimal tense marking",
-    numbers: "Base-12 system"
-  },
-  Taremi: {
-    phonology: "Simple CV syllables, pitch accent",
-    pronouns: "Gender-neutral",
-    verbs: "Agglutinative",
-    numbers: "Base-10"
-  }
-};
-
 const params = new URLSearchParams(window.location.search);
-const lang = params.get("lang");
+const langName = params.get("lang");
 
-if (lang && conlangs[lang]) {
-  document.getElementById("langName").textContent = lang;
-  document.getElementById("phonology").textContent = conlangs[lang].phonology;
-  document.getElementById("pronouns").textContent = conlangs[lang].pronouns;
-  document.getElementById("verbs").textContent = conlangs[lang].verbs;
-  document.getElementById("numbers").textContent = conlangs[lang].numbers;
+const conlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
+const lang = conlangs.find(l => l.name === langName);
+
+if (!lang) {
+  document.getElementById("langName").textContent = "Language not found";
+} else {
+  document.getElementById("langName").textContent = lang.name;
+  document.getElementById("phonology").textContent = lang.phonology;
+  document.getElementById("pronouns").textContent = lang.pronouns;
+  document.getElementById("verbs").textContent = lang.verbs;
+  document.getElementById("numbers").textContent = lang.numbers;
 }
 </script>
+
 
 </body>
 </html>
