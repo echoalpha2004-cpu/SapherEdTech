@@ -85,5 +85,38 @@ conlangButtons.forEach(btn => {
 });
 </script>
 
+<script>
+const bank = document.getElementById("conlangBank");
+const searchInput = document.getElementById("conlangSearch");
+
+// Load conlangs
+const conlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
+
+function renderConlangs(filter = "") {
+  bank.innerHTML = "";
+
+  conlangs
+    .filter(lang => lang.name.toLowerCase().includes(filter))
+    .forEach(lang => {
+      const btn = document.createElement("button");
+      btn.className = "dash-btn word-btn";
+      btn.textContent = lang.name;
+
+      btn.addEventListener("click", () => {
+        window.location.href = `conlang-view.html?lang=${encodeURIComponent(lang.name)}`;
+      });
+
+      bank.appendChild(btn);
+    });
+}
+
+renderConlangs();
+
+searchInput.addEventListener("input", () => {
+  renderConlangs(searchInput.value.toLowerCase());
+});
+</script>
+
+
 </body>
 </html>
