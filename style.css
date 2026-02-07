@@ -679,3 +679,25 @@ textarea,
 .logo-container h1 {
   margin-bottom: 0.4rem;
 }
+
+.about-footer {
+  position: fixed;         /* sticks to the viewport */
+  bottom: 0;               /* bottom of the screen */
+  left: 0;                 /* left-aligned */
+  background: rgba(0, 0, 0, 0.5);  /* semi-transparent to match aesthetic */
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border-top-right-radius: 8px;
+  z-index: 1000;
+}
+
+.about-footer a {
+  color: #88ebf0;          /* a soft link color matching your theme */
+  text-decoration: underline;
+}
+
+.about-footer a:hover {
+  color: #ffffff;
+}
+
