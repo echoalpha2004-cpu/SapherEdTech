@@ -36,38 +36,52 @@
     <span class="app-name">My Languages</span>
   </header>
 
-  <div id="langList" class="content-box"></div>
+<div id="myConlangList"></div>
+
 </main>
 
 <script>
-const container = document.getElementById("langList");
-const langs = JSON.parse(localStorage.getItem("conlangs")) || [];
+const list = document.getElementById("myConlangList");
 
-container.innerHTML = "";
+let conlangs = JSON.parse(localStorage.getItem("conlangs")) || [];
 
-langs.forEach(lang => {
-  const div = document.createElement("div");
-  div.className = "language-card";
+function render() {
+  list.innerHTML = "";
 
-  div.innerHTML = `
-    <h3>${lang.name}</h3>
-    <button class="dash-btn" onclick="editLang(${lang.id})">Edit</button>
-    <button class="dash-btn" onclick="deleteLang(${lang.id})">Delete</button>
-  `;
+  if (conlangs.length === 0) {
+    list.innerHTML = "<p>No conlangs saved yet.</p>";
+    return;
+  }
 
-  container.appendChild(div);
-});
+  conlangs.forEach(lang => {
+    const card = document.createElement("div");
+    card.className = "content-box";
 
-function editLang(id) {
-  window.location.href = `conlang-edit.html?id=${id}`;
+    card.innerHTML = `
+      <h3>${lang.name}</h3>
+      <div class="action-row">
+        <a class="dash-btn" href="conlang-view.html?id=${lang.id}">View</a>
+        <a class="dash-btn secondary" href="conlangs.html?edit=${lang.id}">Edit</a>
+        <button class="dash-btn danger">Delete</button>
+      </div>
+    `;
+
+    // DELETE HANDLER (ID-BASED)
+    card.querySelector(".danger").addEventListener("click", () => {
+      if (!confirm(`Delete "${lang.name}"? This cannot be undone.`)) return;
+
+      conlangs = conlangs.filter(l => l.id !== lang.id);
+      localStorage.setItem("conlangs", JSON.stringify(conlangs));
+      render();
+    });
+
+    list.appendChild(card);
+  });
 }
 
-function deleteLang(id) {
-  const updated = langs.filter(l => l.id !== id);
-  localStorage.setItem("conlangs", JSON.stringify(updated));
-  location.reload();
-}
+render();
 </script>
+
 
 </body>
 </html>
