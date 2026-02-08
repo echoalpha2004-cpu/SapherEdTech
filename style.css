@@ -828,8 +828,11 @@ textarea,
 }
 
 .vowel-image img {
-  max-width: 300px;
-  margin: 10px 0;
+  width: 420px;        /* adjust freely */
+  max-width: 90%;
+  height: auto;
+  margin: 1rem auto;
+  display: block;
 }
 
 .vowel-output {
