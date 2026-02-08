@@ -88,23 +88,23 @@
   </div>
 
   <!-- Height buttons -->
-  <div class="vowel-controls">
-    <button onclick="setHeight('close')">Close</button>
-    <button onclick="setHeight('mid')">Mid</button>
-    <button onclick="setHeight('open')">Open</button>
+  <div class="vowel-controls height-controls">
+   <button onclick="setHeight('close', this)">Close</button>
+   <button onclick="setHeight('mid', this)">Mid</button>
+   <button onclick="setHeight('open', this)">Open</button>
   </div>
 
   <!-- Backness buttons -->
-  <div class="vowel-controls">
-    <button onclick="setBackness('front')">Front</button>
-    <button onclick="setBackness('central')">Central</button>
-    <button onclick="setBackness('back')">Back</button>
+  <div class="vowel-controls backness-controls">
+   <button onclick="setBackness('front', this)">Front</button>
+   <button onclick="setBackness('central', this)">Central</button>
+   <button onclick="setBackness('back', this)">Back</button>
   </div>
 
   <!-- Rounding buttons -->
-<div class="vowel-controls">
-  <button onclick="setRounding('unrounded')">Unrounded</button>
-  <button onclick="setRounding('rounded')">Rounded</button>
+<div class="vowel-controls rounding-controls">
+   <button onclick="setRounding('unrounded', this)">Unrounded</button>
+   <button onclick="setRounding('rounded', this)">Rounded</button>
 </div>
 
 <div class="ipa-grid" id="vowelGrid">
@@ -218,18 +218,29 @@ let currentHeight = null;
 let currentBackness = null;
 let currentRounding = null;
 
-function setHeight(height) {
+function setActiveButton(button, groupClass) {
+  document
+    .querySelectorAll(`.${groupClass} button`)
+    .forEach(btn => btn.classList.remove('active'));
+
+  button.classList.add('active');
+}
+  
+function setHeight(height, btn) {
   currentHeight = height;
+  setActiveButton(btn, 'height-controls');
   filterVowels();
 }
 
-function setBackness(back) {
+function setBackness(back, btn) {
   currentBackness = back;
+  setActiveButton(btn, 'backness-controls');
   filterVowels();
 }
 
-function setRounding(round) {
+function setRounding(round, btn) {
   currentRounding = round;
+  setActiveButton(btn, 'rounding-controls');
   filterVowels();
 }
 
