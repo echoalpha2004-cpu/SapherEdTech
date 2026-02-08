@@ -721,3 +721,8 @@ textarea,
     background: #4da3ff;
     color: white;
 }
+
+.speed-instructions {
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+}
