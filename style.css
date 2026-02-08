@@ -816,3 +816,32 @@ textarea,
     background: #4da3ff;
     color: white;
 }
+
+.vowel-controls {
+  margin-bottom: 10px;
+}
+
+.vowel-controls button {
+  padding: 6px 12px;
+  margin-right: 6px;
+  cursor: pointer;
+}
+
+.vowel-image img {
+  max-width: 300px;
+  margin: 10px 0;
+}
+
+.vowel-output {
+  font-size: 1.5rem;
+  margin-top: 10px;
+}
+
+.vowel {
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+.vowel.none {
+  opacity: 0.5;
+}
