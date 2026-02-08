@@ -77,6 +77,32 @@
   <a href="sound.html?sound=g" class="ipa" data-place="velar">g</a>
 </div>
 
+<section id="vowels">
+  <h2>Vowels</h2>
+
+  <!-- Height buttons -->
+  <div class="vowel-controls">
+    <button onclick="setHeight('close')">Close</button>
+    <button onclick="setHeight('mid')">Mid</button>
+    <button onclick="setHeight('open')">Open</button>
+  </div>
+
+  <!-- Backness buttons -->
+  <div class="vowel-controls">
+    <button onclick="setBackness('front')">Front</button>
+    <button onclick="setBackness('central')">Central</button>
+    <button onclick="setBackness('back')">Back</button>
+  </div>
+
+  <!-- Illustration -->
+  <div class="vowel-image">
+    <img id="vowelImg" src="images/vowels/default.png" alt="Vowel chart">
+  </div>
+
+  <!-- Vowel output -->
+  <div id="vowelOutput" class="vowel-output"></div>
+</section>
+  
 <h2 class="ipa-section">Vowels</h2>
 <div class="ipa-grid">
   <a href="sound.html?sound=i" class="ipa">i</a>
@@ -169,6 +195,61 @@ placeButtons.forEach(btn => {
   });
 });
 </script>
+
+<script>
+  let currentHeight = null;
+  let currentBackness = null;
+
+  const vowelMap = {
+    close: {
+      front: ['i'],
+      central: [],
+      back: ['u']
+    },
+    mid: {
+      front: ['e'],
+      central: [],
+      back: ['o']
+    },
+    open: {
+      front: [],
+      central: ['a'],
+      back: []
+    }
+  };
+
+  function setHeight(height) {
+    currentHeight = height;
+    updateVowels();
+  }
+
+  function setBackness(backness) {
+    currentBackness = backness;
+    updateVowels();
+  }
+
+  function updateVowels() {
+    const output = document.getElementById('vowelOutput');
+    const img = document.getElementById('vowelImg');
+
+    if (!currentHeight || !currentBackness) {
+      output.innerHTML = '';
+      img.src = 'images/vowels/default.png';
+      return;
+    }
+
+    const vowels = vowelMap[currentHeight][currentBackness];
+
+    // Update vowel text
+    output.innerHTML = vowels.length
+      ? vowels.map(v => `<span class="vowel">${v}</span>`).join(' ')
+      : '<span class="vowel none">—</span>';
+
+    // Update illustration
+    img.src = `images/vowels/${currentHeight}-${currentBackness}.png`;
+  }
+</script>
+
 
 <footer class="site-footer">
   <p>Powered by</p>
