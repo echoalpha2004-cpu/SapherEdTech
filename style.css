@@ -726,3 +726,93 @@ textarea,
   margin-bottom: 1.5rem;
   opacity: 0.8;
 }
+
+.select-btn {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #4da3ff;
+  background: transparent;
+  color: #4da3ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.select-btn:hover {
+    background: #4da3ff;
+    color: white;
+}
+
+.select-btn secondary {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #4da3ff;
+  background: transparent;
+  color: #4da3ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.select-btn secondary:hover {
+    background: #4da3ff;
+    color: white;
+}
+
+.print-btn {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #4da3ff;
+  background: transparent;
+  color: #4da3ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.print-btn:hover {
+    background: #4da3ff;
+    color: white;
+}
+
+.game-btn secondary {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #4da3ff;
+  background: transparent;
+  color: #4da3ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.game-btn:hover {
+    background: #4da3ff;
+    color: white;
+}
+
+.game-btn secondary {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #4da3ff;
+  background: transparent;
+  color: #4da3ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.game-btn:hover {
+    background: #4da3ff;
+    color: white;
+}
+
+.coin-btn secondary {
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 2px solid #4da3ff;
+  background: transparent;
+  color: #4da3ff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.coin-btn:hover {
+    background: #4da3ff;
+    color: white;
+}
