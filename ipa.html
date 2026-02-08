@@ -96,18 +96,35 @@
     <button onclick="setBackness('back')">Back</button>
   </div>
 
+  <!-- Rounding buttons -->
+<div class="vowel-controls">
+  <button onclick="setRounding('unrounded')">Unrounded</button>
+  <button onclick="setRounding('rounded')">Rounded</button>
+</div>
+
+
   <!-- Illustration -->
   <div class="vowel-image">
     <img id="vowelImg" src="images/vowels/default.png" alt="Vowel chart">
   </div>
 
 <div class="ipa-grid" id="vowelGrid">
-  <a href="sound.html?sound=i" class="ipa vowel" data-height="close" data-back="front">i</a>
-  <a href="sound.html?sound=e" class="ipa vowel" data-height="mid" data-back="front">e</a>
-  <a href="sound.html?sound=a" class="ipa vowel" data-height="open" data-back="central">a</a>
-  <a href="sound.html?sound=o" class="ipa vowel" data-height="mid" data-back="back">o</a>
-  <a href="sound.html?sound=u" class="ipa vowel" data-height="close" data-back="back">u</a>
+  <a href="sound.html?sound=i" class="ipa vowel"
+     data-height="close" data-back="front" data-round="unrounded">i</a>
+
+  <a href="sound.html?sound=e" class="ipa vowel"
+     data-height="mid" data-back="front" data-round="unrounded">e</a>
+
+  <a href="sound.html?sound=a" class="ipa vowel"
+     data-height="open" data-back="central" data-round="unrounded">a</a>
+
+  <a href="sound.html?sound=o" class="ipa vowel"
+     data-height="mid" data-back="back" data-round="rounded">o</a>
+
+  <a href="sound.html?sound=u" class="ipa vowel"
+     data-height="close" data-back="back" data-round="rounded">u</a>
 </div>
+
 
 
 </section>
@@ -200,6 +217,7 @@ placeButtons.forEach(btn => {
 <script>
 let currentHeight = null;
 let currentBackness = null;
+let currentRounding = null;
 
 function setHeight(height) {
   currentHeight = height;
@@ -208,6 +226,11 @@ function setHeight(height) {
 
 function setBackness(back) {
   currentBackness = back;
+  filterVowels();
+}
+
+function setRounding(round) {
+  currentRounding = round;
   filterVowels();
 }
 
@@ -222,12 +245,18 @@ function filterVowels() {
     const matchesBack =
       !currentBackness || vowel.dataset.back === currentBackness;
 
+    const matchesRound =
+      !currentRounding || vowel.dataset.round === currentRounding;
+
     vowel.style.display =
-      matchesHeight && matchesBack ? 'inline-block' : 'none';
+      matchesHeight && matchesBack && matchesRound
+        ? 'inline-block'
+        : 'none';
   });
 
-  if (currentHeight && currentBackness) {
-    img.src = `images/vowels/${currentHeight}-${currentBackness}.png`;
+  if (currentHeight && currentBackness && currentRounding) {
+    img.src =
+      `images/vowels/${currentHeight}-${currentBackness}-${currentRounding}.png`;
   } else {
     img.src = 'images/vowels/default.png';
   }
