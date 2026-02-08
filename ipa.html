@@ -41,6 +41,8 @@
   Click any symbol to hear its pronunciation.
 </p>
 
+<h2 class="ipa-section">Consonants</h2>
+  
 <section class="articulation-diagram">
   <img
     id="articulationImage"
@@ -67,7 +69,7 @@
   <button class="place glottal" data-place="glottal" style="background:#1d3557;">Glottal</button>
 </div>
 
-<h2 class="ipa-section">Consonants</h2>
+
 <div class="ipa-grid">
   <a href="sound.html?sound=p" class="ipa" data-place="bilabial">p</a>
   <a href="sound.html?sound=b" class="ipa" data-place="bilabial">b</a>
@@ -99,18 +101,17 @@
     <img id="vowelImg" src="images/vowels/default.png" alt="Vowel chart">
   </div>
 
-  <!-- Vowel output -->
-  <div id="vowelOutput" class="vowel-output"></div>
+<div class="ipa-grid" id="vowelGrid">
+  <a href="sound.html?sound=i" class="ipa vowel" data-height="close" data-back="front">i</a>
+  <a href="sound.html?sound=e" class="ipa vowel" data-height="mid" data-back="front">e</a>
+  <a href="sound.html?sound=a" class="ipa vowel" data-height="open" data-back="central">a</a>
+  <a href="sound.html?sound=o" class="ipa vowel" data-height="mid" data-back="back">o</a>
+  <a href="sound.html?sound=u" class="ipa vowel" data-height="close" data-back="back">u</a>
+</div>
+
+
 </section>
   
-<h2 class="ipa-section">Vowels</h2>
-<div class="ipa-grid">
-  <a href="sound.html?sound=i" class="ipa">i</a>
-  <a href="sound.html?sound=e" class="ipa">e</a>
-  <a href="sound.html?sound=a" class="ipa">a</a>
-  <a href="sound.html?sound=o" class="ipa">o</a>
-  <a href="sound.html?sound=u" class="ipa">u</a>
-</div>
 
 </main>
 
@@ -197,58 +198,42 @@ placeButtons.forEach(btn => {
 </script>
 
 <script>
-  let currentHeight = null;
-  let currentBackness = null;
+let currentHeight = null;
+let currentBackness = null;
 
-  const vowelMap = {
-    close: {
-      front: ['i'],
-      central: [],
-      back: ['u']
-    },
-    mid: {
-      front: ['e'],
-      central: [],
-      back: ['o']
-    },
-    open: {
-      front: [],
-      central: ['a'],
-      back: []
-    }
-  };
+function setHeight(height) {
+  currentHeight = height;
+  filterVowels();
+}
 
-  function setHeight(height) {
-    currentHeight = height;
-    updateVowels();
-  }
+function setBackness(back) {
+  currentBackness = back;
+  filterVowels();
+}
 
-  function setBackness(backness) {
-    currentBackness = backness;
-    updateVowels();
-  }
+function filterVowels() {
+  const vowels = document.querySelectorAll('.vowel');
+  const img = document.getElementById('vowelImg');
 
-  function updateVowels() {
-    const output = document.getElementById('vowelOutput');
-    const img = document.getElementById('vowelImg');
+  vowels.forEach(vowel => {
+    const matchesHeight =
+      !currentHeight || vowel.dataset.height === currentHeight;
 
-    if (!currentHeight || !currentBackness) {
-      output.innerHTML = '';
-      img.src = 'images/vowels/default.png';
-      return;
-    }
+    const matchesBack =
+      !currentBackness || vowel.dataset.back === currentBackness;
 
-    const vowels = vowelMap[currentHeight][currentBackness];
+    vowel.style.display =
+      matchesHeight && matchesBack ? 'inline-block' : 'none';
+  });
 
-    // Update vowel text
-    output.innerHTML = vowels.length
-      ? vowels.map(v => `<span class="vowel">${v}</span>`).join(' ')
-      : '<span class="vowel none">—</span>';
-
-    // Update illustration
+  if (currentHeight && currentBackness) {
     img.src = `images/vowels/${currentHeight}-${currentBackness}.png`;
+  } else {
+    img.src = 'images/vowels/default.png';
   }
+}
 </script>
+
 
 
 <footer class="site-footer">
