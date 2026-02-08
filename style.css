@@ -848,3 +848,19 @@ textarea,
 .vowel.none {
   opacity: 0.5;
 }
+
+.vowel-controls button {
+  padding: 0.5rem 0.9rem;
+  margin: 0.25rem;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  background: #e9ecef;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.vowel-controls button.active {
+  background: #2a9d8f;
+  color: white;
+  border-color: #1f7f73;
+}
