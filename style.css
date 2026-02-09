@@ -890,6 +890,23 @@ textarea,
 }
 
 .playing {
-  width: 160px;
+  width: 800px;
   margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+  .top-nav {
+    overflow-x: auto;
+  }
+
+  .nav-inner {
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+  }
 }
