@@ -8,55 +8,34 @@
 </head>
 
 <body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>Pronunciation Trainer</span>
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="inbox.html">Inbox</a>
+      <a href="assignments.html">Assignments</a>
+      <a href="ipa.html">IPA Chart</a>
+      <a href="speed-articulation.html">Speed</a>
+      <a href="games.html">Games</a>
+      <a href="conlangs.html">Conlangs</a>
+    </div>
+  </div>
+</nav>
+  
 <main class="practice-page">
 
-  <header class="dash-header">
-    <img src="logo.png" class="dash-logo">
-    <span class="app-name">Pronunciation Practice</span>
-  </header>
-
-  <h2>Your Practice Sounds</h2>
-  <p>Select a sound to hear it and practice.</p>
-
-  <div id="practiceGrid" class="ipa-grid"></div>
-
-  <p id="emptyMsg" class="empty-msg"></p>
-
-</main>
-
-<script>
-const sounds = {
-  p: "sounds/p.mp3",
-  b: "sounds/b.mp3",
-  i: "sounds/i.mp3",
-  t: "sounds/t.mp3",
-  d: "sounds/d.mp3",
-  a: "sounds/a.mp3"
-};
-
-const grid = document.getElementById("practiceGrid");
-const emptyMsg = document.getElementById("emptyMsg");
-
-const pins = JSON.parse(localStorage.getItem("practicePins")) || [];
-
-if (pins.length === 0) {
-  emptyMsg.textContent = "You haven't pinned any sounds yet. Go to the IPA chart to add some.";
-}
-
-pins.forEach(sound => {
-  const btn = document.createElement("button");
-  btn.className = "ipa";
-  btn.textContent = sound;
-
-  btn.onclick = () => {
-    if (sounds[sound]) {
-      new Audio(sounds[sound]).play();
-    }
-  };
-
-  grid.appendChild(btn);
-});
-</script>
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
 
 <a href="about.html" class="about-btn">About Us</a>
 
