@@ -279,12 +279,41 @@ function setRounding(round, btn) {
   filterVowels();
 }
 
+<script>
+let currentHeight = null;
+let currentBackness = null;
+let currentRounding = null;
+
+function setActiveButton(button, groupClass) {
+  document.querySelectorAll(`.${groupClass} button`).forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+}
+
+function setHeight(height, btn) {
+  currentHeight = height;
+  setActiveButton(btn, 'height-controls');
+  filterVowels();
+}
+
+function setBackness(back, btn) {
+  currentBackness = back;
+  setActiveButton(btn, 'backness-controls');
+  filterVowels();
+}
+
+function setRounding(round, btn) {
+  currentRounding = round;
+  setActiveButton(btn, 'rounding-controls');
+  filterVowels();
+}
+
 function filterVowels() {
   const vowels = document.querySelectorAll('.vowel');
   const img = document.getElementById('vowelImg');
   const vowelOutput = document.getElementById('vowelOutput');
 
   let anyVisible = false;
+  let firstMatch = null;
 
   vowels.forEach(vowel => {
     const matchesHeight = !currentHeight || vowel.dataset.height === currentHeight;
@@ -294,31 +323,26 @@ function filterVowels() {
     const show = matchesHeight && matchesBack && matchesRound;
     vowel.style.display = show ? 'inline-block' : 'none';
 
-    if (show) anyVisible = true;
+    if (show) {
+      anyVisible = true;
+      if (!firstMatch) firstMatch = vowel;
+    }
   });
 
   if (!anyVisible) {
-    // No vowel exists for this combination
     img.src = 'images/vowels/default.png';
     vowelOutput.innerHTML = '<span class="none">No vowel exists for this combination.</span>';
   } else {
-    vowelOutput.innerHTML = ''; // clear message
-
-    // Attempt to find a matching vowel to update the image
-    const matchedVowel = Array.from(vowels).find(vowel => 
-      (!currentHeight || vowel.dataset.height === currentHeight) &&
-      (!currentBackness || vowel.dataset.back === currentBackness) &&
-      (!currentRounding || vowel.dataset.round === currentRounding)
-    );
-
-    if (matchedVowel) {
-      const h = matchedVowel.dataset.height;
-      const b = matchedVowel.dataset.back;
-      const r = matchedVowel.dataset.round;
-      img.src = `images/vowels/${h}-${b}-${r}.png`;
-    }
+    vowelOutput.innerHTML = '';
+    // update chart to first visible vowel
+    const h = firstMatch.dataset.height;
+    const b = firstMatch.dataset.back;
+    const r = firstMatch.dataset.round;
+    img.src = `images/vowels/${h}-${b}-${r}.png`;
   }
 }
+</script>
+
 
 <footer class="site-footer">
   <p>Powered by</p>
