@@ -889,3 +889,7 @@ textarea,
   margin-bottom: 1rem;
 }
 
+.playing {
+  width: 160px;
+  margin-bottom: 1rem;
+}
