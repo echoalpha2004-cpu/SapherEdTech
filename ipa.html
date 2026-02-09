@@ -227,90 +227,32 @@ let currentBackness = null;
 let currentRounding = null;
 
 function setActiveButton(button, groupClass) {
-  document
-    .querySelectorAll(`.${groupClass} button`)
-    .forEach(btn => btn.classList.remove('active'));
-
-  button.classList.add('active');
-}
-  
-function setHeight(height, btn) {
-  currentHeight = height;
-  setActiveButton(btn, 'height-controls');
-  filterVowels();
-}
-
-function setBackness(back, btn) {
-  currentBackness = back;
-  setActiveButton(btn, 'backness-controls');
-  filterVowels();
-}
-
-function setRounding(round, btn) {
-  currentRounding = round;
-  setActiveButton(btn, 'rounding-controls');
-  filterVowels();
-}
-
-let currentHeight = null;
-let currentBackness = null;
-let currentRounding = null;
-
-function setActiveButton(button, groupClass) {
   document.querySelectorAll(`.${groupClass} button`).forEach(btn => btn.classList.remove('active'));
   button.classList.add('active');
 }
 
-function setHeight(height, btn) {
+function setHeight(height, button) {
   currentHeight = height;
-  setActiveButton(btn, 'height-controls');
+  setActiveButton(button, 'height-controls');
   filterVowels();
 }
 
-function setBackness(back, btn) {
+function setBackness(back, button) {
   currentBackness = back;
-  setActiveButton(btn, 'backness-controls');
+  setActiveButton(button, 'backness-controls');
   filterVowels();
 }
 
-function setRounding(round, btn) {
+function setRounding(round, button) {
   currentRounding = round;
-  setActiveButton(btn, 'rounding-controls');
-  filterVowels();
-}
-
-<script>
-let currentHeight = null;
-let currentBackness = null;
-let currentRounding = null;
-
-function setActiveButton(button, groupClass) {
-  document.querySelectorAll(`.${groupClass} button`).forEach(btn => btn.classList.remove('active'));
-  button.classList.add('active');
-}
-
-function setHeight(height, btn) {
-  currentHeight = height;
-  setActiveButton(btn, 'height-controls');
-  filterVowels();
-}
-
-function setBackness(back, btn) {
-  currentBackness = back;
-  setActiveButton(btn, 'backness-controls');
-  filterVowels();
-}
-
-function setRounding(round, btn) {
-  currentRounding = round;
-  setActiveButton(btn, 'rounding-controls');
+  setActiveButton(button, 'rounding-controls');
   filterVowels();
 }
 
 function filterVowels() {
   const vowels = document.querySelectorAll('.vowel');
   const img = document.getElementById('vowelImg');
-  const vowelOutput = document.getElementById('vowelOutput');
+  const output = document.getElementById('vowelOutput');
 
   let anyVisible = false;
   let firstMatch = null;
@@ -331,10 +273,10 @@ function filterVowels() {
 
   if (!anyVisible) {
     img.src = 'images/vowels/default.png';
-    vowelOutput.innerHTML = '<span class="none">No vowel exists for this combination.</span>';
+    output.innerHTML = '<span class="none">No vowel exists for this combination.</span>';
   } else {
-    vowelOutput.innerHTML = '';
-    // update chart to first visible vowel
+    output.innerHTML = '';
+    // Update image to the first matching vowel
     const h = firstMatch.dataset.height;
     const b = firstMatch.dataset.back;
     const r = firstMatch.dataset.round;
@@ -342,6 +284,7 @@ function filterVowels() {
   }
 }
 </script>
+
 
 
 <footer class="site-footer">
