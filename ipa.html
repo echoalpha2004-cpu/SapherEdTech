@@ -227,7 +227,8 @@ let currentBackness = null;
 let currentRounding = null;
 
 function setActiveButton(button, groupClass) {
-  document.querySelectorAll(`.${groupClass} button`).forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll(`.${groupClass} button`)
+    .forEach(btn => btn.classList.remove('active'));
   button.classList.add('active');
 }
 
@@ -253,7 +254,7 @@ function filterVowels() {
   const img = document.getElementById('vowelImg');
   const output = document.getElementById('vowelOutput');
 
-  // If any of the criteria aren't set, just show default chart and no message
+  // Require all three toggles
   if (!currentHeight || !currentBackness || !currentRounding) {
     img.src = 'images/vowels/default.png';
     output.innerHTML = '';
@@ -262,27 +263,32 @@ function filterVowels() {
 
   const src = `images/vowels/${currentHeight}-${currentBackness}-${currentRounding}.png`;
 
-  // Reset output first
-  output.innerHTML = '';
+  // 🔹 Test image existence safely
+  const testImg = new Image();
 
-  // Try to load the image
-  img.onload = () => {
-    output.innerHTML = ''; // Image exists, clear message
+  testImg.onload = () => {
+    // ✅ Image exists
+    img.src = src;
+    output.innerHTML = '';
   };
 
-  img.onerror = () => {
-    img.src = 'images/vowels/default.png'; // fallback to default chart
-    output.innerHTML = '<span class="none">No vowel exists for this combination.</span>';
+  testImg.onerror = () => {
+    // ❌ Image does NOT exist
+    img.src = 'images/vowels/default.png';
+    output.innerHTML =
+      '<span class="none">No vowel exists for this combination.</span>';
   };
 
-  img.src = src;
+  testImg.src = src;
 
-  // Optionally: still highlight any vowel buttons that match selection
+  // Optional: filter vowel buttons (unchanged behavior)
   document.querySelectorAll('.vowel').forEach(vowel => {
-    const matchesHeight = vowel.dataset.height === currentHeight;
-    const matchesBack = vowel.dataset.back === currentBackness;
-    const matchesRound = vowel.dataset.round === currentRounding;
-    vowel.style.display = matchesHeight && matchesBack && matchesRound ? 'inline-block' : 'none';
+    const matches =
+      vowel.dataset.height === currentHeight &&
+      vowel.dataset.back === currentBackness &&
+      vowel.dataset.round === currentRounding;
+
+    vowel.style.display = matches ? 'inline-block' : 'none';
   });
 }
 </script>
