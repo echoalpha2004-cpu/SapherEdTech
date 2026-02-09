@@ -865,14 +865,15 @@ textarea,
   border-color: #1f7f73;
 }
 
-.ipa-box {
+.ipa-page .ipa-box {
   background: #070730;
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 1.5rem;
   margin-bottom: 2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
+
 
 /* Slight visual distinction (optional but nice) */
 .consonant-box {
