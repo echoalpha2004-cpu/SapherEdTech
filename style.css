@@ -864,3 +864,27 @@ textarea,
   color: white;
   border-color: #1f7f73;
 }
+
+.ipa-box {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+}
+
+/* Slight visual distinction (optional but nice) */
+.consonant-box {
+  border-left: 6px solid #457b9d;
+}
+
+.vowel-box {
+  border-left: 6px solid #2a9d8f;
+}
+
+.ipa-box h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
