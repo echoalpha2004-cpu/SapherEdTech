@@ -253,8 +253,8 @@ function filterVowels() {
   const img = document.getElementById('vowelImg');
   const output = document.getElementById('vowelOutput');
 
+  // If any of the criteria aren't set, just show default chart and no message
   if (!currentHeight || !currentBackness || !currentRounding) {
-    // Not enough info to show a vowel yet
     img.src = 'images/vowels/default.png';
     output.innerHTML = '';
     return;
@@ -262,19 +262,22 @@ function filterVowels() {
 
   const src = `images/vowels/${currentHeight}-${currentBackness}-${currentRounding}.png`;
 
-  // Try to load the image; if it fails, show the "No vowel" message
+  // Reset output first
+  output.innerHTML = '';
+
+  // Try to load the image
   img.onload = () => {
-    output.innerHTML = ''; // clear message
+    output.innerHTML = ''; // Image exists, clear message
   };
 
   img.onerror = () => {
-    img.src = 'images/vowels/default.png';
+    img.src = 'images/vowels/default.png'; // fallback to default chart
     output.innerHTML = '<span class="none">No vowel exists for this combination.</span>';
   };
 
   img.src = src;
 
-  // Optional: still highlight any button vowels that match
+  // Optionally: still highlight any vowel buttons that match selection
   document.querySelectorAll('.vowel').forEach(vowel => {
     const matchesHeight = vowel.dataset.height === currentHeight;
     const matchesBack = vowel.dataset.back === currentBackness;
@@ -283,7 +286,6 @@ function filterVowels() {
   });
 }
 </script>
-
 
 <footer class="site-footer">
   <p>Powered by</p>
