@@ -910,3 +910,23 @@ textarea,
     white-space: nowrap;
   }
 }
+
+@media (max-width: 768px) {
+  .playing {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .ipa {
+    padding: 0.6rem;
+    font-size: 1.1rem;
+  }
+
+  .ipa-grid {
+    gap: 0.6rem;
+  }
+}
+
