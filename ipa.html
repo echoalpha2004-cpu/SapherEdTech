@@ -252,10 +252,37 @@ function setRounding(round, btn) {
   filterVowels();
 }
 
+let currentHeight = null;
+let currentBackness = null;
+let currentRounding = null;
+
+function setActiveButton(button, groupClass) {
+  document.querySelectorAll(`.${groupClass} button`).forEach(btn => btn.classList.remove('active'));
+  button.classList.add('active');
+}
+
+function setHeight(height, btn) {
+  currentHeight = height;
+  setActiveButton(btn, 'height-controls');
+  filterVowels();
+}
+
+function setBackness(back, btn) {
+  currentBackness = back;
+  setActiveButton(btn, 'backness-controls');
+  filterVowels();
+}
+
+function setRounding(round, btn) {
+  currentRounding = round;
+  setActiveButton(btn, 'rounding-controls');
+  filterVowels();
+}
+
 function filterVowels() {
   const vowels = document.querySelectorAll('.vowel');
   const img = document.getElementById('vowelImg');
-  const vowelOutput = document.getElementById('vowelOutput'); // optional message area
+  const vowelOutput = document.getElementById('vowelOutput');
 
   let anyVisible = false;
 
@@ -270,25 +297,28 @@ function filterVowels() {
     if (show) anyVisible = true;
   });
 
-  // Update vowel chart image
   if (!anyVisible) {
     // No vowel exists for this combination
-    img.src = 'images/vowels/default.png'; // fallback image
+    img.src = 'images/vowels/default.png';
     vowelOutput.innerHTML = '<span class="none">No vowel exists for this combination.</span>';
   } else {
     vowelOutput.innerHTML = ''; // clear message
-    // Build the image filename
-    let heightPart = currentHeight || 'any';
-    let backPart = currentBackness || 'any';
-    let roundPart = currentRounding || 'any';
 
-    // Only attempt to load if all three selected (or adjust if you have partial images)
-    img.src = `images/vowels/${heightPart}-${backPart}-${roundPart}.png`;
+    // Attempt to find a matching vowel to update the image
+    const matchedVowel = Array.from(vowels).find(vowel => 
+      (!currentHeight || vowel.dataset.height === currentHeight) &&
+      (!currentBackness || vowel.dataset.back === currentBackness) &&
+      (!currentRounding || vowel.dataset.round === currentRounding)
+    );
+
+    if (matchedVowel) {
+      const h = matchedVowel.dataset.height;
+      const b = matchedVowel.dataset.back;
+      const r = matchedVowel.dataset.round;
+      img.src = `images/vowels/${h}-${b}-${r}.png`;
+    }
   }
 }
-
-
-
 
 <footer class="site-footer">
   <p>Powered by</p>
