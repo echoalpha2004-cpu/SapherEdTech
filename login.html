@@ -8,43 +8,76 @@
 </head>
 
 <body>
-  <main class="home">
+<main class="home">
 
-<div class="actions vertical">
+  <div class="actions vertical">
 
-  <button class="login-option" onclick="showStudentLogin()">Student Number</button>
-  <button class="login-option">School Email</button>
-  <button class="login-option">Email & Password</button>
+    <!-- Login type selection -->
+    <button class="login-option" onclick="showLogin('student')">Student Login</button>
+    <button class="login-option" onclick="showLogin('teacher')">Teacher Login</button>
 
-  <div id="student-login" class="student-login hidden">
-    <input type="text" id="studentId" placeholder="Enter your student number">
-    <button class="login-option" onclick="loginStudent()">Log In</button>
+    <!-- STUDENT LOGIN -->
+    <div id="student-login" class="login-box hidden">
+      <input type="text" id="studentNumber" placeholder="Student Number">
+      <input type="email" id="studentEmail" placeholder="Student Email">
+      <input type="password" id="studentPassword" placeholder="Password">
+
+      <button class="login-option" onclick="loginStudent()">Log In as Student</button>
+    </div>
+
+    <!-- TEACHER LOGIN -->
+    <div id="teacher-login" class="login-box hidden">
+      <input type="email" id="teacherEmail" placeholder="Teacher Email">
+      <input type="password" id="teacherPassword" placeholder="Password">
+
+      <button class="login-option" onclick="loginTeacher()">Log In as Teacher</button>
+    </div>
+
+    <div class="divider">or</div>
+
+    <a href="plans.html" class="create-btn">Create an account</a>
+
   </div>
 
-  <div class="divider">or</div>
-
-  <a href="plans.html" class="create-btn">Create an account</a>
-
-</div>
-
-
-  </main>
+</main>
 
 <script>
-function showStudentLogin() {
-  document.getElementById("student-login").classList.remove("hidden");
+function showLogin(type) {
+  document.getElementById("student-login").classList.add("hidden");
+  document.getElementById("teacher-login").classList.add("hidden");
+
+  if (type === "student") {
+    document.getElementById("student-login").classList.remove("hidden");
+  } else {
+    document.getElementById("teacher-login").classList.remove("hidden");
+  }
 }
 
 function loginStudent() {
-  const id = document.getElementById("studentId").value;
+  const number = document.getElementById("studentNumber").value;
+  const email = document.getElementById("studentEmail").value;
+  const password = document.getElementById("studentPassword").value;
 
-  if (id.trim() === "") {
-    alert("Please enter your student number.");
+  if (!number || !email || !password) {
+    alert("Please fill in all student fields.");
     return;
   }
 
-  // For now, we accept any number
+  // Placeholder auth
   window.location.href = "dashboard.html";
+}
+
+function loginTeacher() {
+  const email = document.getElementById("teacherEmail").value;
+  const password = document.getElementById("teacherPassword").value;
+
+  if (!email || !password) {
+    alert("Please fill in all teacher fields.");
+    return;
+  }
+
+  // Placeholder auth
+  window.location.href = "teacher-dashboard.html";
 }
 </script>
 
@@ -57,3 +90,4 @@ function loginStudent() {
 
 </body>
 </html>
+
