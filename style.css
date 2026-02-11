@@ -961,4 +961,17 @@ textarea,
   }
 }
 
+.back-btn {
+  background: #1f3b64;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.back-btn:hover {
+  opacity: 0.85;
+}
 
