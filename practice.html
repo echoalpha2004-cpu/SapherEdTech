@@ -53,16 +53,41 @@
 const practiceGrid = document.getElementById("practiceGrid");
 const emptyMsg = document.getElementById("emptyPractice");
 
-const pins = JSON.parse(localStorage.getItem("practicePins")) || [];
+// Get pinned sounds and words
+const soundPins = JSON.parse(localStorage.getItem("practicePins")) || [];
+const wordPins = JSON.parse(localStorage.getItem("practiceWordPins")) || [];
 
-if (pins.length === 0) {
+// Merge them into one array with a type for display
+const allPins = [];
+
+// Add sounds first
+soundPins.forEach(sound => {
+  allPins.push({ type: 'sound', value: sound });
+});
+
+// Add words
+wordPins.forEach(word => {
+  allPins.push({ type: 'word', value: word });
+});
+
+// If nothing is pinned, show empty message
+if (allPins.length === 0) {
   emptyMsg.style.display = "block";
 } else {
-  pins.forEach(sound => {
+  emptyMsg.style.display = "none";
+
+  allPins.forEach(item => {
     const btn = document.createElement("a");
-    btn.href = `sound.html?sound=${sound}`;
     btn.className = "ipa";
-    btn.textContent = sound;
+    btn.textContent = item.value;
+
+    // Link to the right page
+    if (item.type === 'sound') {
+      btn.href = `sound.html?sound=${item.value}`;
+    } else if (item.type === 'word') {
+      btn.href = `word.html?word=${item.value}`;
+    }
+
     practiceGrid.appendChild(btn);
   });
 }
