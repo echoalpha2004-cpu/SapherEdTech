@@ -975,3 +975,22 @@ textarea,
   opacity: 0.85;
 }
 
+.back-btn {
+  position: fixed;          /* stick to viewport */
+  bottom: 1rem;             /* 1rem from bottom */
+  left: 1rem;               /* 1rem from left */
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  z-index: 1000;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.back-btn:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
+}
