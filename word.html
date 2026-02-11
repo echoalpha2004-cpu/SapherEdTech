@@ -38,8 +38,10 @@
 
     <button id="playBtn" class="select-btn">Play Audio</button>
 
-    <div class="instructions" id="instructions"></div>
+    <button id="pinBtn" class="select-btn secondary">Pin to Practice</button>
+    <p id="pinStatus" class="pin-status"></p>
 
+    <div class="instructions" id="instructions"></div>
     <div id="illustrationContainer"></div>
   </div>
 </main>
@@ -125,6 +127,36 @@ if (words[word]) {
   document.getElementById("wordTitle").textContent = "Word not found";
   document.getElementById("instructions").textContent = "";
 }
+
+const pinBtn = document.getElementById("pinBtn");
+const pinStatus = document.getElementById("pinStatus");
+
+// Sync button & status on page load
+let pins = JSON.parse(localStorage.getItem("practiceWordPins")) || [];
+if (pins.includes(word)) {
+  pinStatus.textContent = "Pinned for practice ✔";
+  pinBtn.textContent = "Unpin from Practice";
+}
+
+// Pin/unpin functionality
+pinBtn.onclick = () => {
+  let pins = JSON.parse(localStorage.getItem("practiceWordPins")) || [];
+
+  if (!pins.includes(word)) {
+    // Pin it
+    pins.push(word);
+    localStorage.setItem("practiceWordPins", JSON.stringify(pins));
+    pinStatus.textContent = "Pinned for practice ✔";
+    pinBtn.textContent = "Unpin from Practice";
+  } else {
+    // Unpin it
+    pins = pins.filter(w => w !== word);
+    localStorage.setItem("practiceWordPins", JSON.stringify(pins));
+    pinStatus.textContent = "Removed from practice";
+    pinBtn.textContent = "Pin to Practice";
+  }
+};
+  
 </script>
 
 <a href="about.html" class="about-btn">About Us</a>
