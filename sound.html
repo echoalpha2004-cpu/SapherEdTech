@@ -44,7 +44,7 @@
 <button id="playBtn" class="select-btn">Play Sound</button>
 
 <button id="pinBtn" class="select-btn secondary">Pin to Practice</button>
-    
+
 <button class="print-btn">Print pronunciation guide slip</button>
 
 <div class="instructions" id="instructions"></div>
@@ -152,49 +152,27 @@ if (sounds[sound]) {
     illustrationDiv.appendChild(img);
   }
   // -----------------------------------
-  
+
   document.getElementById("playBtn").onclick = () => {
     new Audio(sounds[sound].file).play();
   };
 }
 
-<script>
 const pinBtn = document.getElementById("pinBtn");
 const pinStatus = document.getElementById("pinStatus");
 
-function getPins() {
-  return JSON.parse(localStorage.getItem("practicePins")) || [];
-}
+pinBtn.onclick = () => {
+  let pins = JSON.parse(localStorage.getItem("practicePins")) || [];
 
-function savePins(pins) {
-  localStorage.setItem("practicePins", JSON.stringify(pins));
-}
-
-function updatePinUI() {
-  const pins = getPins();
-  if (pins.includes(sound)) {
-    pinBtn.textContent = "Unpin from Practice";
+  if (!pins.includes(sound)) {
+    pins.push(sound);
+    localStorage.setItem("practicePins", JSON.stringify(pins));
     pinStatus.textContent = "Pinned for practice ✔";
   } else {
-    pinBtn.textContent = "Pin to Practice";
-    pinStatus.textContent = "";
+    pinStatus.textContent = "Already in your practice list";
   }
-}
-
-pinBtn.onclick = () => {
-  let pins = getPins();
-
-  if (pins.includes(sound)) {
-    pins = pins.filter(s => s !== sound);
-  } else {
-    pins.push(sound);
-  }
-
-  savePins(pins);
-  updatePinUI();
 };
 
-updatePinUI();
 </script>
 
 <a href="about.html" class="about-btn">About Us</a>
