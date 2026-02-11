@@ -158,18 +158,25 @@ if (sounds[sound]) {
   };
 }
 
-const pinBtn = document.getElementById("pinBtn");
-const pinStatus = document.getElementById("pinStatus");
-
 pinBtn.onclick = () => {
-  let pins = JSON.parse(localStorage.getItem("practicePins")) || [];
+let pins = JSON.parse(localStorage.getItem("practicePins")) || [];
+if (pins.includes(sound)) {
+  pinStatus.textContent = "Pinned for practice ✔";
+  pinBtn.textContent = "Unpin from Practice";
+}
 
   if (!pins.includes(sound)) {
+    // Pin it
     pins.push(sound);
     localStorage.setItem("practicePins", JSON.stringify(pins));
     pinStatus.textContent = "Pinned for practice ✔";
+    pinBtn.textContent = "Unpin from Practice";
   } else {
-    pinStatus.textContent = "Already in your practice list";
+    // Unpin it
+    pins = pins.filter(s => s !== sound);
+    localStorage.setItem("practicePins", JSON.stringify(pins));
+    pinStatus.textContent = "Removed from practice";
+    pinBtn.textContent = "Pin to Practice";
   }
 };
 
