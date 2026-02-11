@@ -33,6 +33,42 @@
   
 <main class="practice-page">
 
+  <header class="dash-header">
+    <span class="app-name">Practice</span>
+  </header>
+
+  <p class="ipa-instructions">
+    Sounds you’ve pinned for focused practice.
+  </p>
+
+  <div id="practiceGrid" class="ipa-grid"></div>
+
+  <p id="emptyPractice" class="ipa-instructions" style="display:none;">
+    You haven’t pinned any sounds yet.
+  </p>
+
+</main>
+
+<script>
+const practiceGrid = document.getElementById("practiceGrid");
+const emptyMsg = document.getElementById("emptyPractice");
+
+const pins = JSON.parse(localStorage.getItem("practicePins")) || [];
+
+if (pins.length === 0) {
+  emptyMsg.style.display = "block";
+} else {
+  pins.forEach(sound => {
+    const btn = document.createElement("a");
+    btn.href = `sound.html?sound=${sound}`;
+    btn.className = "ipa";
+    btn.textContent = sound;
+    practiceGrid.appendChild(btn);
+  });
+}
+</script>
+
+
 <footer class="site-footer">
   <p>Powered by</p>
   <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
