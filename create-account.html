@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create Account</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<main class="home">
+
+  <div class="sound-card">
+    <h2>Create Your Account</h2>
+
+    <input type="text" id="name" placeholder="Full Name" class="select-btn">
+    <input type="number" id="birth" placeholder="Year of Birth" class="select-btn">
+    <input type="email" id="email" placeholder="Email" class="select-btn">
+    <input type="password" id="password" placeholder="Password" class="select-btn">
+
+    <button id="createBtn" class="select-btn">
+      Create Account
+    </button>
+
+    <p id="statusMessage" style="margin-top:1rem;"></p>
+
+    <a href="plans.html" class="select-btn secondary" style="margin-top:1rem;">
+      ← Back to Plans
+    </a>
+
+  </div>
+
+</main>
+
+<script>
+const createBtn = document.getElementById("createBtn");
+const statusMessage = document.getElementById("statusMessage");
+
+createBtn.onclick = () => {
+  const name = document.getElementById("name").value;
+  const birth = document.getElementById("birth").value;
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if (name && birth && email && password) {
+    // Store fake account (no validation)
+    localStorage.setItem("accountCreated", "true");
+
+    statusMessage.textContent = "✔ Account successfully created!";
+    statusMessage.style.color = "lightgreen";
+
+    setTimeout(() => {
+      window.location.href = "index.html"; // login page
+    }, 1500);
+
+  } else {
+    statusMessage.textContent = "Please fill in all fields.";
+    statusMessage.style.color = "red";
+  }
+};
+</script>
+
+</body>
+</html>
