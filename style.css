@@ -1081,6 +1081,7 @@ textarea,
 }
 
 .students-container {
+  background: e8f5f3;
   padding: 40px;
   display: grid;
   gap: 25px;
