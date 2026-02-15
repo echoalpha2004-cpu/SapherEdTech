@@ -71,13 +71,33 @@
 </body>
 
 <script>
+function loadAssignments() {
+  const list = document.querySelector(".assignment-list");
+  if (!list) return;
+
+  list.innerHTML = "";
+
   const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
 
-classwork
-  .filter(item => item.type === "assignment")
-  .forEach(item => {
-    // create assignment card dynamically
+  const assignments = classwork.filter(item => item.type === "assignment");
+
+  if (assignments.length === 0) {
+    list.innerHTML = "<p>No assignments assigned yet.</p>";
+    return;
+  }
+
+  assignments.forEach(assign => {
+    const card = document.createElement("div");
+    card.className = "quiz-card";
+    card.innerHTML = `
+      <h3>${assign.title}</h3>
+      <p>${assign.description}</p>
+    `;
+    list.appendChild(card);
   });
+}
+
+loadAssignments();
 </script>
   
 </html>
