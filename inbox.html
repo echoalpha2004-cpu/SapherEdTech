@@ -62,6 +62,24 @@
 
 </main>
 
+<script>
+  function loadInbox() {
+  const inbox = document.getElementById("inboxList");
+  inbox.innerHTML = "";
+
+  const announcements = JSON.parse(localStorage.getItem("announcements") || "[]");
+
+  announcements.forEach(text => {
+    const div = document.createElement("div");
+    div.className = "announcement-item";
+    div.innerHTML = `<p>${text}</p>`;
+    inbox.appendChild(div);
+  });
+}
+
+loadInbox();
+</script>
+  
 <footer class="site-footer">
   <p>Powered by</p>
   <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
