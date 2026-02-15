@@ -1107,3 +1107,36 @@ textarea,
   background: #4CAF50;
 }
 
+main {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.quiz-section,
+.classwork-section,
+.teacher-section {
+  background: #0a0430;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  margin-bottom: 40px;
+}
+
+.quiz-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.quiz-card {
+  background: #f8f9fb;
+  padding: 20px;
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.quiz-card:hover {
+  transform: translateY(-3px);
+}
+
