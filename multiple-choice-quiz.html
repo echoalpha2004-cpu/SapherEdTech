@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IPA Multiple Choice Quiz</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>Pronunciation Trainer</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="quiz-page">
+
+  <header class="dash-header">
+    <span class="app-name">IPA Multiple Choice Quiz</span>
+  </header>
+
+  <div class="quiz-container">
+
+    <div class="quiz-top">
+      <div id="questionCounter"></div>
+      <div id="timer" class="quiz-timer"></div>
+    </div>
+
+    <div id="questionText" class="quiz-question"></div>
+
+    <div id="answers" class="quiz-answers"></div>
+
+    <div class="quiz-controls">
+      <button id="prevBtn" class="dash-btn">Previous</button>
+      <button id="nextBtn" class="dash-btn">Next</button>
+      <button id="submitBtn" class="dash-btn secondary">Submit Quiz</button>
+    </div>
+
+    <div id="results" class="quiz-results"></div>
+
+  </div>
+
+</main>
+
+<script>
+
+/* =============================
+   WRITE YOUR AUDIO QUESTIONS HERE
+============================= */
+
+const questions = [
+  {
+    audio: "sounds/p.mp3",
+    options: ["b", "p", "d", "g"],
+    correct: 1
+  },
+  {
+    audio: "sounds/i.mp3",
+    options: ["u", "o", "i", "a"],
+    correct: 2
+  },
+  {
+    audio: "sounds/t.mp3",
+    options: ["k", "t", "b", "d"],
+    correct: 1
+  }
+];
+
+/* =============================
+   QUIZ LOGIC
+============================= */
+
+let currentQuestion = 0;
+let userAnswers = new Array(questions.length).fill(null);
+let timeRemaining = 60;
+let timerInterval;
+
+/* Load Question */
+function loadQuestion() {
+
+  const q = questions[currentQuestion];
+
+  document.getElementById("questionCounter").textContent =
+    `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  document.getElementById("questionText").textContent =
+    "Which IPA symbol matches this sound?";
+
+  const answersDiv = document.getElementById("answers");
+  answersDiv.innerHTML = "";
+
+  // Create Play Button
+  const playBtn = document.createElement("button");
+  playBtn.textContent = "▶ Play Audio";
+  playBtn.className = "dash-btn";
+  playBtn.onclick = () => {
+    new Audio(q.audio).play();
+  };
+
+  answersDiv.appendChild(playBtn);
+
+  // Create Answer Options
+  q.options.forEach((option, index) => {
+    const btn = document.createElement("button");
+    btn.className = "quiz-option";
+    btn.textContent = option;
+
+    if (userAnswers[currentQuestion] === index) {
+      btn.classList.add("selected");
+    }
+
+    btn.onclick = () => {
+      userAnswers[currentQuestion] = index;
+      loadQuestion();
+    };
+
+    answersDiv.appendChild(btn);
+  });
+}
+
+/* Navigation */
+document.getElementById("nextBtn").onclick = () => {
+  if (currentQuestion < questions.length - 1) {
+    currentQuestion++;
+    loadQuestion();
+  }
+};
+
+document.getElementById("prevBtn").onclick = () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    loadQuestion();
+  }
+};
+
+/* Submit */
+document.getElementById("submitBtn").onclick = submitQuiz;
+
+function submitQuiz() {
+  clearInterval(timerInterval);
+
+  let score = 0;
+
+  questions.forEach((q, index) => {
+    if (userAnswers[index] === q.correct) {
+      score++;
+    }
+  });
+
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = `
+    <h3>Quiz Complete!</h3>
+    <p>You scored ${score} out of ${questions.length}.</p>
+    <p>Percentage: ${Math.round((score / questions.length) * 100)}%</p>
+  `;
+
+  document.querySelector(".quiz-controls").style.display = "none";
+  document.getElementById("answers").style.display = "none";
+}
+
+/* Timer */
+function startTimer() {
+  const timerDisplay = document.getElementById("timer");
+
+  timerInterval = setInterval(() => {
+    timeRemaining--;
+    timerDisplay.textContent = `Time Remaining: ${timeRemaining}s`;
+
+    if (timeRemaining <= 0) {
+      submitQuiz();
+    }
+  }, 1000);
+}
+
+/* Initialize */
+loadQuestion();
+startTimer();
+
+</script>
+
+
+</body>
+</html>
+
