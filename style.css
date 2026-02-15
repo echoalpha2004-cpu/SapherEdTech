@@ -1081,14 +1081,14 @@ textarea,
 }
 
 .students-container {
-  background: #e8f5f3;
+  background: #e8f5f3 !important;
   padding: 40px;
   display: grid;
   gap: 25px;
 }
 
 .student-card {
-  background: #e8f5f3;
+  background: #e8f5f3 !important;
   padding: 25px;
   border-radius: 16px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.08);
