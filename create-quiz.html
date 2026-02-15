@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Create Quiz</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="teacher-dashboard.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>Pronunciation Trainer</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="builder-page">
+
+<header class="dash-header">
+  <span class="app-name">Create Quiz</span>
+</header>
+
+<section class="builder-card">
+
+  <input type="text" id="quizTitle" placeholder="Quiz Title">
+
+  <input type="number" id="quizTimer" placeholder="Timer (seconds)">
+
+  <div id="questionsContainer"></div>
+
+  <button onclick="addQuestion()" class="dash-btn">Add Question</button>
+
+  <button onclick="saveQuiz()" class="dash-btn">Save Quiz</button>
+
+  <p id="saveMessage"></p>
+
+</section>
+
+</main>
+
+<script>
+let questions = [];
+
+function addQuestion() {
+  const container = document.getElementById("questionsContainer");
+
+  const index = questions.length;
+
+  const div = document.createElement("div");
+  div.className = "question-block";
+  div.innerHTML = `
+    <h3>Question ${index + 1}</h3>
+    <input type="text" placeholder="Audio file path (audio/p.mp3)" class="audio-input">
+    <input type="text" placeholder="Correct Answer" class="correct-input">
+    <input type="text" placeholder="Choice 1" class="choice">
+    <input type="text" placeholder="Choice 2" class="choice">
+    <input type="text" placeholder="Choice 3" class="choice">
+    <input type="text" placeholder="Choice 4" class="choice">
+  `;
+  container.appendChild(div);
+}
+
+function saveQuiz() {
+  const title = document.getElementById("quizTitle").value;
+  const timer = document.getElementById("quizTimer").value;
+  const questionBlocks = document.querySelectorAll(".question-block");
+
+  const quizQuestions = [];
+
+  questionBlocks.forEach(block => {
+    const audio = block.querySelector(".audio-input").value;
+    const correct = block.querySelector(".correct-input").value;
+    const choices = Array.from(block.querySelectorAll(".choice")).map(c => c.value);
+
+    quizQuestions.push({
+      audio,
+      correct,
+      choices
+    });
+  });
+
+  const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
+
+  classwork.push({
+    id: Date.now(),
+    type: "quiz",
+    title,
+    timer,
+    questions: quizQuestions
+  });
+
+  localStorage.setItem("classwork", JSON.stringify(classwork));
+
+  document.getElementById("saveMessage").textContent = "Quiz Created Successfully!";
+}
+</script>
+
+</body>
+</html>
