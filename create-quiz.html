@@ -69,16 +69,23 @@ function addQuestion() {
 function saveQuiz() {
   const title = document.getElementById("quizTitle").value;
   const timer = document.getElementById("quizTimer").value;
-  const questionBlocks = document.querySelectorAll(".question-block");
+  const blocks = document.querySelectorAll(".question-block");
 
-  const quizQuestions = [];
+  if (!title) {
+    alert("Please enter a quiz title.");
+    return;
+  }
 
-  questionBlocks.forEach(block => {
+  const questions = [];
+
+  blocks.forEach(block => {
     const audio = block.querySelector(".audio-input").value;
     const correct = block.querySelector(".correct-input").value;
-    const choices = Array.from(block.querySelectorAll(".choice")).map(c => c.value);
+    const choices = Array.from(block.querySelectorAll(".choice"))
+      .map(c => c.value)
+      .filter(v => v !== "");
 
-    quizQuestions.push({
+    questions.push({
       audio,
       correct,
       choices
@@ -92,12 +99,13 @@ function saveQuiz() {
     type: "quiz",
     title,
     timer,
-    questions: quizQuestions
+    questions
   });
 
   localStorage.setItem("classwork", JSON.stringify(classwork));
 
-  document.getElementById("saveMessage").textContent = "Quiz Created Successfully!";
+  // Go back to classwork page
+  window.location.href = "teacher-classwork.html";
 }
 </script>
 
