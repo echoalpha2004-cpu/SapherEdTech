@@ -70,11 +70,32 @@
 </body>
 
 <script>
-  classwork
-  .filter(item => item.type === "quiz")
-  .forEach(item => {
-    // create quiz card dynamically
+function loadQuizzes() {
+  const quizList = document.querySelector(".quiz-list");
+  quizList.innerHTML = "";
+
+  const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
+  const quizzes = classwork.filter(item => item.type === "quiz");
+
+  if (quizzes.length === 0) {
+    quizList.innerHTML = "<p>No quizzes assigned.</p>";
+    return;
+  }
+
+  quizzes.forEach(quiz => {
+    const card = document.createElement("div");
+    card.className = "quiz-card";
+    card.innerHTML = `
+      <h3>${quiz.title}</h3>
+      <a href="multiple-choice-quiz.html?id=${quiz.id}" class="dash-btn">
+        Start Quiz
+      </a>
+    `;
+    quizList.appendChild(card);
   });
+}
+
+loadQuizzes();
 </script>
   
 </html>
