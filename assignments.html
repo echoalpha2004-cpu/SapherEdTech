@@ -69,4 +69,15 @@
 <a href="about.html" class="about-btn">About Us</a>
   
 </body>
+
+<script>
+  const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
+
+classwork
+  .filter(item => item.type === "assignment")
+  .forEach(item => {
+    // create assignment card dynamically
+  });
+</script>
+  
 </html>
