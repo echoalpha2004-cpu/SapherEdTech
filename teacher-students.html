@@ -7,12 +7,32 @@
 </head>
 <body>
 
-<header class="dash-header">
-  <span class="app-name">Students</span>
-  <a href="teacher-dashboard.html" class="dash-btn">Back</a>
-</header>
+<main class="students-page builder-page">
 
-<div class="students-container" id="studentsList"></div>
+  <header class="dash-header">
+    <span class="app-name">Students</span>
+  </header>
+
+  <div class="students-container">
+    <!-- Example student cards -->
+    <div class="builder-card student-card">
+      <h3>Jane Doe</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 70%;"></div>
+      </div>
+      <p>Assignments Completed: 7 / 10</p>
+    </div>
+
+    <div class="builder-card student-card">
+      <h3>John Smith</h3>
+      <div class="progress-bar">
+        <div class="progress-fill" style="width: 50%;"></div>
+      </div>
+      <p>Assignments Completed: 5 / 10</p>
+    </div>
+  </div>
+
+</main>
 
 <script>
 
