@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Students</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="dash-header">
+  <span class="app-name">Students</span>
+  <a href="teacher-dashboard.html" class="dash-btn">Back</a>
+</header>
+
+<div class="students-container" id="studentsList"></div>
+
+<script>
+
+const students = [
+  { name: "Emily Johnson", assignments: 80, quizzes: 70 },
+  { name: "Michael Smith", assignments: 55, quizzes: 60 },
+  { name: "Sophia Lee", assignments: 95, quizzes: 90 }
+];
+
+const container = document.getElementById("studentsList");
+
+students.forEach(student => {
+
+  const overall = Math.round((student.assignments + student.quizzes) / 2);
+
+  const card = document.createElement("div");
+  card.className = "student-card";
+
+  card.innerHTML = `
+    <h3>${student.name}</h3>
+    <p>Assignments: ${student.assignments}%</p>
+    <p>Quizzes: ${student.quizzes}%</p>
+    <div class="progress-bar">
+      <div class="progress-fill" style="width:${overall}%"></div>
+    </div>
+    <p>Overall Progress: ${overall}%</p>
+  `;
+
+  container.appendChild(card);
+});
+
+</script>
+
+</body>
+</html>
