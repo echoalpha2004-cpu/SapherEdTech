@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Classwork</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="dash-header">
+  <span class="app-name">Classwork</span>
+  <a href="teacher-dashboard.html" class="dash-btn">Back</a>
+</header>
+
+<div class="announcement-create">
+  <input type="text" id="assignmentTitle" placeholder="Assignment / Quiz Name">
+  <select id="typeSelect">
+    <option value="assignment">Assignment</option>
+    <option value="quiz">Quiz</option>
+  </select>
+  <button onclick="createClasswork()" class="dash-btn">Create</button>
+</div>
+
+<div id="classworkList"></div>
+
+<script>
+
+function getClasswork() {
+  return JSON.parse(localStorage.getItem("classwork") || "[]");
+}
+
+function saveClasswork(list) {
+  localStorage.setItem("classwork", JSON.stringify(list));
+}
+
+function renderClasswork() {
+  const listDiv = document.getElementById("classworkList");
+  listDiv.innerHTML = "";
+
+  const classwork = getClasswork();
+
+  classwork.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "announcement-item";
+
+    div.innerHTML = `
+      <p>${item.title} (${item.type})</p>
+      <button onclick="deleteClasswork(${index})" class="dash-btn secondary">Delete</button>
+    `;
+
+    listDiv.appendChild(div);
+  });
+}
+
+function createClasswork() {
+  const title = document.getElementById("assignmentTitle").value;
+  const type = document.getElementById("typeSelect").value;
+  if (!title) return;
+
+  const classwork = getClasswork();
+  classwork.push({ title, type });
+  saveClasswork(classwork);
+
+  document.getElementById("assignmentTitle").value = "";
+  renderClasswork();
+}
+
+function deleteClasswork(index) {
+  const classwork = getClasswork();
+  classwork.splice(index, 1);
+  saveClasswork(classwork);
+  renderClasswork();
+}
+
+renderClasswork();
+
+</script>
+
+</body>
+</html>
