@@ -8,17 +8,21 @@
 </head>
 <body>
 
-<header class="dash-header">
-  <span class="app-name">Announcements</span>
-  <a href="teacher-dashboard.html" class="dash-btn">Back</a>
-</header>
+<main class="announcements-page builder-page">
 
-<div class="announcement-create">
-  <textarea id="announcementText" placeholder="Write announcement..."></textarea>
-  <button onclick="addAnnouncement()" class="dash-btn">Post</button>
-</div>
+  <header class="dash-header">
+    <span class="app-name">Announcements</span>
+  </header>
 
-<div id="announcementList"></div>
+  <div class="builder-card">
+    <input type="text" id="announcementInput" placeholder="Write new announcement">
+    <button class="dash-btn" onclick="addAnnouncement()">Post Announcement</button>
+  </div>
+
+  <h2>Existing Announcements</h2>
+  <div id="announcementList"></div>
+
+</main>
 
 <script>
 
