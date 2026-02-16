@@ -725,34 +725,43 @@ function filterVowels() {
     if (heightMatch && backMatch && roundMatch) {
       vowel.style.display = "inline-block";
       matchFound = true;
-
-      // If all three are selected, update image
-      if (selectedHeight && selectedBackness && selectedRounding) {
-        vowelImg.src =
-          `images/vowels/${selectedHeight}-${selectedBackness}-${selectedRounding}.png`;
-      }
-
     } else {
       vowel.style.display = "none";
     }
   });
 
-  // ---- DEFAULT IMAGE ----
+  // -------------------------
+  // If nothing selected → default
+  // -------------------------
   if (!selectedHeight && !selectedBackness && !selectedRounding) {
     vowelImg.src = "images/vowels/default.png";
     vowelOutput.textContent = "";
     return;
   }
 
-  // ---- NO MATCH CASE ----
-  if (!matchFound) {
-    vowelOutput.textContent = "No vowel exists for this combination.";
+  // -------------------------
+  // If all three selected AND match exists
+  // -------------------------
+  if (selectedHeight && selectedBackness && selectedRounding && matchFound) {
+    vowelImg.src =
+      `images/vowels/${selectedHeight}-${selectedBackness}-${selectedRounding}.png`;
+    vowelOutput.textContent = "";
+  }
+  // -------------------------
+  // If combination invalid
+  // -------------------------
+  else if (selectedHeight && selectedBackness && selectedRounding && !matchFound) {
     vowelImg.src = "images/vowels/default.png";
-  } else {
+    vowelOutput.textContent = "No vowel exists for this combination.";
+  }
+  // -------------------------
+  // Partial selection (1–2 toggles)
+  // -------------------------
+  else {
+    vowelImg.src = "images/vowels/default.png";
     vowelOutput.textContent = "";
   }
 }
-
 </script>
 
 <footer class="site-footer">
