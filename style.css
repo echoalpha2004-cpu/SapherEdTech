@@ -1171,3 +1171,29 @@ main {
   flex-direction: column;
   gap: 10px;
 }
+
+.manner-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.manner {
+  padding: 8px 14px;
+  border-radius: 20px;
+  border: none;
+  background: #e9ecef;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.manner:hover {
+  background: #ced4da;
+}
+
+.active-toggle {
+  background: #1d3557 !important;
+  color: white !important;
+}
