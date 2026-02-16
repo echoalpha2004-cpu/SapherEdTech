@@ -81,14 +81,57 @@
   <button class="place glottal" data-place="glottal" style="background:#1d3557;">Glottal</button>
 </div>
 
+<div class="manner-filters">
+  <button class="manner" data-manner="all">All Manners</button>
+  <button class="manner" data-manner="plosive">Plosive</button>
+  <button class="manner" data-manner="nasal">Nasal</button>
+  <button class="manner" data-manner="trill">Trill</button>
+  <button class="manner" data-manner="tap">Tap</button>
+  <button class="manner" data-manner="fricative">Fricative</button>
+  <button class="manner" data-manner="lateral-fricative">Lateral Fric.</button>
+  <button class="manner" data-manner="approximant">Approximant</button>
+  <button class="manner" data-manner="lateral-approximant">Lat. Approximant</button>
+</div>
+
+<div class="ipa-toggle">
+  <button onclick="setMode('language')" class="active" id="langMode">
+    Language Sounds
+  </button>
+  <button onclick="setMode('all')" id="allMode">
+    Full IPA
+  </button>
+</div>
 
 <div class="ipa-grid">
-  <a href="sound.html?sound=p" class="ipa" data-place="bilabial">p</a>
-  <a href="sound.html?sound=b" class="ipa" data-place="bilabial">b</a>
-  <a href="sound.html?sound=t" class="ipa" data-place="alveolar">t</a>
-  <a href="sound.html?sound=d" class="ipa" data-place="alveolar">d</a>
-  <a href="sound.html?sound=k" class="ipa" data-place="velar">k</a>
-  <a href="sound.html?sound=g" class="ipa" data-place="velar">g</a>
+  <a href="sound.html?sound=p" class="ipa consonant"
+     data-place="bilabial"
+     data-manner="plosive"
+     data-language="true">p</a>
+
+  <a href="sound.html?sound=b" class="ipa consonant"
+     data-place="bilabial"
+     data-manner="plosive"
+     data-language="true">b</a>
+  
+  <a href="sound.html?sound=t" class="ipa" 
+    data-place="alveolar"
+    data-manner="nasal"
+    data-language="true">t</a>
+  
+  <a href="sound.html?sound=t" class="ipa" 
+    data-place="alveolar"
+    data-manner="nasal"
+    data-language="true">d</a>
+  
+  <a href="sound.html?sound=k" class="ipa"
+    data-place="velar"
+    data-manner="plosive"
+    data-language="true">k</a>
+
+  <a href="sound.html?sound=k" class="ipa"
+    data-place="velar"
+    data-manner="plosive"
+    data-language="true">g</a>
 </div>
 </section>
 
@@ -257,74 +300,67 @@ placeButtons.forEach(btn => {
 </script>
 
 <script>
-let currentHeight = null;
-let currentBackness = null;
-let currentRounding = null;
+let currentPlace = "all";
+let currentManner = "all";
+let currentMode = "language";
 
-function setActiveButton(button, groupClass) {
-  document.querySelectorAll(`.${groupClass} button`)
-    .forEach(btn => btn.classList.remove('active'));
-  button.classList.add('active');
-}
+const consonants = document.querySelectorAll(".consonant");
+const noResultMsg = document.createElement("p");
+noResultMsg.className = "none";
+noResultMsg.textContent = "No consonant exists for this combination.";
+document.getElementById("consonantGrid").after(noResultMsg);
+noResultMsg.style.display = "none";
 
-function setHeight(height, button) {
-  currentHeight = height;
-  setActiveButton(button, 'height-controls');
-  filterVowels();
-}
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById("langMode").classList.remove("active");
+  document.getElementById("allMode").classList.remove("active");
 
-function setBackness(back, button) {
-  currentBackness = back;
-  setActiveButton(button, 'backness-controls');
-  filterVowels();
-}
-
-function setRounding(round, button) {
-  currentRounding = round;
-  setActiveButton(button, 'rounding-controls');
-  filterVowels();
-}
-
-function filterVowels() {
-  const img = document.getElementById('vowelImg');
-  const output = document.getElementById('vowelOutput');
-
-  // Require all three toggles
-  if (!currentHeight || !currentBackness || !currentRounding) {
-    img.src = 'images/vowels/default.png';
-    output.innerHTML = '';
-    return;
+  if (mode === "language") {
+    document.getElementById("langMode").classList.add("active");
+  } else {
+    document.getElementById("allMode").classList.add("active");
   }
 
-  const src = `images/vowels/${currentHeight}-${currentBackness}-${currentRounding}.png`;
+  filterConsonants();
+}
 
-  // 🔹 Test image existence safely
-  const testImg = new Image();
-
-  testImg.onload = () => {
-    // ✅ Image exists
-    img.src = src;
-    output.innerHTML = '';
-  };
-
-  testImg.onerror = () => {
-    // ❌ Image does NOT exist
-    img.src = 'images/vowels/default.png';
-    output.innerHTML =
-      '<span class="none">No vowel exists for this combination.</span>';
-  };
-
-  testImg.src = src;
-
-  // Optional: filter vowel buttons (unchanged behavior)
-  document.querySelectorAll('.vowel').forEach(vowel => {
-    const matches =
-      vowel.dataset.height === currentHeight &&
-      vowel.dataset.back === currentBackness &&
-      vowel.dataset.round === currentRounding;
-
-    vowel.style.display = matches ? 'inline-block' : 'none';
+document.querySelectorAll(".place").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentPlace = btn.dataset.place;
+    filterConsonants();
   });
+});
+
+document.querySelectorAll(".manner").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentManner = btn.dataset.manner;
+    filterConsonants();
+  });
+});
+
+function filterConsonants() {
+  let visibleCount = 0;
+
+  consonants.forEach(c => {
+    const matchesPlace =
+      currentPlace === "all" || c.dataset.place === currentPlace;
+
+    const matchesManner =
+      currentManner === "all" || c.dataset.manner === currentManner;
+
+    const matchesMode =
+      currentMode === "all" || c.dataset.language === "true";
+
+    if (matchesPlace && matchesManner && matchesMode) {
+      c.style.display = "inline-block";
+      visibleCount++;
+    } else {
+      c.style.display = "none";
+    }
+  });
+
+  noResultMsg.style.display = visibleCount === 0 ? "block" : "none";
 }
 </script>
 
