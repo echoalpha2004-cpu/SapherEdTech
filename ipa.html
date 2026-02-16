@@ -202,6 +202,136 @@
     data-place="glottal"
     data-manner="plosive"
     data-language="true">ʔ</a>
+
+  <a href="sound.html?sound=ʙ" class="ipa"
+    data-place="glottal"
+    data-manner="trill"
+    data-language="true">ʙ</a>
+
+  <a href="sound.html?sound=ʙ" class="ipa"
+    data-place="glottal"
+    data-manner="trill"
+    data-language="true">ʙ</a>
+
+  <a href="sound.html?sound=ⱱ" class="ipa"
+    data-place="labiodental"
+    data-manner="tap"
+    data-language="true">ⱱ</a>
+
+  <a href="sound.html?sound=ɾ" class="ipa"
+    data-place="alveolar"
+    data-manner="tap"
+    data-language="true">ɾ</a>
+
+  <a href="sound.html?sound=ɽ" class="ipa"
+    data-place="retroflex"
+    data-manner="tap"
+    data-language="true">ɽ</a>
+
+  <a href="sound.html?sound=ɸ" class="ipa"
+    data-place="bilabial"
+    data-manner="fricative"
+    data-language="true">ɸ</a>
+
+  <a href="sound.html?sound=β" class="ipa"
+    data-place="bilabial"
+    data-manner="fricative"
+    data-language="true">β</a>
+
+  <a href="sound.html?sound=f" class="ipa"
+    data-place="labiobilabial"
+    data-manner="fricative"
+    data-language="true">f</a>
+
+  <a href="sound.html?sound=v" class="ipa"
+    data-place="labiobilabial"
+    data-manner="fricative"
+    data-language="true">v</a>
+
+  <a href="sound.html?sound=s" class="ipa"
+    data-place="alveolar"
+    data-manner="fricative"
+    data-language="true">s</a>
+
+  <a href="sound.html?sound=z" class="ipa"
+    data-place="alveolar"
+    data-manner="fricative"
+    data-language="true">z</a>
+
+  <a href="sound.html?sound=θ" class="ipa"
+    data-place="dental"
+    data-manner="fricative"
+    data-language="true">θ</a>
+
+  <a href="sound.html?sound=ð" class="ipa"
+    data-place="dental"
+    data-manner="fricative"
+    data-language="true">ð</a>
+
+  <a href="sound.html?sound=ʃ" class="ipa"
+    data-place="postalveolar"
+    data-manner="fricative"
+    data-language="true">ʃ</a>
+
+  <a href="sound.html?sound=ʒ" class="ipa"
+    data-place="postalveolar"
+    data-manner="fricative"
+    data-language="true">ʒ</a>
+
+  <a href="sound.html?sound=ʂ" class="ipa"
+    data-place="retroflex"
+    data-manner="fricative"
+    data-language="true">ʂ</a>
+
+  <a href="sound.html?sound=ç" class="ipa"
+    data-place="palatal"
+    data-manner="fricative"
+    data-language="true">ç</a>
+
+  <a href="sound.html?sound=ʝ" class="ipa"
+    data-place="palatal"
+    data-manner="fricative"
+    data-language="true">ʝ</a>
+
+  <a href="sound.html?sound=x" class="ipa"
+    data-place="velar"
+    data-manner="fricative"
+    data-language="true">x</a>
+
+  <a href="sound.html?sound=ɣ" class="ipa"
+    data-place="velar"
+    data-manner="fricative"
+    data-language="true">ɣ</a>
+
+  <a href="sound.html?sound=χ" class="ipa"
+    data-place="uvular"
+    data-manner="fricative"
+    data-language="true">χ</a>
+
+  <a href="sound.html?sound=ʁ" class="ipa"
+    data-place="uvular"
+    data-manner="fricative"
+    data-language="true">ʁ</a>
+
+  <a href="sound.html?sound=ħ" class="ipa"
+    data-place="pharyngeal"
+    data-manner="fricative"
+    data-language="true">ħ</a>
+
+  <a href="sound.html?sound=ʕ" class="ipa"
+    data-place="pharyngeal"
+    data-manner="fricative"
+    data-language="true">ʕ</a>
+
+  <a href="sound.html?sound=h" class="ipa"
+    data-place="glottal"
+    data-manner="fricative"
+    data-language="true">h</a>
+
+  <a href="sound.html?sound=ɦ" class="ipa"
+    data-place="glottal"
+    data-manner="fricative"
+    data-language="true">ɦ</a>
 </div>
 </section>
 
@@ -375,26 +505,15 @@ let currentManner = "all";
 let currentMode = "language";
 
 const consonants = document.querySelectorAll(".consonant");
+const grid = document.getElementById("consonantGrid");
+
 const noResultMsg = document.createElement("p");
 noResultMsg.className = "none";
 noResultMsg.textContent = "No consonant exists for this combination.";
-document.getElementById("consonantGrid").after(noResultMsg);
 noResultMsg.style.display = "none";
+grid.after(noResultMsg);
 
-function setMode(mode) {
-  currentMode = mode;
-  document.getElementById("langMode").classList.remove("active");
-  document.getElementById("allMode").classList.remove("active");
-
-  if (mode === "language") {
-    document.getElementById("langMode").classList.add("active");
-  } else {
-    document.getElementById("allMode").classList.add("active");
-  }
-
-  filterConsonants();
-}
-
+// ---- PLACE BUTTONS ----
 document.querySelectorAll(".place").forEach(btn => {
   btn.addEventListener("click", () => {
     currentPlace = btn.dataset.place;
@@ -402,6 +521,7 @@ document.querySelectorAll(".place").forEach(btn => {
   });
 });
 
+// ---- MANNER BUTTONS ----
 document.querySelectorAll(".manner").forEach(btn => {
   btn.addEventListener("click", () => {
     currentManner = btn.dataset.manner;
@@ -409,20 +529,25 @@ document.querySelectorAll(".manner").forEach(btn => {
   });
 });
 
+// ---- FILTER FUNCTION ----
 function filterConsonants() {
   let visibleCount = 0;
 
   consonants.forEach(c => {
-    const matchesPlace =
-      currentPlace === "all" || c.dataset.place === currentPlace;
 
-    const matchesManner =
-      currentManner === "all" || c.dataset.manner === currentManner;
+    const placeMatch =
+      currentPlace === "all" ||
+      c.dataset.place === currentPlace;
 
-    const matchesMode =
-      currentMode === "all" || c.dataset.language === "true";
+    const mannerMatch =
+      currentManner === "all" ||
+      c.dataset.manner === currentManner;
 
-    if (matchesPlace && matchesManner && matchesMode) {
+    const modeMatch =
+      currentMode === "all" ||
+      c.dataset.language === "true";
+
+    if (placeMatch && mannerMatch && modeMatch) {
       c.style.display = "inline-block";
       visibleCount++;
     } else {
@@ -430,7 +555,8 @@ function filterConsonants() {
     }
   });
 
-  noResultMsg.style.display = visibleCount === 0 ? "block" : "none";
+  noResultMsg.style.display =
+    visibleCount === 0 ? "block" : "none";
 }
 </script>
 
