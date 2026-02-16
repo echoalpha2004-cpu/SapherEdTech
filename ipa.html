@@ -102,6 +102,10 @@
   </button>
 </div>
 
+<h3 id="consonantSelection" class="selection-title">
+  Showing: All Consonants
+</h3>
+
 <div class="ipa-grid" id="consonantGrid">
   <a href="sound.html?sound=p" class="ipa consonant"
      data-place="bilabial"
@@ -480,6 +484,7 @@ let currentMode = "language";
 const consonants = document.querySelectorAll(".consonant");
 const grid = document.getElementById("consonantGrid");
 const image = document.getElementById("articulationImage");
+const title = document.getElementById("consonantSelection");
 
 const noResultMsg = document.createElement("p");
 noResultMsg.className = "none";
@@ -487,33 +492,79 @@ noResultMsg.textContent = "No consonant exists for this combination.";
 noResultMsg.style.display = "none";
 grid.after(noResultMsg);
 
-// ---- PLACE BUTTONS ----
+// -------------------------
+// BUTTON HIGHLIGHT
+// -------------------------
+function activateConsonantButton(button, selector) {
+  document.querySelectorAll(selector).forEach(b =>
+    b.classList.remove("active-toggle")
+  );
+  button.classList.add("active-toggle");
+}
+
+// -------------------------
+// TITLE UPDATE
+// -------------------------
+function updateConsonantTitle() {
+  let text = "";
+
+  if (currentPlace !== "all") {
+    text += capitalize(currentPlace) + " ";
+  }
+
+  if (currentManner !== "all") {
+    text += capitalize(currentManner);
+  }
+
+  if (text.trim() === "") {
+    text = "All Consonants";
+  }
+
+  title.textContent = "Showing: " + text.trim();
+}
+
+function capitalize(str) {
+  return str.replace(/-/g, " ")
+            .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+// -------------------------
+// PLACE BUTTONS
+// -------------------------
 document.querySelectorAll(".place").forEach(btn => {
   btn.addEventListener("click", () => {
     currentPlace = btn.dataset.place;
 
-    // Update diagram
+    activateConsonantButton(btn, ".place");
+
     if (currentPlace === "all") {
       image.src = "images/head-default.png";
-      image.alt = "Default articulation diagram";
     } else {
       image.src = `images/head-${currentPlace}.png`;
-      image.alt = `${currentPlace} articulation diagram`;
     }
 
+    updateConsonantTitle();
     filterConsonants();
   });
 });
 
-// ---- MANNER BUTTONS ----
+// -------------------------
+// MANNER BUTTONS
+// -------------------------
 document.querySelectorAll(".manner").forEach(btn => {
   btn.addEventListener("click", () => {
     currentManner = btn.dataset.manner;
+
+    activateConsonantButton(btn, ".manner");
+
+    updateConsonantTitle();
     filterConsonants();
   });
 });
 
-// ---- FILTER FUNCTION ----
+// -------------------------
+// FILTER
+// -------------------------
 function filterConsonants() {
   let visibleCount = 0;
 
