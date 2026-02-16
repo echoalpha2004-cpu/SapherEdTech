@@ -543,6 +543,73 @@ function filterConsonants() {
 }
 </script>
 
+<script>
+let selectedHeight = null;
+let selectedBackness = null;
+let selectedRounding = null;
+
+const vowels = document.querySelectorAll(".vowel");
+const vowelOutput = document.getElementById("vowelOutput");
+
+// -------- HEIGHT --------
+function setHeight(height, btn) {
+  selectedHeight = height;
+  activateButton(btn, ".height-controls button");
+  filterVowels();
+}
+
+// -------- BACKNESS --------
+function setBackness(backness, btn) {
+  selectedBackness = backness;
+  activateButton(btn, ".backness-controls button");
+  filterVowels();
+}
+
+// -------- ROUNDING --------
+function setRounding(rounding, btn) {
+  selectedRounding = rounding;
+  activateButton(btn, ".rounding-controls button");
+  filterVowels();
+}
+
+// -------- BUTTON HIGHLIGHT --------
+function activateButton(button, selector) {
+  document.querySelectorAll(selector).forEach(b =>
+    b.classList.remove("active")
+  );
+  button.classList.add("active");
+}
+
+// -------- FILTER --------
+function filterVowels() {
+  let matchFound = false;
+
+  vowels.forEach(vowel => {
+    const heightMatch =
+      !selectedHeight || vowel.dataset.height === selectedHeight;
+
+    const backMatch =
+      !selectedBackness || vowel.dataset.back === selectedBackness;
+
+    const roundMatch =
+      !selectedRounding || vowel.dataset.round === selectedRounding;
+
+    if (heightMatch && backMatch && roundMatch) {
+      vowel.style.display = "inline-block";
+      matchFound = true;
+    } else {
+      vowel.style.display = "none";
+    }
+  });
+
+  if (!matchFound) {
+    vowelOutput.textContent = "No vowel exists for this combination.";
+  } else {
+    vowelOutput.textContent = "";
+  }
+}
+</script>
+
 <footer class="site-footer">
   <p>Powered by</p>
   <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
