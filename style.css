@@ -1043,6 +1043,20 @@ textarea,
   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
+/* Consonant active toggle */
+.active-toggle {
+  background: #1d3557 !important;
+  color: white !important;
+  box-shadow: 0 0 0 2px rgba(29,53,87,0.3);
+  transform: scale(1.05);
+}
+
+/* Smooth transition */
+.place,
+.manner {
+  transition: all 0.15s ease;
+}
+
 .quiz-option {
   width: 100%;
   padding: 1rem;
@@ -1196,4 +1210,11 @@ main {
 .active-toggle {
   background: #1d3557 !important;
   color: white !important;
+}
+
+.selection-title {
+  margin: 1rem 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #1d3557;
 }
