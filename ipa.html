@@ -706,6 +706,7 @@ function activateButton(button, selector) {
 
 // -------- FILTER --------
 function filterVowels() {
+  const vowelImg = document.getElementById("vowelImg");
   let matchFound = false;
 
   vowels.forEach(vowel => {
@@ -721,17 +722,34 @@ function filterVowels() {
     if (heightMatch && backMatch && roundMatch) {
       vowel.style.display = "inline-block";
       matchFound = true;
+
+      // If all three are selected, update image
+      if (selectedHeight && selectedBackness && selectedRounding) {
+        vowelImg.src =
+          `images/vowels/${selectedHeight}-${selectedBackness}-${selectedRounding}.png`;
+      }
+
     } else {
       vowel.style.display = "none";
     }
   });
 
+  // ---- DEFAULT IMAGE ----
+  if (!selectedHeight && !selectedBackness && !selectedRounding) {
+    vowelImg.src = "images/vowels/default.png";
+    vowelOutput.textContent = "";
+    return;
+  }
+
+  // ---- NO MATCH CASE ----
   if (!matchFound) {
     vowelOutput.textContent = "No vowel exists for this combination.";
+    vowelImg.src = "images/vowels/default.png";
   } else {
     vowelOutput.textContent = "";
   }
 }
+
 </script>
 
 <footer class="site-footer">
