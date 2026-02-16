@@ -1213,8 +1213,9 @@ main {
 }
 
 .selection-title {
+  margin-top: 1.5rem;
   margin-bottom: 1.5rem;
   font-weight: 600;
   font-size: 1.2rem;
-  color: #1d3557;
+  color: #f8f9fb;
 }
