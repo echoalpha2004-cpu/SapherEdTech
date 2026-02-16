@@ -1213,7 +1213,7 @@ main {
 }
 
 .selection-title {
-  margin: 1rem 0;
+  margin-bottom: 1.5rem;
   font-weight: 600;
   font-size: 1.2rem;
   color: #1d3557;
