@@ -452,6 +452,10 @@
    <button onclick="setRounding('rounded', this)">Rounded</button>
 </div>
 
+<h3 id="vowelSelection" class="selection-title">
+  Select vowel features
+</h3>
+
 <div class="ipa-grid" id="vowelGrid">
   <a href="sound.html?sound=i" class="ipa vowel"
      data-height="close" data-back="front" data-round="unrounded">i</a>
@@ -500,6 +504,30 @@ function activateConsonantButton(button, selector) {
     b.classList.remove("active-toggle")
   );
   button.classList.add("active-toggle");
+}
+
+const vowelTitle = document.getElementById("vowelSelection");
+
+function updateVowelTitle() {
+  let text = "";
+
+  if (selectedHeight) {
+    text += capitalize(selectedHeight) + " ";
+  }
+
+  if (selectedBackness) {
+    text += capitalize(selectedBackness) + " ";
+  }
+
+  if (selectedRounding) {
+    text += capitalize(selectedRounding);
+  }
+
+  if (text.trim() === "") {
+    text = "Select vowel features";
+  }
+
+  vowelTitle.textContent = text.trim();
 }
 
 // -------------------------
@@ -602,26 +630,27 @@ let selectedRounding = null;
 const vowels = document.querySelectorAll(".vowel");
 const vowelOutput = document.getElementById("vowelOutput");
 
-// -------- HEIGHT --------
 function setHeight(height, btn) {
   selectedHeight = height;
   activateButton(btn, ".height-controls button");
+  updateVowelTitle();
   filterVowels();
 }
 
-// -------- BACKNESS --------
 function setBackness(backness, btn) {
   selectedBackness = backness;
   activateButton(btn, ".backness-controls button");
+  updateVowelTitle();
   filterVowels();
 }
 
-// -------- ROUNDING --------
 function setRounding(rounding, btn) {
   selectedRounding = rounding;
   activateButton(btn, ".rounding-controls button");
+  updateVowelTitle();
   filterVowels();
 }
+
 
 // -------- BUTTON HIGHLIGHT --------
 function activateButton(button, selector) {
