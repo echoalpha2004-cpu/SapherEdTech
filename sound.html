@@ -63,67 +63,157 @@ const params = new URLSearchParams(window.location.search);
 const sound = params.get("sound");
 
 const sounds = {
+  // CONSONANTS
   p: {
     file: "sounds/p.mp3",
     name: "Voiceless bilabial plosive",
-    instructions: "Press your lips together, build up air, then release it suddenly without vibrating your vocal cords."
+    type: "consonant",
+    place: "bilabial",
+    manner: "plosive",
+    voicing: "voiceless"
   },
   b: {
     file: "sounds/b.mp3",
     name: "Voiced bilabial plosive",
-    instructions: "Press your lips together and release, push air from your throat, and open your mouth."
-  },
-  i: {
-    file: "sounds/i.mp3",
-    name: "Close-front unrounded vowel",
-    instructions: "Raise your tongue high and forward, and push air through your mouth while keeping your teeth close to eachother."
+    type: "consonant",
+    place: "bilabial",
+    manner: "plosive",
+    voicing: "voiced"
   },
   t: {
     file: "sounds/t.mp3",
     name: "Voiceless alveolar plosive",
-    instructions: "Bring your teeth close to eachother, touch the gums right above your teeth, and push air through your throat."
+    type: "consonant",
+    place: "alveolar",
+    manner: "plosive",
+    voicing: "voiceless"
   },
   d: {
     file: "sounds/d.mp3",
     name: "Voiced alveolar plosive",
-    instructions: "Bring your teeth close to eachother, touch the gums high above your teeth, and push air through your throat."
+    type: "consonant",
+    place: "alveolar",
+    manner: "plosive",
+    voicing: "voiced"
   },
   k: {
     file: "sounds/k.mp3",
     name: "Voiceless velar plosive",
-    instructions: "Press the back of the tongue against the roof of the mouth to block air, then release a sharp puff of air."
+    type: "consonant",
+    place: "velar",
+    manner: "plosive",
+    voicing: "voiceless"
   },
   g: {
     file: "sounds/g.mp3",
     name: "Voiced velar plosive",
-    instructions: "Press the back of the tongue against the roof of the mouth to block air, tense up your throat, then release a sharp puff of air."
+    type: "consonant",
+    place: "velar",
+    manner: "plosive",
+    voicing: "voiced"
+  },
+
+  // VOWELS
+  i: {
+    file: "sounds/i.mp3",
+    name: "Close front unrounded vowel",
+    type: "vowel",
+    height: "close",
+    backness: "front",
+    rounding: "unrounded"
   },
   e: {
     file: "sounds/e.mp3",
     name: "Close-mid front unrounded vowel",
-    instructions: "Place the tongue high-front in the mouth, smile slightly, and push a breathe of air from your throat."
+    type: "vowel",
+    height: "closeMid",
+    backness: "front",
+    rounding: "unrounded"
   },
   a: {
     file: "sounds/a.mp3",
-    name: "Open-front unrounded vowel",
-    instructions: "Open your mouth, put your tongue low and forward in your mouth, and push a breathe of air from your throat."
+    name: "Open front unrounded vowel",
+    type: "vowel",
+    height: "open",
+    backness: "front",
+    rounding: "unrounded"
   },
   o: {
     file: "sounds/o.mp3",
     name: "Close-mid back rounded vowel",
-    instructions: "Round your lips, place your tongue on the middle portion at the top of the mouth, and push a breathe of air from your throat."
+    type: "vowel",
+    height: "closeMid",
+    backness: "back",
+    rounding: "rounded"
   },
   u: {
     file: "sounds/u.mp3",
-    name: "Close-back rounded vowel",
-    instructions: "Create a tight, round, circle with your lips, place your tongue on the back portion at the top of the mouth, and push a breathe of air from your throat."
+    name: "Close back rounded vowel",
+    type: "vowel",
+    height: "close",
+    backness: "back",
+    rounding: "rounded"
   }
 };
+
+// -------- CONSONANT INSTRUCTION PARTS --------
+const placeInstructions = {
+  bilabial: "Press your lips together.",
+  alveolar: "Touch your tongue to the ridge behind your upper teeth.",
+  velar: "Raise the back of your tongue to the soft palate."
+};
+
+const mannerInstructions = {
+  plosive: "Block the airflow, build pressure, then release it suddenly."
+};
+
+const voicingInstructions = {
+  voiced: "Vibrate your vocal cords.",
+  voiceless: "Do not vibrate your vocal cords."
+};
+
+// -------- VOWEL INSTRUCTION PARTS --------
+const heightInstructions = {
+  close: "Raise your tongue high in your mouth.",
+  closeMid: "Keep your tongue slightly lower than a close vowel.",
+  open: "Lower your tongue fully in your mouth."
+};
+
+const backnessInstructions = {
+  front: "Move your tongue forward.",
+  back: "Move your tongue toward the back of your mouth."
+};
+
+const roundingInstructions = {
+  rounded: "Round your lips.",
+  unrounded: "Keep your lips relaxed."
+};
+
+function generateInstructions(soundData) {
+  if (soundData.type === "consonant") {
+    return `
+${placeInstructions[soundData.place]}
+${mannerInstructions[soundData.manner]}
+${voicingInstructions[soundData.voicing]}
+    `;
+  }
+
+  if (soundData.type === "vowel") {
+    return `
+${heightInstructions[soundData.height]}
+${backnessInstructions[soundData.backness]}
+${roundingInstructions[soundData.rounding]}
+Let air flow smoothly without blocking it.
+    `;
+  }
+}
+
 
 if (sounds[sound]) {
   document.getElementById("symbol").textContent = sound;
   document.getElementById("sound-name").textContent = sounds[sound].name;
-  document.getElementById("instructions").textContent = sounds[sound].instructions;
+  document.getElementById("instructions").textContent =
+  generateInstructions(sounds[sound]);
 
   // ---- NEW CODE FOR ILLUSTRATION ----
   const illustrations = {
