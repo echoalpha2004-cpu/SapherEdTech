@@ -43,56 +43,25 @@
 </main>
 
 <script>
+function loadInbox() {
+  const inbox = document.getElementById("inboxList");
+  if (!inbox) return;
 
-function getAnnouncements() {
-  return JSON.parse(localStorage.getItem("announcements") || "[]");
-}
+  const announcements = JSON.parse(localStorage.getItem("announcements") || "[]");
 
-function saveAnnouncements(list) {
-  localStorage.setItem("announcements", JSON.stringify(list));
-}
-
-function renderAnnouncements() {
-  const listDiv = document.getElementById("announcementList");
-  listDiv.innerHTML = "";
-
-  const announcements = getAnnouncements();
-
-  announcements.forEach((text, index) => {
-
+  announcements.forEach(text => {
     const div = document.createElement("div");
-    div.className = "announcement-item";
-
+    div.className = "message unread";
     div.innerHTML = `
+      <h3>Instructor</h3>
       <p>${text}</p>
-      <button onclick="deleteAnnouncement(${index})" class="dash-btn secondary">Delete</button>
+      <span class="timestamp">New</span>
     `;
-
-    listDiv.appendChild(div);
+    inbox.appendChild(div);
   });
 }
 
-function addAnnouncement() {
-  const text = document.getElementById("announcementText").value;
-  if (!text) return;
-
-  const announcements = getAnnouncements();
-  announcements.push(text);
-  saveAnnouncements(announcements);
-
-  document.getElementById("announcementText").value = "";
-  renderAnnouncements();
-}
-
-function deleteAnnouncement(index) {
-  const announcements = getAnnouncements();
-  announcements.splice(index, 1);
-  saveAnnouncements(announcements);
-  renderAnnouncements();
-}
-
-renderAnnouncements();
-
+loadInbox();
 </script>
 
 <footer class="site-footer">
