@@ -73,14 +73,16 @@ function renderAnnouncements() {
 }
 
 function addAnnouncement() {
-  const text = document.getElementById("announcementText").value;
+  const input = document.getElementById("announcementInput");
+  const text = input.value.trim();
+
   if (!text) return;
 
   const announcements = getAnnouncements();
   announcements.push(text);
   saveAnnouncements(announcements);
 
-  document.getElementById("announcementText").value = "";
+  input.value = "";
   renderAnnouncements();
 }
 
