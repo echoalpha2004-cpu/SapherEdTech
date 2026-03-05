@@ -83,16 +83,25 @@ function loadQuizzes() {
   }
 
   quizzes.forEach(quiz => {
-    const card = document.createElement("div");
-    card.className = "quiz-card";
-    card.innerHTML = `
-      <h3>${quiz.title}</h3>
-      <a href="multiple-choice-quiz.html?id=${quiz.id}" class="dash-btn">
-        Start Quiz
-      </a>
-    `;
-    quizList.appendChild(card);
-  });
+
+  const card = document.createElement("div");
+  card.className = "quiz-card";
+
+  card.innerHTML = `
+    <h3>${quiz.title}</h3>
+    <button class="dash-btn start-quiz">
+      Start Quiz
+    </button>
+  `;
+
+  card.querySelector(".start-quiz").onclick = () => {
+    localStorage.setItem("currentQuiz", JSON.stringify(quiz));
+    window.location.href = "multiple-choice-quiz.html";
+  };
+
+  quizList.appendChild(card);
+
+});
 }
 
 loadQuizzes();
