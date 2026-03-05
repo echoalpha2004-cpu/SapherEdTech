@@ -51,18 +51,19 @@
 
 </main>
 
+<!-- Updated addQuestion() -->
 <script>
 let questions = [];
 
 function addQuestion() {
   const container = document.getElementById("questionsContainer");
-
   const index = questions.length;
 
   const div = document.createElement("div");
   div.className = "question-block";
   div.innerHTML = `
     <h3>Question ${index + 1}</h3>
+    <input type="text" placeholder="Question Title" class="title-input">
     <input type="text" placeholder="Audio file path (audio/p.mp3)" class="audio-input">
     <input type="text" placeholder="Correct Answer" class="correct-input">
     <input type="text" placeholder="Choice 1" class="choice">
@@ -86,13 +87,15 @@ function saveQuiz() {
   const questions = [];
 
   blocks.forEach(block => {
-    const audio = block.querySelector(".audio-input").value;
-    const correct = block.querySelector(".correct-input").value.trim;
+    const questionTitle = block.querySelector(".title-input").value.trim();
+    const audio = block.querySelector(".audio-input").value.trim();
+    const correct = block.querySelector(".correct-input").value.trim();
     const choices = Array.from(block.querySelectorAll(".choice"))
-      .map(c => c.value)
+      .map(c => c.value.trim())
       .filter(v => v !== "");
 
     questions.push({
+      text: questionTitle,
       audio,
       correct,
       choices
@@ -100,7 +103,6 @@ function saveQuiz() {
   });
 
   const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
-
   classwork.push({
     id: Date.now(),
     type: "quiz",
@@ -108,10 +110,9 @@ function saveQuiz() {
     timer,
     questions
   });
-
   localStorage.setItem("classwork", JSON.stringify(classwork));
 
-  // Go back to classwork page
+  // Redirect to classwork page
   window.location.href = "teacher-classwork.html";
 }
 </script>
