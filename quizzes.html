@@ -5,8 +5,13 @@
 <title>Quizzes</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.quiz-card h3 { color: #222; font-weight: bold; }
+.quiz-card { background: #fff; padding: 1rem; margin-bottom: 1rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.dash-btn { padding: 0.5rem 1rem; border-radius: 6px; border: none; background-color: #007bff; color: #fff; cursor: pointer; transition: background 0.2s; }
+.dash-btn:hover { background-color: #0056b3; }
+</style>
 </head>
-
 <body>
 
 <nav class="top-nav">
@@ -17,22 +22,10 @@
         <span>Pronunciation Trainer</span>
       </a>
     </div>
-
-    <div class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="inbox.html">Inbox</a>
-      <a href="assignments.html">Assignments</a>
-      <a href="ipa.html">IPA Chart</a>
-      <a href="speed-articulation.html">Speed</a>
-      <a href="practice.html">Practice</a>
-      <a href="games.html">Games</a>
-      <a href="conlangs.html">Conlangs</a>
-    </div>
   </div>
 </nav>
 
 <main class="quizzes">
-
 <header class="dash-header">
   <span class="app-name">Quizzes</span>
 </header>
@@ -42,32 +35,10 @@
 </p>
 
 <section class="quiz-section">
-
   <h2 class="ipa-section">Available Quizzes</h2>
-
-  <div class="quiz-list">
-
-    <div class="quiz-card">
-      <h3>IPA Multiple Choice Quiz</h3>
-      <p>Test your ability to identify IPA symbols and sounds.</p>
-      <a href="multiple-choice-quiz.html" class="dash-btn">
-        Start Quiz
-      </a>
-    </div>
-
-  </div>
-
+  <div class="quiz-list"></div>
 </section>
 </main>
-
-<footer class="site-footer">
-  <p>Powered by</p>
-  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
-</footer>
-
-<a href="about.html" class="about-btn">About Us</a>
-  
-</body>
 
 <script>
 function loadQuizzes() {
@@ -83,35 +54,26 @@ function loadQuizzes() {
   }
 
   quizzes.forEach(quiz => {
-
-  const card = document.createElement("div");
-  card.className = "quiz-card";
-
-  card.innerHTML = `
-    <h3>${quiz.title}</h3>
-    <button class="dash-btn start-quiz">
-      Start Quiz
-    </button>
-  `;
-
-  card.querySelector(".start-quiz").onclick = () => {
-    localStorage.setItem("currentQuiz", JSON.stringify(quiz));
-    window.location.href = "multiple-choice-quiz.html";
-  };
-
-  quizList.appendChild(card);
-
-});
+    const card = document.createElement("div");
+    card.className = "quiz-card";
+    card.innerHTML = `
+      <h3>${quiz.title}</h3>
+      <p>${quiz.description || "Test your knowledge."}</p>
+      <button class="dash-btn start-quiz">Start Quiz</button>
+    `;
+    card.querySelector(".start-quiz").onclick = () => {
+      localStorage.setItem("currentQuiz", JSON.stringify(quiz));
+      localStorage.setItem("quizStartTime", Date.now()); // initialize timer for new attempt
+      localStorage.setItem("quizAnswers", JSON.stringify(new Array(quiz.questions.length).fill(null)));
+      localStorage.setItem("quizCurrent", 0);
+      window.location.href = "multiple-choice-quiz.html";
+    };
+    quizList.appendChild(card);
+  });
 }
 
 loadQuizzes();
 </script>
 
-<footer class="site-footer">
-  <p>Powered by</p>
-  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
-</footer>
-
-<a href="about.html" class="about-btn">About Us</a>
-  
+</body>
 </html>
