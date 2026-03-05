@@ -55,23 +55,13 @@
    WRITE YOUR AUDIO QUESTIONS HERE
 ============================= */
 
-const questions = [
-  {
-    audio: "sounds/p.mp3",
-    options: ["b", "p", "d", "g"],
-    correct: 1
-  },
-  {
-    audio: "sounds/i.mp3",
-    options: ["u", "o", "i", "a"],
-    correct: 2
-  },
-  {
-    audio: "sounds/t.mp3",
-    options: ["k", "t", "b", "d"],
-    correct: 1
-  }
-];
+const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
+const QUIZ_DURATION = parseInt(quizData.timer);
+const questions = quizData.questions.map(q => ({
+  audio: q.audio,
+  options: q.choices,
+  correct: q.choices.indexOf(q.correct)
+}));
 
 /* =============================
    QUIZ STATE
@@ -143,15 +133,19 @@ function loadQuestion() {
       btn.classList.add("selected");
     }
 
-    btn.onclick = () => {
+/* =============================
+   LOAD QUIZ FROM CLASSWORK
+============================= */
 
-      userAnswers[currentQuestion] = index;
+const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
 
-      localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
-      localStorage.setItem("quizCurrent", currentQuestion);
+const questions = quizData.questions.map(q => ({
+  audio: q.audio,
+  options: q.choices,
+  correct: q.choices.indexOf(q.correct)
+}));
 
-      loadQuestion();
-    };
+const QUIZ_DURATION = parseInt(quizData.timer);
 
     answersDiv.appendChild(btn);
   });
