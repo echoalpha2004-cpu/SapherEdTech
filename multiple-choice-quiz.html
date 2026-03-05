@@ -5,6 +5,26 @@
 <title>IPA Multiple Choice Quiz</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* Stylish answer buttons */
+.answer-btn {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.answer-btn:hover { background-color: #e0e0e0; }
+.answer-btn.selected { background-color: #d0f0d0; border-color: #4caf50; }
+.quiz-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.quiz-timer { font-weight: bold; }
+</style>
 </head>
 
 <body>
@@ -21,20 +41,17 @@
 </nav>
 
 <main class="quiz-page">
-
   <header class="dash-header">
     <span class="app-name">IPA Multiple Choice Quiz</span>
   </header>
 
   <div class="quiz-container">
-
     <div class="quiz-top">
       <div id="questionCounter"></div>
       <div id="timer" class="quiz-timer"></div>
     </div>
 
     <div id="questionText" class="quiz-question"></div>
-
     <div id="answers" class="quiz-answers"></div>
 
     <div class="quiz-controls">
@@ -44,27 +61,19 @@
     </div>
 
     <div id="results" class="quiz-results"></div>
-
   </div>
-
 </main>
 
 <script>
-
 /* =============================
-   WRITE YOUR AUDIO QUESTIONS HERE
+   LOAD QUIZ DATA
 ============================= */
-
 const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
-const QUIZ_DURATION = parseInt(quizData.timer);
 
 if (!quizData) {
-  document.querySelector(".quiz-container").innerHTML =
-    "<h2>No quiz loaded.</h2>";
+  document.querySelector(".quiz-container").innerHTML = "<h2>No quiz loaded.</h2>";
   throw new Error("No quiz found in localStorage");
 }
-
-const QUIZ_DURATION = parseInt(quizData.timer) || 60;
 
 const questions = quizData.questions.map(q => ({
   audio: q.audio,
@@ -72,100 +81,47 @@ const questions = quizData.questions.map(q => ({
   correct: q.choices.indexOf(q.correct)
 }));
 
+const QUIZ_DURATION = parseInt(quizData.timer) || 60;
+
 /* =============================
    QUIZ STATE
 ============================= */
-
-let currentQuestion = 0;
-let userAnswers = new Array(questions.length).fill(null);
+let currentQuestion = parseInt(localStorage.getItem("quizCurrent")) || 0;
+let userAnswers = JSON.parse(localStorage.getItem("quizAnswers")) || new Array(questions.length).fill(null);
 let timerInterval;
-
-/* =============================
-   INITIALIZE QUIZ
-============================= */
-
-function initializeQuiz() {
-
-  const savedStart = localStorage.getItem("quizStartTime");
-  const savedAnswers = localStorage.getItem("quizAnswers");
-  const savedQuestion = localStorage.getItem("quizCurrent");
-
-  if (!savedStart) {
-    // First time opening quiz
-    localStorage.setItem("quizStartTime", Date.now());
-    localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
-    localStorage.setItem("quizCurrent", 0);
-  } else {
-    userAnswers = JSON.parse(savedAnswers);
-    currentQuestion = parseInt(savedQuestion);
-  }
-
-  loadQuestion();
-  startTimer();
-}
+let startTime = parseInt(localStorage.getItem("quizStartTime")) || Date.now();
+localStorage.setItem("quizStartTime", startTime);
 
 /* =============================
    LOAD QUESTION
 ============================= */
-/* LOAD QUESTION */
-
 function loadQuestion() {
-
   const question = questions[currentQuestion];
-
-  const questionText = document.getElementById("questionText");
-  const answersDiv = document.getElementById("answers");
-  const counter = document.getElementById("questionCounter");
-
-  counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-  document.getElementById("questionCounter").textContent =
-    `Question ${currentQuestion + 1} of ${questions.length}`;
-
-  questionText.innerHTML = `
-    <audio controls src="${question.audio}"></audio>
-  `;
-  document.getElementById("questionText").innerHTML =
-    `<audio controls src="${question.audio}"></audio>`;
+  document.getElementById("questionCounter").textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+  document.getElementById("questionText").innerHTML = `<audio controls src="${question.audio}"></audio>`;
 
   const answersDiv = document.getElementById("answers");
   answersDiv.innerHTML = "";
 
   question.options.forEach((option, index) => {
-
     const btn = document.createElement("button");
     btn.className = "answer-btn";
     btn.textContent = option;
-
-    if (userAnswers[currentQuestion] === index) {
-      btn.classList.add("selected");
-    }
+    if (userAnswers[currentQuestion] === index) btn.classList.add("selected");
 
     btn.onclick = () => {
-
       userAnswers[currentQuestion] = index;
-
       localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
-      if (currentQuestion === questions.length - 1) {
-        submitQuiz();
-      } else {
-        loadQuestion();
-      }
-
-      loadQuestion();
+      loadQuestion(); // refresh selection highlight
     };
 
     answersDiv.appendChild(btn);
-
   });
-
 }
 
 /* =============================
    NAVIGATION
 ============================= */
-
-/* NAVIGATION */
-
 document.getElementById("nextBtn").onclick = () => {
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
@@ -183,38 +139,28 @@ document.getElementById("prevBtn").onclick = () => {
 };
 
 /* =============================
-   SUBMIT
+   SUBMIT QUIZ
 ============================= */
-
-/* SUBMIT QUIZ */
-
 document.getElementById("submitBtn").onclick = submitQuiz;
 
 function submitQuiz() {
-
   clearInterval(timerInterval);
 
   let score = 0;
-
   questions.forEach((q, index) => {
     if (userAnswers[index] === q.correct) score++;
   });
 
-  const resultsDiv = document.getElementById("results");
-  resultsDiv.innerHTML = `
-    <h3>Quiz Complete!</h3>
-    <p>You scored ${score} out of ${questions.length}</p>
-    <p>Percentage: ${Math.round((score / questions.length) * 100)}%</p>
   document.getElementById("results").innerHTML = `
     <h3>Quiz Complete</h3>
-    <p>Score: ${score}/${questions.length}</p>
+    <p>You scored ${score} out of ${questions.length}</p>
+    <p>Percentage: ${Math.round((score / questions.length) * 100)}%</p>
   `;
-
   document.querySelector(".quiz-controls").style.display = "none";
   document.getElementById("answers").style.display = "none";
   document.getElementById("questionText").style.display = "none";
 
-  // Clear saved data
+  // clear saved quiz state
   localStorage.removeItem("quizStartTime");
   localStorage.removeItem("quizAnswers");
   localStorage.removeItem("quizCurrent");
@@ -223,43 +169,24 @@ function submitQuiz() {
 /* =============================
    TIMER (PERSISTENT)
 ============================= */
-
-/* TIMER */
-
 function startTimer() {
-
   const timerDisplay = document.getElementById("timer");
-  const start = Date.now();
 
   timerInterval = setInterval(() => {
-
-    const start = parseInt(localStorage.getItem("quizStartTime"));
-    const elapsed = Math.floor((Date.now() - start) / 1000);
+    const elapsed = Math.floor((Date.now() - startTime) / 1000);
     const remaining = QUIZ_DURATION - elapsed;
 
     timerDisplay.textContent = `Time Remaining: ${remaining}s`;
-    document.getElementById("timer").textContent =
-      `Time Remaining: ${remaining}s`;
 
-    if (remaining <= 0) {
-      submitQuiz();
-    }
     if (remaining <= 0) submitQuiz();
-
   }, 1000);
-
 }
 
 /* =============================
-   START
+   START QUIZ
 ============================= */
-
-initializeQuiz();
-/* START QUIZ */
-
 loadQuestion();
 startTimer();
-
 </script>
 
 </body>
