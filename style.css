@@ -335,7 +335,17 @@ p {
   display: block;
   max-width: 700px;
   width: 100%;
-  margin: 2rem auto 0;
+  margin: 2rem auto 3rem auto;
+}
+
+.stopwatch {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+#coin {
+  width: 120px;
+  margin-bottom: 1rem;
 }
 
 .site-footer {
@@ -399,6 +409,11 @@ p {
   height: auto;
   display: block;
   margin: 1rem auto;
+}
+
+.coin-container {
+  text-align: center;
+  margin: 2rem 0 3rem 0;
 }
 
 .inbox {
