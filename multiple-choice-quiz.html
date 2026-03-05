@@ -56,6 +56,69 @@ const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
 if (!quizData) {
   document.querySelector(".quiz-container").innerHTML =
     "<h2>No quiz loaded.</h2>";
+  throw new Error("No quiz found in localStorage");<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>IPA Multiple Choice Quiz</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+<nav class="top-nav">
+  <div class="nav-inner">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-logo">
+        <img src="logo.png" alt="Logo">
+        <span>Pronunciation Trainer</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<main class="quiz-page">
+
+  <header class="dash-header">
+    <span class="app-name">IPA Multiple Choice Quiz</span>
+  </header>
+
+  <div class="quiz-container">
+
+    <div class="quiz-top">
+      <div id="questionCounter"></div>
+      <div id="timer" class="quiz-timer"></div>
+    </div>
+
+    <div id="questionText" class="quiz-question"></div>
+
+    <div id="answers" class="quiz-answers"></div>
+
+    <div class="quiz-controls">
+      <button id="prevBtn" class="dash-btn">Previous</button>
+      <button id="nextBtn" class="dash-btn">Next</button>
+      <button id="submitBtn" class="dash-btn secondary">Submit Quiz</button>
+    </div>
+
+    <div id="results" class="quiz-results"></div>
+
+  </div>
+
+</main>
+
+<script>
+
+/* =============================
+   WRITE YOUR AUDIO QUESTIONS HERE
+============================= */
+
+const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
+const QUIZ_DURATION = parseInt(quizData.timer);
+
+if (!quizData) {
+  document.querySelector(".quiz-container").innerHTML =
+    "<h2>No quiz loaded.</h2>";
   throw new Error("No quiz found in localStorage");
 }
 
@@ -67,20 +130,58 @@ const questions = quizData.questions.map(q => ({
   correct: q.choices.indexOf(q.correct)
 }));
 
+/* =============================
+   QUIZ STATE
+============================= */
+
 let currentQuestion = 0;
 let userAnswers = new Array(questions.length).fill(null);
 let timerInterval;
 
+/* =============================
+   INITIALIZE QUIZ
+============================= */
 
+function initializeQuiz() {
+
+  const savedStart = localStorage.getItem("quizStartTime");
+  const savedAnswers = localStorage.getItem("quizAnswers");
+  const savedQuestion = localStorage.getItem("quizCurrent");
+
+  if (!savedStart) {
+    // First time opening quiz
+    localStorage.setItem("quizStartTime", Date.now());
+    localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
+    localStorage.setItem("quizCurrent", 0);
+  } else {
+    userAnswers = JSON.parse(savedAnswers);
+    currentQuestion = parseInt(savedQuestion);
+  }
+
+  loadQuestion();
+  startTimer();
+}
+
+/* =============================
+   LOAD QUESTION
+============================= */
 /* LOAD QUESTION */
 
 function loadQuestion() {
 
   const question = questions[currentQuestion];
 
+  const questionText = document.getElementById("questionText");
+  const answersDiv = document.getElementById("answers");
+  const counter = document.getElementById("questionCounter");
+
+  counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
   document.getElementById("questionCounter").textContent =
     `Question ${currentQuestion + 1} of ${questions.length}`;
 
+  questionText.innerHTML = `
+    <audio controls src="${question.audio}"></audio>
+  `;
   document.getElementById("questionText").innerHTML =
     `<audio controls src="${question.audio}"></audio>`;
 
@@ -101,12 +202,14 @@ function loadQuestion() {
 
       userAnswers[currentQuestion] = index;
 
+      localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
       if (currentQuestion === questions.length - 1) {
         submitQuiz();
       } else {
         loadQuestion();
       }
 
+      loadQuestion();
     };
 
     answersDiv.appendChild(btn);
@@ -115,12 +218,16 @@ function loadQuestion() {
 
 }
 
+/* =============================
+   NAVIGATION
+============================= */
 
 /* NAVIGATION */
 
 document.getElementById("nextBtn").onclick = () => {
   if (currentQuestion < questions.length - 1) {
     currentQuestion++;
+    localStorage.setItem("quizCurrent", currentQuestion);
     loadQuestion();
   }
 };
@@ -128,10 +235,14 @@ document.getElementById("nextBtn").onclick = () => {
 document.getElementById("prevBtn").onclick = () => {
   if (currentQuestion > 0) {
     currentQuestion--;
+    localStorage.setItem("quizCurrent", currentQuestion);
     loadQuestion();
   }
 };
 
+/* =============================
+   SUBMIT
+============================= */
 
 /* SUBMIT QUIZ */
 
@@ -147,6 +258,11 @@ function submitQuiz() {
     if (userAnswers[index] === q.correct) score++;
   });
 
+  const resultsDiv = document.getElementById("results");
+  resultsDiv.innerHTML = `
+    <h3>Quiz Complete!</h3>
+    <p>You scored ${score} out of ${questions.length}</p>
+    <p>Percentage: ${Math.round((score / questions.length) * 100)}%</p>
   document.getElementById("results").innerHTML = `
     <h3>Quiz Complete</h3>
     <p>Score: ${score}/${questions.length}</p>
@@ -156,38 +272,47 @@ function submitQuiz() {
   document.getElementById("answers").style.display = "none";
   document.getElementById("questionText").style.display = "none";
 
+  // Clear saved data
+  localStorage.removeItem("quizStartTime");
+  localStorage.removeItem("quizAnswers");
+  localStorage.removeItem("quizCurrent");
 }
 
+/* =============================
+   TIMER (PERSISTENT)
+============================= */
 
 /* TIMER */
 
-/* START TIMER - persistent across refresh */
 function startTimer() {
-  const timerDisplay = document.getElementById("timer");
 
-  // Check if a start time already exists
-  let start = localStorage.getItem("quizStartTime");
-  if (!start) {
-    start = Date.now();
-    localStorage.setItem("quizStartTime", start);
-  } else {
-    start = parseInt(start);
-  }
+  const timerDisplay = document.getElementById("timer");
+  const start = Date.now();
 
   timerInterval = setInterval(() => {
+
+    const start = parseInt(localStorage.getItem("quizStartTime"));
     const elapsed = Math.floor((Date.now() - start) / 1000);
     const remaining = QUIZ_DURATION - elapsed;
 
     timerDisplay.textContent = `Time Remaining: ${remaining}s`;
+    document.getElementById("timer").textContent =
+      `Time Remaining: ${remaining}s`;
 
     if (remaining <= 0) {
-      clearInterval(timerInterval);
       submitQuiz();
     }
+    if (remaining <= 0) submitQuiz();
+
   }, 1000);
+
 }
 
+/* =============================
+   START
+============================= */
 
+initializeQuiz();
 /* START QUIZ */
 
 loadQuestion();
@@ -197,4 +322,3 @@ startTimer();
 
 </body>
 </html>
-
