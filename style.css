@@ -1249,3 +1249,15 @@ main {
 .timer-buttons button {
   margin: 0.3rem;
 }
+
+.quiz-question {
+  color: #222;
+}
+
+.quiz-results {
+  color: #222;
+}
+
+.quiz-container {
+  color: #222;
+}
