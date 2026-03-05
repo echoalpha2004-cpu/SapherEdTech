@@ -290,8 +290,8 @@ p {
 }
 
 #articulationImage {
-  width: 450px;
-  height: auto;
+  width: 450px !important;
+  height: auto !important;
   display: block;
   margin: 1rem auto;
 }
