@@ -5,9 +5,26 @@
 <title>IPA Multiple Choice Quiz</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<style>
+.answer-btn {
+  display: block;
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.75rem 1rem;
+  background-color: #f9f9f9;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+.answer-btn:hover { background-color: #e0e0e0; }
+.answer-btn.selected { background-color: #d0f0d0; border-color: #4caf50; }
+.quiz-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+.quiz-timer { font-weight: bold; }
+</style>
 </head>
-
 <body>
 
 <nav class="top-nav">
@@ -22,35 +39,34 @@
 </nav>
 
 <main class="quiz-page">
-  <header class="dash-header">
-    <span class="app-name">IPA Multiple Choice Quiz</span>
-  </header>
+<header class="dash-header">
+  <span class="app-name">IPA Multiple Choice Quiz</span>
+</header>
 
-  <div class="quiz-container">
-    <div class="quiz-top">
-      <div id="questionCounter"></div>
-      <div id="timer" class="quiz-timer"></div>
-    </div>
-
-    <div id="questionText" class="quiz-question"></div>
-    <div id="answers" class="quiz-answers"></div>
-
-    <div class="quiz-controls">
-      <button id="prevBtn" class="dash-btn">Previous</button>
-      <button id="nextBtn" class="dash-btn">Next</button>
-      <button id="submitBtn" class="dash-btn secondary">Submit Quiz</button>
-    </div>
-
-    <div id="results" class="quiz-results"></div>
+<div class="quiz-container">
+  <div class="quiz-top">
+    <div id="questionCounter"></div>
+    <div id="timer" class="quiz-timer"></div>
   </div>
+
+  <div id="questionText" class="quiz-question"></div>
+  <div id="answers" class="quiz-answers"></div>
+
+  <div class="quiz-controls">
+    <button id="prevBtn" class="dash-btn">Previous</button>
+    <button id="nextBtn" class="dash-btn">Next</button>
+    <button id="submitBtn" class="dash-btn secondary">Submit Quiz</button>
+  </div>
+
+  <div id="results" class="quiz-results"></div>
+</div>
 </main>
 
 <script>
-/* =============================
-   LOAD QUIZ DATA
-============================= */
+// ---------------------------
+// Load quiz data
+// ---------------------------
 const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
-
 if (!quizData) {
   document.querySelector(".quiz-container").innerHTML = "<h2>No quiz loaded.</h2>";
   throw new Error("No quiz found in localStorage");
@@ -61,56 +77,53 @@ const questions = quizData.questions.map(q => ({
   options: q.choices,
   correct: q.choices.indexOf(q.correct)
 }));
-
 const QUIZ_DURATION = parseInt(quizData.timer) || 60;
 
-/* =============================
-   QUIZ STATE
-============================= */
+// ---------------------------
+// Quiz state
+// ---------------------------
 let currentQuestion = parseInt(localStorage.getItem("quizCurrent")) || 0;
 let userAnswers = JSON.parse(localStorage.getItem("quizAnswers")) || new Array(questions.length).fill(null);
-let timerInterval;
 let startTime = parseInt(localStorage.getItem("quizStartTime")) || Date.now();
 localStorage.setItem("quizStartTime", startTime);
+let timerInterval;
 
-/* =============================
-   LOAD QUESTION
-============================= */
+// ---------------------------
+// Load question
+// ---------------------------
 function loadQuestion() {
-  const question = questions[currentQuestion];
-  document.getElementById("questionCounter").textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
-  document.getElementById("questionText").innerHTML = `<audio controls src="${question.audio}"></audio>`;
+  const q = questions[currentQuestion];
+  document.getElementById("questionCounter").textContent = `Question ${currentQuestion+1} of ${questions.length}`;
+  document.getElementById("questionText").innerHTML = `<audio controls src="${q.audio}"></audio>`;
 
   const answersDiv = document.getElementById("answers");
   answersDiv.innerHTML = "";
 
-  question.options.forEach((option, index) => {
+  q.options.forEach((opt, idx) => {
     const btn = document.createElement("button");
     btn.className = "answer-btn";
-    btn.textContent = option;
-    if (userAnswers[currentQuestion] === index) btn.classList.add("selected");
+    btn.textContent = opt;
+    if (userAnswers[currentQuestion] === idx) btn.classList.add("selected");
 
     btn.onclick = () => {
-      userAnswers[currentQuestion] = index;
+      userAnswers[currentQuestion] = idx;
       localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
-      loadQuestion(); // refresh selection highlight
+      loadQuestion(); // refresh highlight
     };
-
     answersDiv.appendChild(btn);
   });
 }
 
-/* =============================
-   NAVIGATION
-============================= */
+// ---------------------------
+// Navigation
+// ---------------------------
 document.getElementById("nextBtn").onclick = () => {
-  if (currentQuestion < questions.length - 1) {
+  if (currentQuestion < questions.length-1) {
     currentQuestion++;
     localStorage.setItem("quizCurrent", currentQuestion);
     loadQuestion();
   }
 };
-
 document.getElementById("prevBtn").onclick = () => {
   if (currentQuestion > 0) {
     currentQuestion--;
@@ -119,53 +132,49 @@ document.getElementById("prevBtn").onclick = () => {
   }
 };
 
-/* =============================
-   SUBMIT QUIZ
-============================= */
+// ---------------------------
+// Submit quiz
+// ---------------------------
 document.getElementById("submitBtn").onclick = submitQuiz;
 
 function submitQuiz() {
   clearInterval(timerInterval);
-
   let score = 0;
-  questions.forEach((q, index) => {
-    if (userAnswers[index] === q.correct) score++;
+  questions.forEach((q, idx) => {
+    if (userAnswers[idx] === q.correct) score++;
   });
 
   document.getElementById("results").innerHTML = `
     <h3>Quiz Complete</h3>
     <p>You scored ${score} out of ${questions.length}</p>
-    <p>Percentage: ${Math.round((score / questions.length) * 100)}%</p>
+    <p>Percentage: ${Math.round(score / questions.length * 100)}%</p>
   `;
   document.querySelector(".quiz-controls").style.display = "none";
   document.getElementById("answers").style.display = "none";
   document.getElementById("questionText").style.display = "none";
 
-  // clear saved quiz state
+  // clear saved state
   localStorage.removeItem("quizStartTime");
   localStorage.removeItem("quizAnswers");
   localStorage.removeItem("quizCurrent");
 }
 
-/* =============================
-   TIMER (PERSISTENT)
-============================= */
+// ---------------------------
+// Timer (persistent)
+// ---------------------------
 function startTimer() {
   const timerDisplay = document.getElementById("timer");
-
   timerInterval = setInterval(() => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+    const elapsed = Math.floor((Date.now() - startTime)/1000);
     const remaining = QUIZ_DURATION - elapsed;
-
     timerDisplay.textContent = `Time Remaining: ${remaining}s`;
-
     if (remaining <= 0) submitQuiz();
   }, 1000);
 }
 
-/* =============================
-   START QUIZ
-============================= */
+// ---------------------------
+// Start quiz
+// ---------------------------
 loadQuestion();
 startTimer();
 </script>
