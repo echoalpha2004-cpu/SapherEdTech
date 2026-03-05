@@ -69,7 +69,6 @@ const questions = quizData.questions.map(q => ({
 
 let currentQuestion = 0;
 let userAnswers = new Array(questions.length).fill(null);
-const QUIZ_DURATION = 60; // seconds
 let timerInterval;
 
 /* =============================
@@ -102,53 +101,42 @@ function initializeQuiz() {
 
 function loadQuestion() {
 
-  const q = questions[currentQuestion];
+  const question = questions[currentQuestion];
 
-  document.getElementById("questionCounter").textContent =
-    `Question ${currentQuestion + 1} of ${questions.length}`;
-
-  document.getElementById("questionText").textContent =
-    "Which IPA symbol matches this sound?";
-
+  const questionText = document.getElementById("questionText");
   const answersDiv = document.getElementById("answers");
+  const counter = document.getElementById("questionCounter");
+
+  counter.textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+
+  questionText.innerHTML = `
+    <audio controls src="${question.audio}"></audio>
+  `;
+
   answersDiv.innerHTML = "";
 
-  // Play button
-  const playBtn = document.createElement("button");
-  playBtn.textContent = "▶ Play Audio";
-  playBtn.className = "dash-btn";
-  playBtn.style.marginBottom = "1.5rem";
-  playBtn.onclick = () => new Audio(q.audio).play();
-  answersDiv.appendChild(playBtn);
-
-  // Options
-  q.options.forEach((option, index) => {
+  question.options.forEach((option, index) => {
 
     const btn = document.createElement("button");
-    btn.className = "quiz-option";
+    btn.className = "answer-btn";
     btn.textContent = option;
 
-    // Visual indicator if selected
     if (userAnswers[currentQuestion] === index) {
       btn.classList.add("selected");
     }
 
-/* =============================
-   LOAD QUIZ FROM CLASSWORK
-============================= */
+    btn.onclick = () => {
 
-const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
+      userAnswers[currentQuestion] = index;
 
-const questions = quizData.questions.map(q => ({
-  audio: q.audio,
-  options: q.choices,
-  correct: q.choices.indexOf(q.correct)
-}));
+      localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
 
-const QUIZ_DURATION = parseInt(quizData.timer);
+      loadQuestion();
+    };
 
     answersDiv.appendChild(btn);
   });
+
 }
 
 /* =============================
