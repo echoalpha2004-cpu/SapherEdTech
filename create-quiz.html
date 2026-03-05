@@ -87,7 +87,7 @@ function saveQuiz() {
 
   blocks.forEach(block => {
     const audio = block.querySelector(".audio-input").value;
-    const correct = block.querySelector(".correct-input").value;
+    const correct = block.querySelector(".correct-input").value.trim;
     const choices = Array.from(block.querySelectorAll(".choice"))
       .map(c => c.value)
       .filter(v => v !== "");
