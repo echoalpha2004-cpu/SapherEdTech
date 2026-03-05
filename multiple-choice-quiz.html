@@ -51,64 +51,6 @@
 
 <script>
 
-const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
-
-if (!quizData) {
-  document.querySelector(".quiz-container").innerHTML =
-    "<h2>No quiz loaded.</h2>";
-  throw new Error("No quiz found in localStorage");<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>IPA Multiple Choice Quiz</title>
-<link rel="stylesheet" href="style.css">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-</head>
-
-<body>
-
-<nav class="top-nav">
-  <div class="nav-inner">
-    <div class="nav-left">
-      <a href="dashboard.html" class="nav-logo">
-        <img src="logo.png" alt="Logo">
-        <span>Pronunciation Trainer</span>
-      </a>
-    </div>
-  </div>
-</nav>
-
-<main class="quiz-page">
-
-  <header class="dash-header">
-    <span class="app-name">IPA Multiple Choice Quiz</span>
-  </header>
-
-  <div class="quiz-container">
-
-    <div class="quiz-top">
-      <div id="questionCounter"></div>
-      <div id="timer" class="quiz-timer"></div>
-    </div>
-
-    <div id="questionText" class="quiz-question"></div>
-
-    <div id="answers" class="quiz-answers"></div>
-
-    <div class="quiz-controls">
-      <button id="prevBtn" class="dash-btn">Previous</button>
-      <button id="nextBtn" class="dash-btn">Next</button>
-      <button id="submitBtn" class="dash-btn secondary">Submit Quiz</button>
-    </div>
-
-    <div id="results" class="quiz-results"></div>
-
-  </div>
-
-</main>
-
-<script>
-
 /* =============================
    WRITE YOUR AUDIO QUESTIONS HERE
 ============================= */
@@ -322,3 +264,4 @@ startTimer();
 
 </body>
 </html>
+~
