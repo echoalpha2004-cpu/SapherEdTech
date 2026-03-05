@@ -44,38 +44,43 @@
 </main>
 
 <script>
-// ---------------------------
 // Load quiz data
-// ---------------------------
 const quizData = JSON.parse(localStorage.getItem("currentQuiz"));
 if (!quizData) {
   document.querySelector(".quiz-container").innerHTML = "<h2>No quiz loaded.</h2>";
   throw new Error("No quiz found in localStorage");
 }
 
+// Map questions
 const questions = quizData.questions.map(q => ({
-  audio: q.audio,
+  text: q.text || "",
+  audio: q.audio || null,
   options: q.choices,
   correct: q.choices.indexOf(q.correct)
 }));
+
 const QUIZ_DURATION = parseInt(quizData.timer) || 60;
 
-// ---------------------------
 // Quiz state
-// ---------------------------
 let currentQuestion = parseInt(localStorage.getItem("quizCurrent")) || 0;
 let userAnswers = JSON.parse(localStorage.getItem("quizAnswers")) || new Array(questions.length).fill(null);
-let startTime = parseInt(localStorage.getItem("quizStartTime")) || Date.now();
-localStorage.setItem("quizStartTime", startTime);
+
+let startTime = parseInt(localStorage.getItem("quizStartTime"));
+if (!startTime) {
+  startTime = Date.now();
+  localStorage.setItem("quizStartTime", startTime);
+}
+
 let timerInterval;
 
-// ---------------------------
 // Load question
-// ---------------------------
 function loadQuestion() {
   const q = questions[currentQuestion];
   document.getElementById("questionCounter").textContent = `Question ${currentQuestion+1} of ${questions.length}`;
-  document.getElementById("questionText").innerHTML = `<audio controls src="${q.audio}"></audio>`;
+
+  document.getElementById("questionText").innerHTML = q.text
+    ? q.text
+    : q.audio ? `<audio controls src="${q.audio}"></audio>` : "No question text available";
 
   const answersDiv = document.getElementById("answers");
   answersDiv.innerHTML = "";
@@ -89,15 +94,13 @@ function loadQuestion() {
     btn.onclick = () => {
       userAnswers[currentQuestion] = idx;
       localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
-      loadQuestion(); // refresh highlight
+      loadQuestion();
     };
     answersDiv.appendChild(btn);
   });
 }
 
-// ---------------------------
 // Navigation
-// ---------------------------
 document.getElementById("nextBtn").onclick = () => {
   if (currentQuestion < questions.length-1) {
     currentQuestion++;
@@ -113,9 +116,7 @@ document.getElementById("prevBtn").onclick = () => {
   }
 };
 
-// ---------------------------
 // Submit quiz
-// ---------------------------
 document.getElementById("submitBtn").onclick = submitQuiz;
 
 function submitQuiz() {
@@ -134,15 +135,13 @@ function submitQuiz() {
   document.getElementById("answers").style.display = "none";
   document.getElementById("questionText").style.display = "none";
 
-  // clear saved state
+  // Clear saved state
   localStorage.removeItem("quizStartTime");
   localStorage.removeItem("quizAnswers");
   localStorage.removeItem("quizCurrent");
 }
 
-// ---------------------------
-// Timer (persistent)
-// ---------------------------
+// Timer
 function startTimer() {
   const timerDisplay = document.getElementById("timer");
   timerInterval = setInterval(() => {
@@ -153,9 +152,7 @@ function startTimer() {
   }, 1000);
 }
 
-// ---------------------------
 // Start quiz
-// ---------------------------
 loadQuestion();
 startTimer();
 </script>
