@@ -5,6 +5,36 @@
 <title>IPA Multiple Choice Quiz</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+/* Minimal CSS to ensure buttons are visible */
+.quiz-controls {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.dash-btn {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+.dash-btn.secondary {
+  background-color: #4CAF50;
+  color: white;
+}
+.answer-btn {
+  display: block;
+  margin: 5px 0;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+.answer-btn.selected {
+  background-color: #ddd;
+}
+</style>
 </head>
 <body>
 
@@ -65,6 +95,7 @@ const QUIZ_DURATION = parseInt(quizData.timer) || 60;
 let currentQuestion = parseInt(localStorage.getItem("quizCurrent")) || 0;
 let userAnswers = JSON.parse(localStorage.getItem("quizAnswers")) || new Array(questions.length).fill(null);
 
+// Timer persistence
 let startTime = parseInt(localStorage.getItem("quizStartTime"));
 if (!startTime) {
   startTime = Date.now();
@@ -95,6 +126,7 @@ function loadQuestion() {
       userAnswers[currentQuestion] = idx;
       localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
       loadQuestion();
+      checkAutoSubmit(); // auto-submit if done
     };
     answersDiv.appendChild(btn);
   });
@@ -117,10 +149,16 @@ document.getElementById("prevBtn").onclick = () => {
 };
 
 // Submit quiz
-document.getElementById("submitBtn").onclick = submitQuiz;
+document.getElementById("submitBtn").onclick = () => {
+  if (confirm("Are you sure you want to submit the quiz?")) {
+    submitQuiz();
+  }
+};
 
 function submitQuiz() {
   clearInterval(timerInterval);
+  document.getElementById("submitBtn").disabled = true;
+
   let score = 0;
   questions.forEach((q, idx) => {
     if (userAnswers[idx] === q.correct) score++;
@@ -139,6 +177,13 @@ function submitQuiz() {
   localStorage.removeItem("quizStartTime");
   localStorage.removeItem("quizAnswers");
   localStorage.removeItem("quizCurrent");
+}
+
+// Auto-submit if all questions answered
+function checkAutoSubmit() {
+  if (userAnswers.every(ans => ans !== null)) {
+    submitQuiz();
+  }
 }
 
 // Timer
