@@ -105,14 +105,31 @@ if (!startTime) {
 let timerInterval;
 
 // Load question
+// Updated loadQuestion()
 function loadQuestion() {
   const q = questions[currentQuestion];
   document.getElementById("questionCounter").textContent = `Question ${currentQuestion+1} of ${questions.length}`;
 
-  document.getElementById("questionText").innerHTML = q.text
-    ? q.text
-    : q.audio ? `<audio controls src="${q.audio}"></audio>` : "No question text available";
+  const questionTextDiv = document.getElementById("questionText");
+  questionTextDiv.innerHTML = ""; // clear previous
 
+  // Display question title if exists
+  if (q.text) {
+    const titleElem = document.createElement("h3");
+    titleElem.textContent = q.text;
+    questionTextDiv.appendChild(titleElem);
+  }
+
+  // Display audio if exists
+  if (q.audio) {
+    const audioElem = document.createElement("audio");
+    audioElem.src = q.audio;
+    audioElem.controls = true;
+    audioElem.preload = "auto"; // optional: preload the audio
+    questionTextDiv.appendChild(audioElem);
+  }
+
+  // Display answers
   const answersDiv = document.getElementById("answers");
   answersDiv.innerHTML = "";
 
@@ -126,12 +143,11 @@ function loadQuestion() {
       userAnswers[currentQuestion] = idx;
       localStorage.setItem("quizAnswers", JSON.stringify(userAnswers));
       loadQuestion();
-      checkAutoSubmit(); // auto-submit if done
+      checkAutoSubmit(); // auto-submit if all answered
     };
     answersDiv.appendChild(btn);
   });
 }
-
 // Navigation
 document.getElementById("nextBtn").onclick = () => {
   if (currentQuestion < questions.length-1) {
