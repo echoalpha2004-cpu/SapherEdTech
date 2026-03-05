@@ -161,22 +161,30 @@ function submitQuiz() {
 
 /* TIMER */
 
+/* START TIMER - persistent across refresh */
 function startTimer() {
+  const timerDisplay = document.getElementById("timer");
 
-  const start = Date.now();
+  // Check if a start time already exists
+  let start = localStorage.getItem("quizStartTime");
+  if (!start) {
+    start = Date.now();
+    localStorage.setItem("quizStartTime", start);
+  } else {
+    start = parseInt(start);
+  }
 
   timerInterval = setInterval(() => {
-
     const elapsed = Math.floor((Date.now() - start) / 1000);
     const remaining = QUIZ_DURATION - elapsed;
 
-    document.getElementById("timer").textContent =
-      `Time Remaining: ${remaining}s`;
+    timerDisplay.textContent = `Time Remaining: ${remaining}s`;
 
-    if (remaining <= 0) submitQuiz();
-
+    if (remaining <= 0) {
+      clearInterval(timerInterval);
+      submitQuiz();
+    }
   }, 1000);
-
 }
 
 
