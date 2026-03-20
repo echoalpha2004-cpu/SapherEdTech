@@ -1310,7 +1310,7 @@ main {
 }
 
 .home-image img {
-  max-width: 300px;   /* adjust size */
-  width: 20%;
+  max-width: 30px;   /* adjust size */
+  width: 100%;
   height: auto;
 }
