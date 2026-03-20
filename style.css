@@ -1302,3 +1302,15 @@ main {
 .page-intro {
  margin-bottom: 1rem;
 }
+
+.home-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.home-image img {
+  max-width: 300px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
