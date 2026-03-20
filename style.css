@@ -1394,3 +1394,15 @@ main {
   width: 100%;
   height: auto;
 }
+
+.practice-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.practice-image img {
+  max-width: 250px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
