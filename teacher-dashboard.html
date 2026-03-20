@@ -35,9 +35,20 @@
   </header>
 
   <div class="profile">
-    <img src="images/pfp.png" alt="Profile Picture" class="pfp">
-    <h2>Joe Dohn - Educator</h2>
+  <img src="images/pfp.png" alt="Profile Picture" class="pfp" id="profilePic">
+  <h2>John Doe - Student</h2>
+  <p class="language-label">Currently Learning: Outlandish</p>
+
+  <button id="changePicBtn" class="dash-btn">Change Profile Picture</button>
+
+  <div id="pfpOptions" class="pfp-options" style="display: none;">
+    <img src="images/pfp.png" class="pfp-choice">
+    <img src="images/cat.png" class="pfp-choice">
+    <img src="images/pigeon.png" class="pfp-choice">
+    <img src="images/snake.png" class="pfp-choice">
+    <img src="images/frog.png" class="pfp-choice">
   </div>
+</div>
 
 <div class="dashboard-buttons">
   <a href="teacher-students.html" class="dash-btn">Students</a>
@@ -54,6 +65,33 @@
 </footer>
 
 <a href="about.html" class="about-btn">About Us</a>
+
+<script>
+const profilePic = document.getElementById("profilePic");
+const changeBtn = document.getElementById("changePicBtn");
+const options = document.getElementById("pfpOptions");
+const choices = document.querySelectorAll(".pfp-choice");
+
+// Load saved profile pic
+const savedPic = localStorage.getItem("profilePic");
+if (savedPic) {
+  profilePic.src = savedPic;
+}
+
+// Toggle options
+changeBtn.onclick = () => {
+  options.style.display = options.style.display === "none" ? "flex" : "none";
+};
+
+// Select new profile pic
+choices.forEach(img => {
+  img.onclick = () => {
+    profilePic.src = img.src;
+    localStorage.setItem("profilePic", img.src);
+    options.style.display = "none";
+  };
+});
+</script>
 
 </body>
 </html>
