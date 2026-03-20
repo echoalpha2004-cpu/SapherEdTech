@@ -1306,11 +1306,11 @@ main {
 .home-image {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .home-image img {
-  max-width: 30px;   /* adjust size */
+  max-width: 100px;   /* adjust size */
   width: 100%;
   height: auto;
 }
