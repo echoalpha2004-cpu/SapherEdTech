@@ -1338,7 +1338,7 @@ main {
 .login-image {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .login-image img {
@@ -1350,7 +1350,7 @@ main {
 .quizzes-image {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .quizzes-image img {
@@ -1362,7 +1362,7 @@ main {
 .speed-image {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .speed-image img {
@@ -1374,7 +1374,7 @@ main {
 .assignments-image {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .assignments-image img {
@@ -1386,7 +1386,7 @@ main {
 .inbox-image {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .inbox-image img {
