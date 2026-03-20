@@ -1342,7 +1342,7 @@ main {
 }
 
 .login-image img {
-  max-width: 200px;   /* adjust size */
+  max-width: 200px !important;   /* adjust size */
   width: 100%;
   height: auto;
 }
