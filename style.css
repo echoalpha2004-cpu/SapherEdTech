@@ -1346,3 +1346,51 @@ main {
   width: 100%;
   height: auto;
 }
+
+.quizzes-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.quizzes-image img {
+  max-width: 250px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
+
+.speed-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.speed-image img {
+  max-width: 250px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
+
+.assignments-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.assignments-image img {
+  max-width: 250px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
+
+.inbox-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.inbox-image img {
+  max-width: 250px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
