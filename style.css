@@ -1334,3 +1334,15 @@ main {
   width: 100%;
   height: auto;
 }
+
+.login-image {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.login-image img {
+  max-width: 200px;   /* adjust size */
+  width: 100%;
+  height: auto;
+}
