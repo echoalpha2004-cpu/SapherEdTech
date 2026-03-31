@@ -205,9 +205,10 @@ p {
 
 .dash-header {
   display: flex !important;
-  align-items: center !important; /* vertically center logo + text */
-  gap: 1rem !important;           /* space between logo and text */
-  padding: 1rem 2rem !important;  /* optional: add padding so header isn’t cramped */
+  align-items: center !important;      /* vertical centering */
+  justify-content: center !important;  /* HORIZONTALLY center everything */
+  gap: 1rem !important;                /* space between logo and text */
+  padding: 1rem 2rem !important;       /* optional padding */
 }
 
 .app-name {
