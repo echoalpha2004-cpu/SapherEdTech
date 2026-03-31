@@ -197,17 +197,20 @@ p {
   transition: 0.2s;
 }
 
-.dash-header {
-  display: flex;
-  justify-content: center;  /* centers logo + text horizontally */
-  align-items: center;      /* centers logo + text vertically */
-  gap: 1rem;
-  padding: 1rem 2rem;
+.dash-logo {
+  width: 40px;
+  height: auto;
+.dash-logo img {
+  height: 60px;       /* or whatever feels right */
+  width: auto;        /* keep aspect ratio */
+  object-fit: contain; /* ensures it doesn’t stretch */
 }
 
-.dash-logo {
-  max-height: 10% !important;  /* sets the logo size */
-  width: auto;       /* keeps aspect ratio */
+.dash-header {
+  display: flex;
+  align-items: center; /* vertically center logo + text */
+  gap: 1rem;           /* space between logo and text */
+  padding: 1rem 2rem;  /* optional: add padding so header isn’t cramped */
 }
 
 .app-name {
