@@ -197,10 +197,10 @@ p {
   transition: 0.2s;
 }
 
-.dash-logo img {
-  height: 60px !important;       /* or whatever feels right */
-  width: auto !important;        /* keep aspect ratio */
-  object-fit: contain !important; /* ensures it doesn’t stretch */
+.dash-logo {
+  height: 50px;   /* adjust smaller as needed */
+  width: auto;    /* keep aspect ratio */
+  display: block; /* removes extra inline spacing */
 }
 
 .dash-header {
