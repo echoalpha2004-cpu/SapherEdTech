@@ -47,73 +47,97 @@
 
   <p id="saveMessage"></p>
 
+  <!-- Hidden field for editing existing quiz -->
+  <input type="hidden" id="editingQuizId">
+
 </section>
 
-</main>
-
-<!-- Updated addQuestion() -->
 <script>
 let questions = [];
 
-function addQuestion() {
+// Check if a quiz is being edited
+window.onload = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const quizId = urlParams.get('id');
+  if (quizId) {
+    const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
+    const quiz = classwork.find(q => q.id == quizId);
+    if (quiz) loadQuizForEditing(quiz);
+  }
+};
+
+function loadQuizForEditing(quiz) {
+  document.getElementById("quizTitle").value = quiz.title;
+  document.getElementById("quizTimer").value = quiz.timer;
+  document.getElementById("editingQuizId").value = quiz.id;
+
   const container = document.getElementById("questionsContainer");
-  const index = questions.length;
+  container.innerHTML = "";
+  quiz.questions.forEach((q, idx) => {
+    addQuestion(q, idx);
+  });
+}
+
+function addQuestion(existingQuestion = null, idx = null) {
+  const container = document.getElementById("questionsContainer");
+  const index = idx !== null ? idx : questions.length;
 
   const div = document.createElement("div");
   div.className = "question-block";
   div.innerHTML = `
     <h3>Question ${index + 1}</h3>
-    <input type="text" placeholder="Question Title" class="title-input">
-    <input type="text" placeholder="Audio file path (sounds/p.mp3)" class="audio-input">
-    <input type="text" placeholder="Correct Answer" class="correct-input">
-    <input type="text" placeholder="Choice 1" class="choice">
-    <input type="text" placeholder="Choice 2" class="choice">
-    <input type="text" placeholder="Choice 3" class="choice">
-    <input type="text" placeholder="Choice 4" class="choice">
+    <input type="text" placeholder="Question Title" class="title-input" value="${existingQuestion?.text || ''}">
+    <input type="text" placeholder="Audio file path (sounds/p.mp3)" class="audio-input" value="${existingQuestion?.audio || ''}">
+    <input type="text" placeholder="Correct Answer" class="correct-input" value="${existingQuestion?.correct || ''}">
+    <input type="text" placeholder="Choice 1" class="choice" value="${existingQuestion?.choices[0] || ''}">
+    <input type="text" placeholder="Choice 2" class="choice" value="${existingQuestion?.choices[1] || ''}">
+    <input type="text" placeholder="Choice 3" class="choice" value="${existingQuestion?.choices[2] || ''}">
+    <input type="text" placeholder="Choice 4" class="choice" value="${existingQuestion?.choices[3] || ''}">
   `;
   container.appendChild(div);
 }
 
 function saveQuiz() {
-  const title = document.getElementById("quizTitle").value;
+  const title = document.getElementById("quizTitle").value.trim();
   const timer = document.getElementById("quizTimer").value;
+  const editingQuizId = document.getElementById("editingQuizId").value;
   const blocks = document.querySelectorAll(".question-block");
 
-  if (!title) {
-    alert("Please enter a quiz title.");
-    return;
-  }
+  if (!title) { alert("Please enter a quiz title."); return; }
 
-  const questions = [];
-
-  blocks.forEach(block => {
+  const questions = Array.from(blocks).map(block => {
     const questionTitle = block.querySelector(".title-input").value.trim();
     const audio = block.querySelector(".audio-input").value.trim();
     const correct = block.querySelector(".correct-input").value.trim();
     const choices = Array.from(block.querySelectorAll(".choice"))
-      .map(c => c.value.trim())
-      .filter(v => v !== "");
-
-    questions.push({
-      text: questionTitle,
-      audio,
-      correct,
-      choices
-    });
+      .map(c => c.value.trim()).filter(v => v !== "");
+    return { text: questionTitle, audio, correct, choices };
   });
 
   const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
-  classwork.push({
-    id: Date.now(),
-    type: "quiz",
-    title,
-    timer,
-    questions
-  });
+
+  if (editingQuizId) {
+    // Update existing quiz
+    const index = classwork.findIndex(q => q.id == editingQuizId);
+    if (index !== -1) {
+      classwork[index].title = title;
+      classwork[index].timer = timer;
+      classwork[index].questions = questions;
+    }
+  } else {
+    // Create new quiz
+    classwork.push({
+      id: Date.now(),
+      type: "quiz",
+      title,
+      timer,
+      questions
+    });
+  }
+
   localStorage.setItem("classwork", JSON.stringify(classwork));
 
-  // Redirect to classwork page
-  window.location.href = "teacher-classwork.html";
+  window.location.href = "teacher-classwork.html"; // redirect back
 }
 </script>
 
