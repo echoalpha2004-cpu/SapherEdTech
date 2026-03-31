@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
 
 <nav class="top-nav">
@@ -17,7 +16,6 @@
         <span>Pronunciation Trainer</span>
       </a>
     </div>
-
     <div class="nav-links">
       <a href="dashboard.html">Dashboard</a>
       <a href="inbox.html">Inbox</a>
@@ -32,40 +30,46 @@
 </nav>
 
 <main class="home">
-
   <header class="dash-header">
     <span class="app-name">Upcoming Assignments</span>
   </header>
 
-  <div id="assignmentsContainer"></div>
-
+  <div id="assignmentContainer"></div>
 </main>
 
 <script>
 function loadAssignments() {
-  const container = document.getElementById("assignmentsContainer");
+  const container = document.getElementById("assignmentContainer");
   container.innerHTML = "";
 
   const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
   const assignments = classwork.filter(item => item.type === "assignment");
 
-  if (assignments.length === 0) {
+  if (!assignments.length) {
     container.innerHTML = "<p>No assignments assigned yet.</p>";
     return;
   }
 
-  assignments.forEach(assign => {
-    const card = document.createElement("div");
-    card.className = "assignment-card";
-    card.innerHTML = `
-      <h3>${assign.title}</h3>
-      <p>${assign.description || "No details provided."}</p>
+  assignments.forEach(a => {
+    const div = document.createElement("div");
+    div.className = "assignment-card";
+    div.innerHTML = `
+      <h3>${a.title}</h3>
+      <p>${a.description || ""}</p>
+      <p><strong>Due:</strong> ${a.dueDate || "N/A"}</p>
     `;
-    container.appendChild(card);
+    container.appendChild(div);
   });
 }
 
 loadAssignments();
 </script>
-  
+
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
+
+<a href="about.html" class="about-btn">About Us</a>
+</body>
 </html>
