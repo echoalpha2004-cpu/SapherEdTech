@@ -206,7 +206,7 @@ p {
 }
 
 .dash-logo {
-  max-height: 10%;  /* sets the logo size */
+  max-height: 10% !important;  /* sets the logo size */
   width: auto;       /* keeps aspect ratio */
 }
 
