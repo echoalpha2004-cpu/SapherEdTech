@@ -1422,6 +1422,6 @@ a.dash-btn {
 
 /* Add extra spacing above the Existing Classwork header */
 h3 {
-  margin-top: 2rem;  /* gives breathing room above the list */
+  margin-top: 2rem !important;  /* gives breathing room above the list */
   margin-bottom: 1rem; /* optional: space between header and list */
 }
