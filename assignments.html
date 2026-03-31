@@ -37,67 +37,31 @@
     <span class="app-name">Upcoming Assignments</span>
   </header>
 
-  <section class="assignments-section overdue">
-  <h2>Overdue</h2>
-  <ul class="assignment-list">
-    <li class="assignment-item">IPA Chart Practice – Lesson 3</li>
-    <li class="assignment-item">Velar vs Alveolar Quiz</li>
-  </ul>
-</section>
-
-<section class="assignments-section in-progress">
-  <h2>In Progress</h2>
-  <ul class="assignment-list">
-    <li class="assignment-item">Speech Bingo Reflection</li>
-  </ul>
-</section>
-
-<section class="assignments-section due-soon">
-  <h2>Due Soon</h2>
-  <ul class="assignment-list">
-    <li class="assignment-item">Minimal Pairs Worksheet</li>
-  </ul>
-</section>
-
-   <div class="assignments-image">
-  <img src="images/assignments-image.png" alt="assignmentim">
-   </div>
+  <div id="assignmentsContainer"></div>
 
 </main>
 
-<footer class="site-footer">
-  <p>Powered by</p>
-  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
-</footer>
-
-<a href="about.html" class="about-btn">About Us</a>
-  
-</body>
-
 <script>
 function loadAssignments() {
-  const list = document.querySelector(".assignment-list");
-  if (!list) return;
-
-  list.innerHTML = "";
+  const container = document.getElementById("assignmentsContainer");
+  container.innerHTML = "";
 
   const classwork = JSON.parse(localStorage.getItem("classwork") || "[]");
-
   const assignments = classwork.filter(item => item.type === "assignment");
 
   if (assignments.length === 0) {
-    list.innerHTML = "<p>No assignments assigned yet.</p>";
+    container.innerHTML = "<p>No assignments assigned yet.</p>";
     return;
   }
 
   assignments.forEach(assign => {
     const card = document.createElement("div");
-    card.className = "quiz-card";
+    card.className = "assignment-card";
     card.innerHTML = `
       <h3>${assign.title}</h3>
-      <p>${assign.description}</p>
+      <p>${assign.description || "No details provided."}</p>
     `;
-    list.appendChild(card);
+    container.appendChild(card);
   });
 }
 
