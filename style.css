@@ -211,7 +211,7 @@ p {
 }
 
 .dash-logo img {
-  height: 10%;        /* adjust as needed */
+  height: 15px !important;        /* adjust as needed */
   width: auto;
   object-fit: contain;
 }
