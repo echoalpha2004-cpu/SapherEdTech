@@ -208,8 +208,8 @@ p {
 }
 
 .dash-logo {
-  width: 60px !important;
-  height: auto !important;
+  height: 60px;
+  width: auto;
 }
 
 .app-name {
