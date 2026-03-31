@@ -198,7 +198,7 @@ p {
 }
 
 .dash-logo {
-  height: 10%;   /* adjust smaller as needed */
+  height: 10% !important;   /* adjust smaller as needed */
   width: auto;    /* keep aspect ratio */
   display: block; /* removes extra inline spacing */
 }
