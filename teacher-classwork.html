@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Classwork</title>
+<title>Classwork – Pronunciation Trainer</title>
 <link rel="stylesheet" href="style.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -16,7 +16,6 @@
         <span>Pronunciation Trainer</span>
       </a>
     </div>
-
     <div class="nav-links">
       <a href="teacher-classwork.html">Classwork</a>
       <a href="teacher-students.html">Students</a>
@@ -31,18 +30,23 @@
     <span class="app-name">Classwork</span>
   </header>
 
-<div class="classwork-section builder-card">
-  <input type="text" id="assignmentTitle" placeholder="Assignment / Quiz Name">
-  <textarea id="assignmentDetails" placeholder="Assignment details / instructions"></textarea>
-  <button onclick="createClasswork()" class="dash-btn">Create Assignment</button>
-</div>
+  <!-- Create Assignment -->
+  <div class="classwork-section builder-card">
+    <input type="text" id="assignmentTitle" placeholder="Assignment Title">
+    <input type="text" id="assignmentDescription" placeholder="Assignment Details">
+    <input type="date" id="assignmentDueDate">
+    <button onclick="createOrUpdateClasswork()" class="dash-btn">Save Assignment</button>
+    <input type="hidden" id="editingId">
+  </div>
 
-<a href="create-quiz.html" class="dash-btn">Create Quiz</a>
+  <h3>Existing Classwork</h3>
+  <div id="classworkList"></div>
 
-<div id="classworkList"></div>
+  <a href="create-quiz.html" class="dash-btn">Create Quiz</a>
+
+</main>
 
 <script>
-// Helper functions
 function getClasswork() {
   return JSON.parse(localStorage.getItem("classwork") || "[]");
 }
@@ -51,46 +55,79 @@ function saveClasswork(list) {
   localStorage.setItem("classwork", JSON.stringify(list));
 }
 
-// Render existing classwork
 function renderClasswork() {
   const listDiv = document.getElementById("classworkList");
   listDiv.innerHTML = "";
 
   const classwork = getClasswork();
 
-  classwork.forEach((item, index) => {
+  classwork.filter(item => item.type === "assignment").forEach((item, index) => {
     const div = document.createElement("div");
     div.className = "announcement-item";
 
     div.innerHTML = `
-      <h3>${item.title}</h3>
-      <p>${item.description || ""}</p>
-      <button onclick="deleteClasswork(${index})" class="dash-btn secondary">Delete</button>
+      <p><strong>${item.title}</strong> – ${item.description} (Due: ${item.dueDate || "N/A"})</p>
+      <button onclick="editClasswork(${item.id})" class="dash-btn secondary">Edit</button>
+      <button onclick="deleteClasswork(${item.id})" class="dash-btn secondary">Delete</button>
     `;
 
     listDiv.appendChild(div);
   });
 }
 
-// Create new assignment
-function createClasswork() {
+function createOrUpdateClasswork() {
   const title = document.getElementById("assignmentTitle").value.trim();
-  const description = document.getElementById("assignmentDetails").value.trim();
-  if (!title) return alert("Please enter a title for the assignment.");
+  const description = document.getElementById("assignmentDescription").value.trim();
+  const dueDate = document.getElementById("assignmentDueDate").value;
+  const editingId = document.getElementById("editingId").value;
+
+  if (!title) return;
 
   const classwork = getClasswork();
-  classwork.push({ title, description, type: "assignment" });
+
+  if (editingId) {
+    // Update existing
+    const index = classwork.findIndex(item => item.id == editingId);
+    if (index !== -1) {
+      classwork[index].title = title;
+      classwork[index].description = description;
+      classwork[index].dueDate = dueDate;
+    }
+  } else {
+    // Create new
+    classwork.push({
+      id: Date.now(),
+      type: "assignment",
+      title,
+      description,
+      dueDate
+    });
+  }
+
   saveClasswork(classwork);
 
   document.getElementById("assignmentTitle").value = "";
-  document.getElementById("assignmentDetails").value = "";
+  document.getElementById("assignmentDescription").value = "";
+  document.getElementById("assignmentDueDate").value = "";
+  document.getElementById("editingId").value = "";
+
   renderClasswork();
 }
 
-// Delete assignment
-function deleteClasswork(index) {
+function editClasswork(id) {
   const classwork = getClasswork();
-  classwork.splice(index, 1);
+  const item = classwork.find(i => i.id == id);
+  if (!item) return;
+
+  document.getElementById("assignmentTitle").value = item.title;
+  document.getElementById("assignmentDescription").value = item.description;
+  document.getElementById("assignmentDueDate").value = item.dueDate || "";
+  document.getElementById("editingId").value = item.id;
+}
+
+function deleteClasswork(id) {
+  let classwork = getClasswork();
+  classwork = classwork.filter(item => item.id != id);
   saveClasswork(classwork);
   renderClasswork();
 }
@@ -104,6 +141,5 @@ renderClasswork();
 </footer>
 
 <a href="about.html" class="about-btn">About Us</a>
-
 </body>
 </html>
