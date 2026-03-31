@@ -197,18 +197,23 @@ p {
   transition: 0.2s;
 }
 
-.dash-logo {
-  height: 10% !important;   /* adjust smaller as needed */
-  width: auto;    /* keep aspect ratio */
-  display: block; /* removes extra inline spacing */
-}
-
 .dash-header {
   display: flex !important;
-  align-items: center !important;      /* vertical centering */
-  justify-content: center !important;  /* HORIZONTALLY center everything */
-  gap: 1rem !important;                /* space between logo and text */
-  padding: 1rem 2rem !important;       /* optional padding */
+  align-items: center !important;    /* vertically center logo + text */
+  justify-content: center !important; /* center horizontally */
+  gap: 1rem !important;               /* space between logo and text */
+  padding: 1rem 2rem !important;      /* optional padding */
+}
+
+.dash-logo {
+  display: flex;       /* keeps logo inline with text */
+  align-items: center; /* vertically align inside logo container */
+}
+
+.dash-logo img {
+  height: 10%;        /* adjust as needed */
+  width: auto;
+  object-fit: contain;
 }
 
 .app-name {
