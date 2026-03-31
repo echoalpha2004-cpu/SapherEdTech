@@ -1413,3 +1413,15 @@ main {
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
+/* Add vertical space below the Create Quiz button */
+a.dash-btn {
+  display: inline-block;
+  margin: 1.5rem 0; /* adjust this number to increase/decrease space */
+}
+
+/* Add extra spacing above the Existing Classwork header */
+h3 {
+  margin-top: 2rem;  /* gives breathing room above the list */
+  margin-bottom: 1rem; /* optional: space between header and list */
+}
