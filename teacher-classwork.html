@@ -63,7 +63,8 @@ function renderClasswork() {
 
   const classwork = getClasswork();
 
-  classwork.filter(item => item.type === "assignment").forEach((item, index) => {
+  // --- Assignments ---
+  classwork.filter(item => item.type === "assignment").forEach((item) => {
     const div = document.createElement("div");
     div.className = "announcement-item";
 
@@ -75,8 +76,23 @@ function renderClasswork() {
 
     listDiv.appendChild(div);
   });
+
+  // --- Quizzes ---
+  classwork.filter(item => item.type === "quiz").forEach((item) => {
+    const div = document.createElement("div");
+    div.className = "announcement-item";
+
+    div.innerHTML = `
+      <p><strong>${item.title}</strong> (Quiz)</p>
+      <a href="create-quiz.html?id=${item.id}" class="dash-btn secondary">Edit Quiz</a>
+      <button onclick="deleteClasswork(${item.id})" class="dash-btn secondary">Delete</button>
+    `;
+
+    listDiv.appendChild(div);
+  });
 }
 
+// --- Assignments functions ---
 function createOrUpdateClasswork() {
   const title = document.getElementById("assignmentTitle").value.trim();
   const description = document.getElementById("assignmentDescription").value.trim();
@@ -88,7 +104,6 @@ function createOrUpdateClasswork() {
   const classwork = getClasswork();
 
   if (editingId) {
-    // Update existing
     const index = classwork.findIndex(item => item.id == editingId);
     if (index !== -1) {
       classwork[index].title = title;
@@ -96,7 +111,6 @@ function createOrUpdateClasswork() {
       classwork[index].dueDate = dueDate;
     }
   } else {
-    // Create new
     classwork.push({
       id: Date.now(),
       type: "assignment",
@@ -134,6 +148,7 @@ function deleteClasswork(id) {
   renderClasswork();
 }
 
+// Initial render
 renderClasswork();
 </script>
 
