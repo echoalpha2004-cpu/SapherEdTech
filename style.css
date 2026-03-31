@@ -205,9 +205,17 @@ p {
   margin-bottom: 2rem;
 }
 
-.dash-logo {
-  width: 40px;
-  height: 40px;
+.dash-logo img {
+  height: 60px;       /* or whatever feels right */
+  width: auto;        /* keep aspect ratio */
+  object-fit: contain; /* ensures it doesn’t stretch */
+}
+
+.dash-header {
+  display: flex;
+  align-items: center; /* vertically center logo + text */
+  gap: 1rem;           /* space between logo and text */
+  padding: 1rem 2rem;  /* optional: add padding so header isn’t cramped */
 }
 
 .app-name {
