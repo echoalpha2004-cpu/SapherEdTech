@@ -339,13 +339,7 @@ p {
   height: auto;
   display: block;
   margin: 0 auto;
-
-  background: radial-gradient(
-   circle,
-   rgba(255,255,255,0.65) 0%,
-   rgba(255,255,255,0.35) 40%,
-   rgba(255,255,255,0) 75%
-  );
+  filter: drop-shadow(0 0 6px rgba(0, 90, 40, 0.8)) !important;
 }
 
 .game-instructions {
