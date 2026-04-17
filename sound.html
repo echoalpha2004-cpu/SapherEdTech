@@ -930,16 +930,22 @@ if (sounds[sound]) {
   };
 
   const illustrationDiv = document.getElementById("illustration");
-  if (illustrations[sound]) {
-    const img = document.createElement("img");
-    img.src = illustrations[sound];
-    img.alt = `${sound} articulation illustration`;
-    img.style.maxWidth = "90%";      // adjust size if needed
-    img.style.display = "block";
-    img.style.margin = "1rem auto 0";
+if (illustrations[sound]) {
+  const img = document.createElement("img");
+  img.src = illustrations[sound];
+  img.alt = `${sound} articulation illustration`;
+  img.style.maxWidth = "90%";
+  img.style.display = "block";
+  img.style.margin = "1rem auto 0";
 
-    illustrationDiv.appendChild(img);
-  }
+  illustrationDiv.appendChild(img);
+
+  // --- credit text under image ---
+  const credit = document.createElement("p");
+  credit.className = "illustration-credit";
+  credit.textContent = "Audio source: Wikimedia Commons, Visuals modified from Canva";
+  illustrationDiv.appendChild(credit);
+}
   // -----------------------------------
 
   document.getElementById("playBtn").onclick = () => {
