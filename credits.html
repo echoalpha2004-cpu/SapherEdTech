@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>About Us – Pronunciation Trainer</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
 
+<body class="app">
+
+<main class="home">
+
+  <header class="dash-header">
+    <span class="app-name">Project Credits</span>
+  </header>
+
+ <div class="home-image">
+    <img src="images/home-image.png" alt="Preview">
+ </div>
+
+  <!-- Optional sections -->
+  <div class="content-box">
+    <h3>Project Disclaimern</h3>
+    <p>
+      <!-- Your mission statement here -->
+      This is a speculative collaborative project. References to Busuu do not imply official affiliation.
+    </p>
+  </div>
+
+  <!-- Optional sections -->
+  <div class="content-box">
+    <h3>Audio Assets</h3>
+    <p>
+      <!-- Your mission statement here -->
+      Phonetic audio samples for indivual phonetic sounds are sourced from Wikimedia Commons and are licensed under Creative Commons. The usage of these audio files is educational and demonstrative.  Full citations are provided in the product report's bibliography.
+    </p>
+  </div>
+
+    <div class="content-box">
+    <h3>Visual Elements</h3>
+    <p>
+      <!-- Your mission statement here -->
+      Select diagrams and images are sourced or adapted from Canva external sources. The usage of these audio files is educational and demonstrative. Full citations are provided in the product report's bibliography.
+    </p>
+  </div>
+
+      <div class="content-box">
+    <h3>Tools and Technologies</h3>
+    <p>
+      <!-- Your mission statement here -->
+      This project was created using AI-assisted technologies. OpenAI's ChatGPT was used as an assistive tool for code creation and prototyping. All final outputs were instructed, overseen, formatted, and implemented by the author.
+    </p>
+  </div>
+
+      <div class="content-box">
+    <h3>Authorship</h3>
+    <p>
+      <!-- Your mission statement here -->
+      All original work was done by the author. Third-party assets are used where necessary and credited and cited.
+    </p>
+  </div>
+
+
+<button class="back-btn" onclick="goBack()">← Back</button>
+
+</main>
+
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
+
+<div class="corner-footer">
+  This project utilizes assets and information from third-party softwares and AI-assisted tools (Canva, Wikimedia Commons, and OpenAI). This is a speculative collaborative project. References to Busuu do not imply official affiliation.
+</div>
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script>
+
+<script>
+function goBack() {
+  if (document.referrer) {
+    window.history.back();
+  } else {
+    window.location.href = "index.html";
+  }
+}
+</script>
+
+</body>
+  
+</html>
