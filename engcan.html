@@ -37,3 +37,567 @@
   <header class="dash-header">
     <span class="app-name">English (Canadian)</span>
   </header>
+
+  <p class="ipa-instructions">
+  The International Phonetic Alphabet (IPA) is an official system of naming, classifying, and representing sounds in any language. Learning it is a vital step in being able to identify sounds visually and auditorily.
+</p>
+
+<section class="ipa-box consonant-box">
+<h2 class="ipa-section">Consonants</h2>
+
+<p class="ipa-instructions">
+  Consonants are sounds created by keeping your mouth mostly closed, and creating physical contact between parts of your mouth such as your tongue, teeth, and lips. Below is a diagram of different parts of the mouth and the different sounds they produce.
+</p>
+
+<div class="ipa-official-chart">
+  <img src="images/ipa-consonant-chart.png" 
+       alt="Official IPA Consonant Chart"
+       style="width:100%; max-width:900px; display:block; margin:2rem auto;">
+</div>
+
+<p class="ipa-instructions">
+  Consonant Chart is sourced from https://hmturnbull.com/. Anatomical diagrams are adapted from Canva.
+</p>
+  
+<section class="articulation-diagram">
+  <img
+    id="articulationImage"
+    src="images/head-default.png"
+    alt="Articulation diagram"
+  />
+</section>
+
+<p class="ipa-instructions">
+  Body Part
+</p>
+
+<div class="place-filters">
+<button class="place show-all" data-place="all" style="background:#adb5bd; color:#000;">
+  Show All
+</button>
+  
+  <button class="place bilabial" data-place="bilabial" style="background:#e63946;">Bilabial</button>
+  <button class="place labiodental" data-place="labiodental" style="background:#f77f00;">Labio-dental</button>
+  <button class="place dental" data-place="dental" style="background:#fcbf49; color:#000;">Dental</button>
+  <button class="place alveolar" data-place="alveolar" style="background:#2a9d8f;">Alveolar</button>
+  <button class="place postalveolar" data-place="postalveolar" style="background:#264653;">Postalveolar</button>
+  <button class="place palatal" data-place="palatal" style="background:#457b9d;">Palatal</button>
+  <button class="place retroflex" data-place="retroflex" style="background:#6d597a;">Retroflex</button>
+  <button class="place velar" data-place="velar" style="background:#8d6e63;">Velar</button>
+  <button class="place uvular" data-place="uvular" style="background:#5e548e;">Uvular</button>
+  <button class="place pharyngeal" data-place="pharyngeal" style="background:#9d4edd;">Pharyngeal</button>
+  <button class="place glottal" data-place="glottal" style="background:#1d3557;">Glottal</button>
+</div>
+
+<p class="ipa-instructions">
+  Manner
+</p>
+
+<div class="manner-filters">
+  <button class="manner" data-manner="all">All Manners</button>
+  <button class="manner" data-manner="plosive">Plosive</button>
+  <button class="manner" data-manner="nasal">Nasal</button>
+  <button class="manner" data-manner="trill">Trill</button>
+  <button class="manner" data-manner="tap">Tap</button>
+  <button class="manner" data-manner="fricative">Fricative</button>
+  <button class="manner" data-manner="lateral-fricative">Lateral Fric.</button>
+  <button class="manner" data-manner="approximant">Approximant</button>
+  <button class="manner" data-manner="lateral-approximant">Lat. Approximant</button>
+</div>
+
+<h3 id="consonantSelection" class="selection-title">
+  Showing: All Consonants
+</h3>
+
+<div class="ipa-grid" id="consonantGrid">
+  <a href="sound.html?sound=p" class="ipa consonant"
+     data-place="bilabial"
+     data-manner="plosive"
+     data-language="true">p</a>
+
+  <a href="sound.html?sound=b" class="ipa consonant"
+     data-place="bilabial"
+     data-manner="plosive"
+     data-language="true">b</a>
+  
+  <a href="sound.html?sound=t" class="ipa consonant"
+    data-place="alveolar"
+    data-manner="plosive"
+    data-language="true">t</a>
+  
+  <a href="sound.html?sound=d" class="ipa consonant"
+    data-place="alveolar"
+    data-manner="plosive"
+    data-language="true">d</a>
+  
+  <a href="sound.html?sound=k" class="ipa consonant"
+    data-place="velar"
+    data-manner="plosive"
+    data-language="true">k</a>
+
+  <a href="sound.html?sound=g" class="ipa consonant"
+    data-place="velar"
+    data-manner="plosive"
+    data-language="true">g</a>
+
+  <a href="sound.html?sound=m" class="ipa consonant"
+    data-place="bilabial"
+    data-manner="nasal"
+    data-language="true">m</a>
+
+  <a href="sound.html?sound=ɱ" class="ipa consonant"
+    data-place="labiodental"
+    data-manner="nasal"
+    data-language="true">ɱ</a>
+
+  <a href="sound.html?sound=n" class="ipa consonant"
+    data-place="alveolar"
+    data-manner="nasal"
+    data-language="true">n</a>
+
+  <a href="sound.html?sound=ŋ" class="ipa consonant"
+    data-place="velar"
+    data-manner="nasal"
+    data-language="true">ŋ</a>
+
+  <a href="sound.html?sound=ʔ" class="ipa consonant"
+    data-place="glottal"
+    data-manner="plosive"
+    data-language="true">ʔ</a>
+
+  <a href="sound.html?sound=f" class="ipa consonant"
+    data-place="labiobilabial"
+    data-manner="fricative"
+    data-language="true">f</a>
+
+  <a href="sound.html?sound=v" class="ipa consonant"
+    data-place="labiobilabial"
+    data-manner="fricative"
+    data-language="true">v</a>
+
+  <a href="sound.html?sound=s" class="ipa consonant"
+    data-place="alveolar"
+    data-manner="fricative"
+    data-language="true">s</a>
+
+  <a href="sound.html?sound=z" class="ipa consonant"
+    data-place="alveolar"
+    data-manner="fricative"
+    data-language="true">z</a>
+
+  <a href="sound.html?sound=θ" class="ipa consonant"
+    data-place="dental"
+    data-manner="fricative"
+    data-language="true">θ</a>
+
+  <a href="sound.html?sound=ð" class="ipa consonant"
+    data-place="dental"
+    data-manner="fricative"
+    data-language="true">ð</a>
+
+  <a href="sound.html?sound=ʃ" class="ipa consonant"
+    data-place="postalveolar"
+    data-manner="fricative"
+    data-language="true">ʃ</a>
+
+  <a href="sound.html?sound=ʒ" class="ipa consonant"
+    data-place="postalveolar"
+    data-manner="fricative"
+    data-language="true">ʒ</a>
+
+  <a href="sound.html?sound=x" class="ipa consonant"
+    data-place="velar"
+    data-manner="fricative"
+    data-language="true">x</a>
+
+  <a href="sound.html?sound=h" class="ipa consonant"
+    data-place="glottal"
+    data-manner="fricative"
+    data-language="true">h</a>
+
+  <a href="sound.html?sound=j" class="ipa consonant"
+    data-place="palatal"
+    data-manner="approximant"
+    data-language="true">j</a>
+
+  <a href="sound.html?sound=l" class="ipa consonant"
+    data-place="alveolar"
+    data-manner="lateral-approximant"
+    data-language="true">l</a>
+
+</section>
+
+<section class="ipa-box vowel-box" id="vowels">
+  <h2 class="ipa-section">Vowels</h2>
+
+<p class="ipa-instructions">
+  Vowels are sounded created by keeping your mouth open. The sound of vowels depend on 3 factors: where you position your tongue in your mouth, how vertically stressed your lip muscles are, and whether your round your lips into an O shape. Below is a visual guide on how different vowel sounds are formed. Not all combination of factors may produce a pronuncable vowel.
+</p>
+
+  <div class="ipa-official-vowel">
+  <img src="images/ipa-vowel-chart.png"
+       alt="Official IPA Vowel Trapezoid"
+       style="width:100%; max-width:700px; display:block; margin:2rem auto;">
+</div>
+
+<p class="ipa-instructions">
+  Vowel Chart is sourced from https://hmturnbull.com/. Anatomical diagrams are adapted from Canva.
+</p>
+    <!-- Illustration -->
+  <div class="vowel-image">
+    <img id="vowelImg" src="images/vowels/default.png" alt="Vowel chart">
+  </div>
+
+  <div id="vowelOutput" class="vowel-output"></div>
+
+<p class="ipa-instructions">
+  Mouth Closedness
+</p>
+
+  <!-- Height buttons -->
+<div class="vowel-controls height-controls">
+  <button onclick="setHeight('close', this)">Close</button>
+  <button onclick="setHeight('near-close', this)">Near-Close</button>
+  <button onclick="setHeight('close-mid', this)">Close-Mid</button>
+  <button onclick="setHeight('mid', this)">Mid</button>
+  <button onclick="setHeight('open-mid', this)">Open-Mid</button>
+  <button onclick="setHeight('near-open', this)">Near-Open</button>
+  <button onclick="setHeight('open', this)">Open</button>
+</div>
+
+<p class="ipa-instructions">
+  Horizontal Lip Muscle Stress
+</p>
+
+  <!-- Backness buttons -->
+  <div class="vowel-controls backness-controls">
+   <button onclick="setBackness('front', this)">Front</button>
+   <button onclick="setBackness('near-front', this)">Near-Front</button>
+   <button onclick="setBackness('central', this)">Central</button>
+   <button onclick="setBackness('near-back', this)">Near-Back</button>
+   <button onclick="setBackness('back', this)">Back</button>
+  </div>
+
+<p class="ipa-instructions">
+  Lip Roundedness (O-shape)
+</p>
+  
+  <!-- Rounding buttons -->
+<div class="vowel-controls rounding-controls">
+   <button onclick="setRounding('unrounded', this)">Unrounded</button>
+   <button onclick="setRounding('rounded', this)">Rounded</button>
+</div>
+
+<h3 id="vowelSelection" class="selection-title">
+  Select vowel features
+</h3>
+
+<div class="ipa-grid" id="vowelGrid">
+  <a href="sound.html?sound=i" class="ipa vowel"
+     data-height="close" data-back="front" data-round="unrounded">i</a>
+
+  <a href="sound.html?sound=e" class="ipa vowel"
+     data-height="close-mid" data-back="front" data-round="unrounded">e</a>
+
+  <a href="sound.html?sound=a" class="ipa vowel"
+     data-height="open" data-back="front" data-round="unrounded">a</a>
+
+  <a href="sound.html?sound=ɶ" class="ipa vowel"
+     data-height="open" data-back="front" data-round="rounded">ɶ</a>
+
+  <a href="sound.html?sound=ɑ" class="ipa vowel"
+     data-height="open" data-back="back" data-round="unrounded">ɑ</a>
+
+  <a href="sound.html?sound=o" class="ipa vowel"
+     data-height="close-mid" data-back="back" data-round="rounded">o</a>
+  
+  <a href="sound.html?sound=u" class="ipa vowel"
+     data-height="close" data-back="back" data-round="rounded">u</a>
+
+  <a href="sound.html?sound=ɪ" class="ipa vowel"
+     data-height="near-close" data-back="near-front" data-round="unrounded">ɪ</a>
+
+  <a href="sound.html?sound=ʊ" class="ipa vowel"
+     data-height="near-close" data-back="near-back" data-round="rounded">ʊ</a>
+
+  <a href="sound.html?sound=ə" class="ipa vowel"
+     data-height="mid" data-back="central" data-round="unrounded">ə</a>
+
+  <a href="sound.html?sound=æ" class="ipa vowel"
+     data-height="near-open" data-back="front" data-round="unrounded">æ</a>
+
+  <a href="sound.html?sound=ɐ" class="ipa vowel"
+     data-height="near-open" data-back="central" data-round="unrounded">ɐ</a>
+
+  <a href="sound.html?sound=ɛ" class="ipa vowel"
+     data-height="open-mid" data-back="front" data-round="unrounded">ɛ</a>
+
+  <a href="sound.html?sound=ʌ" class="ipa vowel"
+     data-height="open-mid" data-back="back" data-round="unrounded">ʌ</a>
+
+  <a href="sound.html?sound=ɔ" class="ipa vowel"
+     data-height="open-mid" data-back="back" data-round="rounded">ɔ</a>
+</div>
+
+
+
+</section>
+  
+
+</main>
+  
+<script>
+let currentPlace = "all";
+let currentManner = "all";
+let currentMode = "language";
+
+const consonants = document.querySelectorAll(".consonant");
+const grid = document.getElementById("consonantGrid");
+const image = document.getElementById("articulationImage");
+const title = document.getElementById("consonantSelection");
+
+const noResultMsg = document.createElement("p");
+noResultMsg.className = "none";
+noResultMsg.textContent = "No consonant exists for this combination.";
+noResultMsg.style.display = "none";
+grid.after(noResultMsg);
+
+// -------------------------
+// BUTTON HIGHLIGHT
+// -------------------------
+function activateConsonantButton(button, selector) {
+  document.querySelectorAll(selector).forEach(b =>
+    b.classList.remove("active-toggle")
+  );
+  button.classList.add("active-toggle");
+}
+
+const vowelTitle = document.getElementById("vowelSelection");
+
+function updateVowelTitle() {
+  let text = "";
+
+  if (selectedHeight) {
+    text += capitalize(selectedHeight) + " ";
+  }
+
+  if (selectedBackness) {
+    text += capitalize(selectedBackness) + " ";
+  }
+
+  if (selectedRounding) {
+    text += capitalize(selectedRounding);
+  }
+
+  if (text.trim() === "") {
+    text = "Select vowel features";
+  }
+
+  vowelTitle.textContent = text.trim();
+}
+
+// -------------------------
+// TITLE UPDATE
+// -------------------------
+function updateConsonantTitle() {
+  let text = "";
+
+  if (currentPlace !== "all") {
+    text += capitalize(currentPlace) + " ";
+  }
+
+  if (currentManner !== "all") {
+    text += capitalize(currentManner);
+  }
+
+  if (text.trim() === "") {
+    text = "All Consonants";
+  }
+
+  title.textContent = "Showing: " + text.trim();
+}
+
+function capitalize(str) {
+  return str.replace(/-/g, " ")
+            .replace(/\b\w/g, l => l.toUpperCase());
+}
+
+// -------------------------
+// PLACE BUTTONS
+// -------------------------
+document.querySelectorAll(".place").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentPlace = btn.dataset.place;
+
+    activateConsonantButton(btn, ".place");
+
+    if (currentPlace === "all") {
+      image.src = "images/head-default.png";
+    } else {
+      image.src = `images/head-${currentPlace}.png`;
+    }
+
+    updateConsonantTitle();
+    filterConsonants();
+  });
+});
+
+// -------------------------
+// MANNER BUTTONS
+// -------------------------
+document.querySelectorAll(".manner").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentManner = btn.dataset.manner;
+
+    activateConsonantButton(btn, ".manner");
+
+    updateConsonantTitle();
+    filterConsonants();
+  });
+});
+
+// -------------------------
+// FILTER
+// -------------------------
+function filterConsonants() {
+  let visibleCount = 0;
+
+  consonants.forEach(c => {
+    const placeMatch =
+      currentPlace === "all" ||
+      c.dataset.place === currentPlace;
+
+    const mannerMatch =
+      currentManner === "all" ||
+      c.dataset.manner === currentManner;
+
+    const modeMatch =
+      currentMode === "all" ||
+      c.dataset.language === "true";
+
+    if (placeMatch && mannerMatch && modeMatch) {
+      c.style.display = "inline-block";
+      visibleCount++;
+    } else {
+      c.style.display = "none";
+    }
+  });
+
+  noResultMsg.style.display =
+    visibleCount === 0 ? "block" : "none";
+}
+</script>
+
+<script>
+let selectedHeight = null;
+let selectedBackness = null;
+let selectedRounding = null;
+
+const vowels = document.querySelectorAll(".vowel");
+const vowelOutput = document.getElementById("vowelOutput");
+
+function setHeight(height, btn) {
+  selectedHeight = height;
+  activateButton(btn, ".height-controls button");
+  updateVowelTitle();
+  filterVowels();
+}
+
+function setBackness(backness, btn) {
+  selectedBackness = backness;
+  activateButton(btn, ".backness-controls button");
+  updateVowelTitle();
+  filterVowels();
+}
+
+function setRounding(rounding, btn) {
+  selectedRounding = rounding;
+  activateButton(btn, ".rounding-controls button");
+  updateVowelTitle();
+  filterVowels();
+}
+
+
+// -------- BUTTON HIGHLIGHT --------
+function activateButton(button, selector) {
+  document.querySelectorAll(selector).forEach(b =>
+    b.classList.remove("active")
+  );
+  button.classList.add("active");
+}
+
+// -------- FILTER --------
+function filterVowels() {
+  const vowelImg = document.getElementById("vowelImg");
+  let matchFound = false;
+
+  vowels.forEach(vowel => {
+    const heightMatch =
+      !selectedHeight || vowel.dataset.height === selectedHeight;
+
+    const backMatch =
+      !selectedBackness || vowel.dataset.back === selectedBackness;
+
+    const roundMatch =
+      !selectedRounding || vowel.dataset.round === selectedRounding;
+
+    if (heightMatch && backMatch && roundMatch) {
+      vowel.style.display = "inline-block";
+      matchFound = true;
+    } else {
+      vowel.style.display = "none";
+    }
+  });
+
+  // -------------------------
+  // If nothing selected → default
+  // -------------------------
+  if (!selectedHeight && !selectedBackness && !selectedRounding) {
+    vowelImg.src = "images/vowels/default.png";
+    vowelOutput.textContent = "";
+    return;
+  }
+
+  // -------------------------
+  // If all three selected AND match exists
+  // -------------------------
+  if (selectedHeight && selectedBackness && selectedRounding && matchFound) {
+    vowelImg.src =
+      `images/vowels/${selectedHeight}-${selectedBackness}-${selectedRounding}.png`;
+    vowelOutput.textContent = "";
+  }
+  // -------------------------
+  // If combination invalid
+  // -------------------------
+  else if (selectedHeight && selectedBackness && selectedRounding && !matchFound) {
+    vowelImg.src = "images/vowels/default.png";
+    vowelOutput.textContent = "No vowel exists for this combination.";
+  }
+  // -------------------------
+  // Partial selection (1–2 toggles)
+  // -------------------------
+  else {
+    vowelImg.src = "images/vowels/default.png";
+    vowelOutput.textContent = "";
+  }
+}
+</script>
+
+<footer class="site-footer">
+  <p>Powered by</p>
+  <img src="images/powered-by-logo.png" alt="Powered by logo" class="powered-logo">
+</footer>
+
+<a href="about.html" class="about-btn">About Us</a>
+
+<div class="corner-footer">
+  <p>
+This project utilizes assets and information from third-party softwares and AI-assisted tools (Canva, Wikimedia Commons, and OpenAI). 
+    This is a speculative collaborative project. References to Busuu do not imply official affiliation.
+  </p>
+
+  <a href="credits.html" class="credits-link">View Credits</a>
+</div>
+  
+</body>
+</html>
