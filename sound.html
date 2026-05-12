@@ -49,6 +49,8 @@
 
 <div class="instructions" id="instructions"></div>
 
+<div id="languageSection" class="language-section"></div>
+
 <div id="illustration" class="illustration"></div>
 
 <p id="pinStatus" class="pin-status"></p>
@@ -70,7 +72,8 @@ const sounds = {
     type: "consonant",
     place: "bilabial",
     manner: "plosive",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   b: {
     file: "sounds/b.mp3",
@@ -78,7 +81,8 @@ const sounds = {
     type: "consonant",
     place: "bilabial",
     manner: "plosive",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   t: {
     file: "sounds/t.mp3",
@@ -86,7 +90,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "plosive",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   d: {
     file: "sounds/d.mp3",
@@ -94,7 +99,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "plosive",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   k: {
     file: "sounds/k.mp3",
@@ -102,7 +108,8 @@ const sounds = {
     type: "consonant",
     place: "velar",
     manner: "plosive",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   g: {
     file: "sounds/g.mp3",
@@ -110,7 +117,8 @@ const sounds = {
     type: "consonant",
     place: "velar",
     manner: "plosive",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   m: {
     file: "sounds/m.mp3",
@@ -118,7 +126,8 @@ const sounds = {
     type: "consonant",
     place: "bilabial",
     manner: "nasal",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ʙ: {
     file: "sounds/ʙ.mp3",
@@ -150,15 +159,8 @@ const sounds = {
     type: "consonant",
     place: "labiodental",
     manner: "nasal",
-    voicing: "voiced"
-  },
-  ⱱ: {
-    file: "sounds/ⱱ.mp3",
-    name: "Voiced labiodental tap",
-    type: "consonant",
-    place: "labiodental",
-    manner: "tap",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)"]
   },
   ⱱ: {
     file: "sounds/ⱱ.mp3",
@@ -174,7 +176,8 @@ const sounds = {
     type: "consonant",
     place: "labiodental",
     manner: "fricative",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   v: {
     file: "sounds/v.mp3",
@@ -182,7 +185,8 @@ const sounds = {
     type: "consonant",
     place: "labiodental",
     manner: "fricative",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ʋ: {
     file: "sounds/ʋ.mp3",
@@ -198,7 +202,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "nasal",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   r: {
     file: "sounds/r.mp3",
@@ -222,7 +227,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "fricative",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   z: {
     file: "sounds/z.mp3",
@@ -230,7 +236,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "fricative",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   θ: {
     file: "sounds/θ.mp3",
@@ -238,7 +245,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "fricative",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)"]
   },
   ð: {
     file: "sounds/ð.mp3",
@@ -246,7 +254,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "fricative",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)"]
   },
   ɬ: {
     file: "sounds/ɬ.mp3",
@@ -278,7 +287,8 @@ const sounds = {
     type: "consonant",
     place: "alveolar",
     manner: "latApproximant",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ʈ: {
     file: "sounds/ʈ.mp3",
@@ -302,7 +312,8 @@ const sounds = {
     type: "consonant",
     place: "retroflex",
     manner: "nasal",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["French/Français (Québécois)"]
   },
   ɽ: {
     file: "sounds/ɽ.mp3",
@@ -366,7 +377,8 @@ const sounds = {
     type: "consonant",
     place: "palatal",
     manner: "nasal",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["French/Français (Québécois)"]
   },
   ç: {
     file: "sounds/ç.mp3",
@@ -390,7 +402,8 @@ const sounds = {
     type: "consonant",
     place: "palatal",
     manner: "approximant",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ʎ: {
     file: "sounds/ʎ.mp3",
@@ -406,7 +419,8 @@ const sounds = {
     type: "consonant",
     place: "velar",
     manner: "nasal",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)"]
   },
   x: {
     file: "sounds/x.mp3",
@@ -470,7 +484,8 @@ const sounds = {
     type: "consonant",
     place: "uvular",
     manner: "trill",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["French/Français (Québécois)"]
   },
   ʁ: {
     file: "sounds/ʁ.mp3",
@@ -510,7 +525,8 @@ const sounds = {
     type: "consonant",
     place: "glottal",
     manner: "plosive",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)"]
   },
   h: {
     file: "sounds/h.mp3",
@@ -518,7 +534,8 @@ const sounds = {
     type: "consonant",
     place: "glottal",
     manner: "fricative",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)"]
   },
   ɦ: {
     file: "sounds/ɦ.mp3",
@@ -534,7 +551,8 @@ const sounds = {
     type: "consonant",
     place: "postalveolar",
     manner: "fricative",
-    voicing: "voiceless"
+    voicing: "voiceless",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ʃ: {
     file: "sounds/ʃ.mp3",
@@ -542,7 +560,8 @@ const sounds = {
     type: "consonant",
     place: "postalveolar",
     manner: "fricative",
-    voicing: "voiced"
+    voicing: "voiced",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
 
   // VOWELS
@@ -552,7 +571,8 @@ const sounds = {
     type: "vowel",
     height: "close",
     backness: "front",
-    rounding: "unrounded"
+    rounding: "unrounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   y: {
     file: "sounds/y.mp3",
@@ -568,7 +588,8 @@ const sounds = {
     type: "vowel",
     height: "closeMid",
     backness: "front",
-    rounding: "unrounded"
+    rounding: "unrounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   a: {
     file: "sounds/a.mp3",
@@ -576,7 +597,8 @@ const sounds = {
     type: "vowel",
     height: "open",
     backness: "front",
-    rounding: "unrounded"
+    rounding: "unrounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ɶ: {
     file: "sounds/ɶ.mp3",
@@ -584,7 +606,8 @@ const sounds = {
     type: "vowel",
     height: "open",
     backness: "front",
-    rounding: "rounded"
+    rounding: "rounded",
+    languages: ["French/Français (Québécois)"]
   },
   o: {
     file: "sounds/o.mp3",
@@ -592,7 +615,8 @@ const sounds = {
     type: "vowel",
     height: "closeMid",
     backness: "back",
-    rounding: "rounded"
+    rounding: "rounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   },
   ɨ: {
   file: "sounds/ɨ.mp3",
@@ -627,7 +651,8 @@ const sounds = {
   type: "vowel",
   height: "nearClose",
   backness: "nearFront",
-  rounding: "unrounded"
+  rounding: "unrounded",
+    languages: ["English (Canadian)"]
 },
 
 ʏ: {
@@ -654,7 +679,8 @@ const sounds = {
   type: "vowel",
   height: "nearClose",
   backness: "nearBack",
-  rounding: "rounded"
+  rounding: "rounded",
+    languages: ["English (Canadian)"]
 },
 
 ø: {
@@ -663,7 +689,8 @@ const sounds = {
   type: "vowel",
   height: "closeMid",
   backness: "front",
-  rounding: "rounded"
+  rounding: "rounded",
+    languages: ["French/Français (Québécois)"]
 },
 
 ɘ: {
@@ -699,7 +726,8 @@ const sounds = {
   type: "vowel",
   height: "openMid",
   backness: "front",
-  rounding: "unrounded"
+  rounding: "unrounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
 },
 
 œ: {
@@ -708,7 +736,8 @@ const sounds = {
   type: "vowel",
   height: "openMid",
   backness: "front",
-  rounding: "rounded"
+  rounding: "rounded",
+    languages: ["French/Français (Québécois)"]
 },
 
 ɜ: {
@@ -735,7 +764,8 @@ const sounds = {
   type: "vowel",
   height: "openMid",
   backness: "back",
-  rounding: "unrounded"
+  rounding: "unrounded",
+    languages: ["English (Canadian)"]
 },
 
 æ: {
@@ -744,7 +774,8 @@ const sounds = {
   type: "vowel",
   height: "nearOpen",
   backness: "front",
-  rounding: "unrounded"
+  rounding: "unrounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
 },
 
 ɐ: {
@@ -762,7 +793,8 @@ const sounds = {
     type: "vowel",
     height: "close",
     backness: "back",
-    rounding: "rounded"
+    rounding: "rounded",
+    languages: ["English (Canadian)", "French/Français (Québécois)"]
   }
 };
 
@@ -845,8 +877,21 @@ Let air flow smoothly without blocking it.
 if (sounds[sound]) {
   document.getElementById("symbol").textContent = sound;
   document.getElementById("sound-name").textContent = sounds[sound].name;
+
   document.getElementById("instructions").textContent =
   generateInstructions(sounds[sound]);
+
+  // ----- LANGUAGE SECTION -----
+  const languageSection = document.getElementById("languageSection");
+
+  if (sounds[sound].languages) {
+    languageSection.innerHTML = `
+      <h3>Featured in the following languages:</h3>
+      <ul class="language-list">
+        ${sounds[sound].languages.map(lang => `<li>${lang}</li>`).join("")}
+      </ul>
+    `;
+  }
 
   // ---- NEW CODE FOR ILLUSTRATION ----
   const illustrations = {
